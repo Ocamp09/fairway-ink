@@ -13,7 +13,7 @@ const Header = ({ cartPopup, setCartPopup }) => {
           <div className="header-start">
             <span>
               <img
-                src="../../public/logo_full.png"
+                src="/logo_full.png"
                 height={40}
                 className="d-inline-block align-top"
                 alt="Fairway Ink"
