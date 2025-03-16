@@ -124,7 +124,7 @@ export const verifySuccessfulCheckout = async (sessionId) => {
   try {
     const response = await axios.post(
       API_URL + "/verify-payment",
-      { swipe_ssid: sessionId, browser_ssid: browser_ssid },
+      { stripe_ssid: sessionId, browser_ssid: browser_ssid },
       {
         headers: {
           "Content-Type": "application/json",
