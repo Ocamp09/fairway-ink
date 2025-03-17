@@ -77,16 +77,18 @@ export const generateStl = async (svgData, scale, stlKey, templateType) => {
   }
 };
 
-export const addToCartApi = (stlUrl) => {
+export const addToCartApi = (stlUrl, quantity, templateType) => {
   const session_id = get_ssid();
 
   const formData = new FormData();
-  formData.append("filename", stlUrl);
+  formData.append("stlUrl", stlUrl);
+  formData.append("quantity", quantity);
+  formData.append("templateType", templateType);
 
   try {
     axios.post(API_URL + "/cart", formData, {
       headers: {
-        "Content-Type": "text/plain",
+        "Content-Type": "multi-part/form-data",
         ssid: session_id,
       },
     });

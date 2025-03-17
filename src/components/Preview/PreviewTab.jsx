@@ -27,7 +27,7 @@ const PreviewTab = () => {
       setError("No custom design uploaded");
       return;
     }
-    addToCartApi(stlUrl);
+    addToCartApi(stlUrl, quantity, templateType);
     addToCart(stlKey, stlUrl, quantity, templateType);
     setIsAdded(true);
   };
