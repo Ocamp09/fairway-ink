@@ -34,9 +34,16 @@ const Header = ({ cartPopup, setCartPopup }) => {
                 navigate("/design");
               }}
             >
-              Start Designing
+              Design
             </button>
-            {/* <button className="nav-item">Browse Designs</button> */}
+            <button
+              className="nav-item"
+              onClick={() => {
+                navigate("browse");
+              }}
+            >
+              Browse
+            </button>
           </div>
           <div className="header-icons">
             {/* <button className="icon-button">Login</button> */}

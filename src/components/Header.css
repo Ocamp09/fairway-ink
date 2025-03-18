@@ -50,6 +50,12 @@
   color: var(--text);
   background-color: var(--background);
   font-size: large;
+  transition: 0.3s border;
+  border-bottom: 0.1em solid transparent;
+}
+
+.nav-item:hover {
+  border-color: var(--text);
 }
 
 .icon-button {

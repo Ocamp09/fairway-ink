@@ -12,6 +12,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Us
 import SuccessPage from "./components/SuccessPage"; // Import the SuccessPage component
 import WelcomePopup from "./components/WelcomePopup";
 import HomePage from "./components/HomePage";
+import Browse from "./components/Browse";
 
 function App() {
   const [cartPopup, setCartPopup] = useState(false);
@@ -42,6 +43,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/design" element={<GolfBallDisplay />} />
+            <Route path="/browse" element={<Browse />} />
             <Route path="/success" element={<SuccessPage />} />
           </Routes>
           <ViewCartPopup isOpen={cartPopup} setIsOpen={setCartPopup} />
