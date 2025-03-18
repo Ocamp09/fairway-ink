@@ -18,7 +18,7 @@ const BrowseItem = ({ url }) => {
 
   return (
     <div className="browse-item">
-      <STLViewer stlUrl={url} cart={true} />
+      <STLViewer stlUrl={url} cart={true} zoomScale={2} />
       <button
         onClick={handleAddToCart}
         className="submit-button"

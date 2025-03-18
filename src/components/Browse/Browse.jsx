@@ -20,7 +20,7 @@ const Browse = () => {
 
   return (
     <div>
-      <h3> Browse designs</h3>
+      <h3> Pre-generated designs</h3>
 
       <div className="browse-grid">
         {designList.map((item, index) => (
