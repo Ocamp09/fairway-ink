@@ -12,7 +12,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Us
 import SuccessPage from "./components/SuccessPage"; // Import the SuccessPage component
 import WelcomePopup from "./components/WelcomePopup";
 import HomePage from "./components/HomePage";
-import Browse from "./components/Browse";
+import Browse from "./components/Browse/Browse";
 
 function App() {
   const [cartPopup, setCartPopup] = useState(false);
