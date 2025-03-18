@@ -96,7 +96,7 @@ const ViewCartPopup = ({ isOpen, setIsOpen }) => {
                     <div className="quantity-controls">
                       <button
                         onClick={() =>
-                          handleQuantityChange(item.id, item.quantity - 1)
+                          handleQuantityChange(item.stl, item.quantity - 1)
                         }
                       >
                         -
@@ -104,14 +104,14 @@ const ViewCartPopup = ({ isOpen, setIsOpen }) => {
                       <span>{item.quantity}</span>
                       <button
                         onClick={() =>
-                          handleQuantityChange(item.id, item.quantity + 1)
+                          handleQuantityChange(item.stl, item.quantity + 1)
                         }
                       >
                         +
                       </button>
                     </div>
                     <button
-                      onClick={() => removeFromCart(item.id)}
+                      onClick={() => removeFromCart(item.stl)}
                       className="remove-button"
                     >
                       Remove
@@ -131,7 +131,7 @@ const ViewCartPopup = ({ isOpen, setIsOpen }) => {
           <button
             onClick={handleCheckout}
             className="checkout-button"
-            disabled={loading}
+            disabled={loading || cartItems.length === 0}
           >
             {loading ? "Redirecting to Payment..." : "Proceed to Payment"}
           </button>
