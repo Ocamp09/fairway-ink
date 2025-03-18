@@ -41,7 +41,7 @@ const CameraController = ({ cameraRef, resetKey }) => {
   return null;
 };
 
-const STLViewer = ({ stlUrl, cart = false }) => {
+const STLViewer = ({ stlUrl, cart = false, zoomScale = 1 }) => {
   const cameraRef = useRef();
   const [resetKey, setResetKey] = useState(0); // Use a key to force re-render
 
@@ -65,7 +65,7 @@ const STLViewer = ({ stlUrl, cart = false }) => {
   return (
     <div className="stl-body">
       <Canvas
-        camera={{ position: [0, 0, 100], fov: 50 }}
+        camera={{ position: [0, 0, 100], fov: 50 / zoomScale }}
         className="stl-canvas"
       >
         {/* Add lighting */}
