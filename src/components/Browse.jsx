@@ -1,16 +1,20 @@
 import { useState, useEffect } from "react";
+import { getDesigns } from "../api/api";
 
 const Browse = () => {
   const [designList, setDesignList] = useState([]);
 
   useEffect(() => {
-    const getDesigns = () => {
-      // fetch api call
+    const fetchDesigns = async () => {
+      const designs = await getDesigns();
+      if (designs) {
+        setDesignList(designs);
+      }
     };
+    fetchDesigns();
+  }, []);
 
-    const designs = getDesigns();
-    setDesignList(designs);
-  });
+  console.log(designList);
 
   return (
     <div>
