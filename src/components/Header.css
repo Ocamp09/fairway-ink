@@ -17,6 +17,10 @@
   align-items: center;
 }
 
+.home-logo:hover {
+  cursor: pointer;
+}
+
 .header-nav {
   display: flex;
   width: 100%;
@@ -44,6 +48,8 @@
   border: none;
   margin-left: 0.5rem;
   color: var(--text);
+  background-color: var(--background);
+  font-size: large;
 }
 
 .icon-button {
