@@ -19,6 +19,9 @@ const HomePage = () => {
           <button className="submit-button" onClick={() => navigate("/design")}>
             Start designing
           </button>
+          <button className="submit-button" onClick={() => navigate("/design")}>
+            Browse designs
+          </button>
         </div>
       </div>
       {/* <button>
