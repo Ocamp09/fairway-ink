@@ -24,9 +24,6 @@ const HomePage = () => {
           </button>
         </div>
       </div>
-      {/* <button>
-                    Browse templates
-                </button> */}
     </div>
   );
 };
