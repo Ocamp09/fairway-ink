@@ -2,11 +2,12 @@ import "./Header.css";
 // import { LuSun } from "react-icons/lu";
 import { IoIosCart } from "react-icons/io";
 import { useCart } from "../contexts/CartContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Header = ({ cartPopup, setCartPopup }) => {
   const { getItemCount } = useCart();
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <>
@@ -29,7 +30,9 @@ const Header = ({ cartPopup, setCartPopup }) => {
           </div>
           <div className="header-nav">
             <button
-              className="nav-item"
+              className={`nav-item ${
+                location.pathname === "/design" ? "active" : ""
+              }`}
               onClick={() => {
                 navigate("/design");
               }}
@@ -37,7 +40,9 @@ const Header = ({ cartPopup, setCartPopup }) => {
               Design
             </button>
             <button
-              className="nav-item"
+              className={`nav-item ${
+                location.pathname === "/browse" ? "active" : ""
+              }`}
               onClick={() => {
                 navigate("browse");
               }}

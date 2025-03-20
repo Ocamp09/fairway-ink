@@ -35,12 +35,12 @@ const TypeSelector = ({ paths }) => {
       >
         Solid
       </button>
-      <button
+      {/* <button
         className={templateType === "text" ? "active" : ""}
         onClick={handleText}
       >
         Text Only
-      </button>
+      </button> */}
       <button
         className={templateType === "custom" ? "active" : ""}
         onClick={handleCustom}

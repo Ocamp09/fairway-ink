@@ -113,7 +113,7 @@ const Toolbar = ({
           title="Activate text mode"
           onClick={handleText}
           className={editorMode === "type" ? "editor-but-active" : "editor-but"}
-          hidden={templateType == "solid"}
+          hidden={templateType == "solid" || templateType == "custom"} // remove this when bringing text mode back
         >
           <IoText
             size={iconSize}
