@@ -2,7 +2,7 @@ import "./ModeExamples.css";
 
 const ModeExamples = ({ small }) => {
   return (
-    <>
+    <div className="mode-examples">
       <div className={small ? "mode-item-small" : "mode-item"}>
         <p className="mode-desc">Solid template:</p>
         <div className={small ? "ball-display-small" : "ball-display"}>
@@ -16,7 +16,7 @@ const ModeExamples = ({ small }) => {
           />
         </div>
       </div>
-      <div className={small ? "mode-item-small" : "mode-item"}>
+      {/* <div className={small ? "mode-item-small" : "mode-item"}>
         <p className="mode-desc">Text template:</p>
         <div className={small ? "ball-display-small" : "ball-display"}>
           <img
@@ -28,7 +28,7 @@ const ModeExamples = ({ small }) => {
             }}
           />
         </div>
-      </div>
+      </div> */}
       <div className={small ? "mode-item-small" : "mode-item"}>
         <p className="mode-desc">Custom template:</p>
         <div className={small ? "ball-display-small" : "ball-display"}>
@@ -42,7 +42,7 @@ const ModeExamples = ({ small }) => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
