@@ -19,14 +19,11 @@ const HomePage = () => {
           <button className="submit-button" onClick={() => navigate("/design")}>
             Start designing
           </button>
-          <button className="submit-button" onClick={() => navigate("/design")}>
+          <button className="submit-button" onClick={() => navigate("/browse")}>
             Browse designs
           </button>
         </div>
       </div>
-      {/* <button>
-                    Browse templates
-                </button> */}
     </div>
   );
 };
