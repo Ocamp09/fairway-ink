@@ -52,10 +52,18 @@
   font-size: large;
   transition: 0.3s border;
   border-bottom: 0.1em solid transparent;
+  font-weight: 400;
 }
 
 .nav-item:hover {
-  border-color: var(--text);
+  border-color: var(--tool-button);
+  color: var(--tool-button);
+}
+
+.nav-item.active {
+  font-weight: 600;
+  border-bottom: 2px solid var(--tool-button);
+  color: var(--tool-button);
 }
 
 .icon-button {
