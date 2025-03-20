@@ -94,6 +94,7 @@
 
   .modes-top {
     display: flex;
+    flex-direction: row;
   }
 
   .tool {
