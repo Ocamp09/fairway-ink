@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import { v4 as uuidv4 } from "uuid";
 
 let API_URL = "https://api.fairway-ink.com";
-if (process.env.NODE_ENV === "development") API_URL = "http://localhost:5001";
+if (process.env.NODE_ENV === "development") API_URL = "http://localhost:5000";
 
 const get_ssid = () => {
   let sessionId = Cookies.get("session_id");
@@ -20,14 +20,14 @@ export const uploadImage = async (file, method) => {
   const session_id = get_ssid();
 
   const formData = new FormData();
+  formData.append("ssid", session_id);
   formData.append("file", file, "fairway_ink_drawing.png");
   formData.append("method", method);
 
   try {
-    const response = await axios.post(API_URL + "/upload", formData, {
+    const response = await axios.post(`${API_URL}/upload`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
-        ssid: session_id,
       },
     });
 
@@ -59,12 +59,12 @@ export const generateStl = async (svgData, scale, stlKey, templateType) => {
   }
 
   formData.append("stlKey", stlKey);
+  formData.append("ssid", session_id);
 
   try {
-    const response = await axios.post(API_URL + "/generate", formData, {
+    const response = await axios.post(`${API_URL}/generate`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
-        ssid: session_id,
       },
     });
 
@@ -81,15 +81,15 @@ export const addToCartApi = (stlUrl, quantity, templateType) => {
   const session_id = get_ssid();
 
   const formData = new FormData();
+  formData.append("ssid", session_id);
   formData.append("stlUrl", stlUrl);
   formData.append("quantity", quantity);
   formData.append("templateType", templateType);
 
   try {
-    axios.post(API_URL + "/cart", formData, {
+    axios.post(`${API_URL}/cart`, formData, {
       headers: {
         "Content-Type": "multi-part/form-data",
-        ssid: session_id,
       },
     });
   } catch (error) {
@@ -104,7 +104,7 @@ export const getCheckoutSession = async () => {
 
   try {
     const response = await axios.post(
-      API_URL + "/create-checkout-session",
+      `${API_URL}/create-checkout-session`,
       formData,
       {
         headers: {
@@ -125,7 +125,7 @@ export const verifySuccessfulCheckout = async (sessionId) => {
 
   try {
     const response = await axios.post(
-      API_URL + "/verify-payment",
+      `${API_URL}/verify-payment`,
       { stripe_ssid: sessionId, browser_ssid: browser_ssid },
       {
         headers: {
