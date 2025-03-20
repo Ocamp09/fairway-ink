@@ -27,7 +27,7 @@ const TabMenu = () => {
           }}
         >
           <BsFill2CircleFill size={24} className="tab-number" />
-          Scale
+          Adjust
         </h3>
       </div>
       <div className={stage === "preview" ? "active" : ""}>

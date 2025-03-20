@@ -1,31 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import STLViewer from "../3D-View/STLViewer";
 import { addToCartApi } from "../../api/api";
 import { useCart } from "../../contexts/CartContext";
 import "./BrowseItem.css";
+import SizeSelector from "./SizeSelector";
 
 const BrowseItem = ({ url }) => {
   const [isAdded, setIsAdded] = useState(false);
+  const [size, setSize] = useState("medium");
+  const [prevSize, setPrevSize] = useState(size);
+  const [displayUrl, setDisplayUrl] = useState(url);
   const { addToCart } = useCart();
 
   const handleAddToCart = (event) => {
     event.preventDefault();
 
-    addToCartApi(url, 1, "solid");
-    addToCart(1, url, 1, "solid");
+    addToCartApi(displayUrl, 1, "solid");
+    addToCart(1, displayUrl, 1, "solid");
     setIsAdded(true);
   };
 
+  useEffect(() => {
+    setDisplayUrl(url.replace(prevSize, size));
+    setIsAdded(false);
+  }, [size]);
+
   return (
     <div className="browse-item">
-      <STLViewer stlUrl={url} cart={true} zoomScale={2} />
+      <STLViewer stlUrl={displayUrl} cart={true} zoomScale={1.75} />
+      <SizeSelector size={size} setSize={setSize} setPrevSize={setPrevSize} />
       <button
         onClick={handleAddToCart}
         className="submit-button"
         disabled={isAdded}
       >
         {!isAdded ? "Add to Cart" : "Item added!"}
-      </button>{" "}
+      </button>
     </div>
   );
 };
