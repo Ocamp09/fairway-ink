@@ -3,11 +3,7 @@ import { useCart } from "../../contexts/CartContext";
 import STLViewer from "../3D-View/STLViewer";
 import "./ViewCartPopup.css";
 import { loadStripe } from "@stripe/stripe-js";
-import { getCheckoutSession } from "../../api/api";
-
-const stripePromise = loadStripe(
-  "pk_test_51Qs6WuACPDsvvNfxem8wieeIWOMf7FDRdwepMv7kSRJ9h80oegevnSUyxwEhyq7BbCU5KEwjxdOFptaDUFyeo7s400o1D8zBSi"
-);
+import Checkout from "./Checkout";
 
 const ViewCartPopup = ({ isOpen, setIsOpen }) => {
   const { cartItems, removeFromCart, updateQuantity } = useCart();
@@ -15,6 +11,7 @@ const ViewCartPopup = ({ isOpen, setIsOpen }) => {
 
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [isCheckout, setIsCheckout] = useState(false);
 
   useEffect(() => {
     let newTotal = 0;
@@ -42,26 +39,8 @@ const ViewCartPopup = ({ isOpen, setIsOpen }) => {
     }
   };
 
-  const handleCheckout = async () => {
-    setLoading(true);
-    try {
-      // Call API to create checkout session and get session ID
-      const sessionId = await getCheckoutSession();
-
-      // Redirect the user to Stripe Checkout
-      const stripe = await stripePromise;
-      const { error } = await stripe.redirectToCheckout({ sessionId });
-
-      // If there's an error, show it to the user
-      if (error) {
-        setErrorMessage(error.message);
-      }
-    } catch (error) {
-      // Handle error from your API or network issues
-      setErrorMessage("There was an issue creating your checkout session.");
-      console.error("Error during checkout session creation: ", error);
-    }
-    setLoading(false);
+  const handleCheckout = () => {
+    setIsCheckout(true);
   };
 
   if (!isOpen) {
@@ -131,11 +110,13 @@ const ViewCartPopup = ({ isOpen, setIsOpen }) => {
           <button
             onClick={handleCheckout}
             className="checkout-button"
-            disabled={loading || cartItems.length === 0}
+            disabled={cartItems.length === 0}
+            hidden={isCheckout}
           >
             {loading ? "Redirecting to Payment..." : "Proceed to Payment"}
           </button>
         </div>
+        {isCheckout && <Checkout cartTotal={total.toFixed(2)} />}
       </div>
     </div>
   );

@@ -98,13 +98,13 @@ export const addToCartApi = (stlUrl, quantity, templateType) => {
   }
 };
 
-export const getCheckoutSession = async () => {
+export const getPaymentIntent = async () => {
   const formData = new FormData();
   formData.append("cart", sessionStorage.getItem("cart"));
 
   try {
     const response = await axios.post(
-      `${API_URL}/create-checkout-session`,
+      `${API_URL}/create-payment-intent`,
       formData,
       {
         headers: {
@@ -112,8 +112,8 @@ export const getCheckoutSession = async () => {
         },
       }
     );
-    console.log(response);
-    return response.data.id;
+    console.log(response.data);
+    return response.data.client_secret;
   } catch (error) {
     console.log("Error getting checkout session: ", error);
     throw error;
@@ -135,6 +135,7 @@ export const verifySuccessfulCheckout = async (sessionId) => {
     );
 
     if (response.data.success) {
+      console.log(response.data);
       return response.data;
     } else {
       alert(response.data.message || "Payment failed");
