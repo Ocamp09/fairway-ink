@@ -113,20 +113,31 @@ export const getPaymentIntent = async () => {
       }
     );
     console.log(response.data);
-    return response.data.client_secret;
+    return response.data;
   } catch (error) {
     console.log("Error getting checkout session: ", error);
     throw error;
   }
 };
 
-export const verifySuccessfulCheckout = async (sessionId) => {
+export const verifySuccessfulCheckout = async (
+  intentId,
+  name,
+  email,
+  address
+) => {
   const browser_ssid = get_ssid();
-
+  console.log("addr", address);
   try {
     const response = await axios.post(
-      `${API_URL}/verify-payment`,
-      { stripe_ssid: sessionId, browser_ssid: browser_ssid },
+      `${API_URL}/handle-order`,
+      {
+        intent_id: intentId,
+        browser_ssid: browser_ssid,
+        address: address,
+        email: email,
+        name: name,
+      },
       {
         headers: {
           "Content-Type": "application/json",

@@ -10,14 +10,15 @@ const stripePromise = loadStripe(
 
 const Checkout = ({ cartTotal }) => {
   const [clientSecret, setClientSecret] = useState("");
+  const [intentId, setIntentId] = useState("");
 
   useEffect(() => {
     const fetchClientSecret = async () => {
       try {
         // Call your API to create a payment intent with the cart total
-        const secret = await getPaymentIntent();
-        console.log("sec", secret);
-        setClientSecret(secret); // Assuming the API returns the clientSecret
+        const intent = await getPaymentIntent();
+        setClientSecret(intent.client_secret);
+        setIntentId(intent.payment_intent);
       } catch (error) {
         console.error("Error fetching client secret", error);
       }
@@ -40,11 +41,8 @@ const Checkout = ({ cartTotal }) => {
 
   return (
     <div className="checkout-form">
-      <Elements
-        stripe={stripePromise}
-        options={{ clientSecret, appearance, loader }}
-      >
-        <CheckoutForm />
+      <Elements stripe={stripePromise}>
+        <CheckoutForm intentId={intentId} clientSecret={clientSecret} />
       </Elements>
     </div>
   );
