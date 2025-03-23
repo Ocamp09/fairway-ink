@@ -112,7 +112,7 @@ export const getPaymentIntent = async () => {
         },
       }
     );
-    console.log(response.data);
+
     return response.data;
   } catch (error) {
     console.log("Error getting checkout session: ", error);

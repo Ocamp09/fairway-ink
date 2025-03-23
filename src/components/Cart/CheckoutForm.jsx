@@ -22,13 +22,13 @@ const CheckoutForm = ({ clientSecret, intentId }) => {
 
   const [successfulOrder, setSuccessfulOrder] = useState(null);
   const [orderInfo, setOrderInfo] = useState({
-    amount: 2083,
-    email: "test@gmail.com",
-    shipping_info: {
-      tracking_number: "1234",
-      carrier: "USPS",
-      estimated_delivery: 2,
-    },
+    // amount: 2083,
+    // email: "test@gmail.com",
+    // shipping_info: {
+    //   tracking_id: "1234",
+    //   carrier: "USPS",
+    //   expected_delivery: 2,
+    // },
   });
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -107,7 +107,7 @@ const CheckoutForm = ({ clientSecret, intentId }) => {
     setIsLoading(false);
   };
 
-  if (successfulOrder === "") {
+  if (successfulOrder === null) {
     return (
       <form id="payment-form" onSubmit={handleSubmit}>
         <AddressElement
@@ -147,7 +147,7 @@ const CheckoutForm = ({ clientSecret, intentId }) => {
         </button>
       </form>
     );
-  } else if (successfulOrder === null) {
+  } else if (successfulOrder === true) {
     return (
       <div className="paid">
         <h3 className="success-text">
@@ -161,10 +161,10 @@ const CheckoutForm = ({ clientSecret, intentId }) => {
         <hr />
         <label>Shipping info:</label>
         <p>Carrier: {orderInfo.shipping_info.carrier}</p>
-        <p>Tracking Number: {orderInfo.shipping_info.tracking_number}</p>
+        <p>Tracking Number: {orderInfo.shipping_info.tracking_id}</p>
         <p>
-          Estimated Delivery {orderInfo.shipping_info.estimated_delivery + 3}-
-          {orderInfo.shipping_info.estimated_delivery + 5} days
+          Estimated Delivery {orderInfo.shipping_info.expected_delivery + 3}-
+          {orderInfo.shipping_info.expected_delivery + 5} days
         </p>
       </div>
     );
