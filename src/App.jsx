@@ -8,8 +8,7 @@ import { useState, useEffect } from "react";
 import ViewCartPopup from "./components/Cart/ViewCartPopup";
 import Cookies from "js-cookie";
 import { v4 as uuidv4 } from "uuid";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Use Routes instead of Switch
-import SuccessPage from "./components/SuccessPage"; // Import the SuccessPage component
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import WelcomePopup from "./components/WelcomePopup";
 import HomePage from "./components/HomePage";
 import Browse from "./components/Browse/Browse";
@@ -47,7 +46,6 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/design" element={<GolfBallDisplay />} />
             <Route path="/browse" element={<Browse />} />
-            <Route path="/success" element={<SuccessPage />} />
           </Routes>
           <ViewCartPopup isOpen={cartPopup} setIsOpen={setCartPopup}>
             {isCheckout ? (
