@@ -13,10 +13,13 @@ import SuccessPage from "./components/SuccessPage"; // Import the SuccessPage co
 import WelcomePopup from "./components/WelcomePopup";
 import HomePage from "./components/HomePage";
 import Browse from "./components/Browse/Browse";
+import CartDisplay from "./components/Cart/CartDisplay";
+import Checkout from "./components/Cart/Checkout";
 
 function App() {
   const [cartPopup, setCartPopup] = useState(false);
   const [welcome, setWelcome] = useState(false);
+  const [isCheckout, setIsCheckout] = useState(false);
 
   let sessionId = Cookies.get("session_id");
 
@@ -32,7 +35,7 @@ function App() {
       setWelcome(true);
       sessionStorage.setItem("showedWelcome", "true");
     }
-  });
+  }, []);
 
   return (
     <Router>
@@ -46,7 +49,13 @@ function App() {
             <Route path="/browse" element={<Browse />} />
             <Route path="/success" element={<SuccessPage />} />
           </Routes>
-          <ViewCartPopup isOpen={cartPopup} setIsOpen={setCartPopup} />
+          <ViewCartPopup isOpen={cartPopup} setIsOpen={setCartPopup}>
+            {isCheckout ? (
+              <Checkout setIsCheckout={setIsCheckout} />
+            ) : (
+              <CartDisplay setIsCheckout={setIsCheckout} />
+            )}
+          </ViewCartPopup>
         </CartProvider>
       </FileProvider>
     </Router>

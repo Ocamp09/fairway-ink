@@ -57,6 +57,32 @@ export const CartProvider = ({ children }) => {
     return cartItems.length;
   };
 
+  const getPrice = (item) => {
+    if (item.type === "solid" || item.type === "text") {
+      const price = 5.99;
+      return price * item.quantity;
+    } else {
+      const price = 7.99;
+      return price * item.quantity;
+    }
+  };
+
+  const getTotal = () => {
+    let total = 0.0;
+    for (let i = 0; i < cartItems.length; i++) {
+      const item = cartItems[i];
+      if (item.type === "solid" || item.type === "text") {
+        const price = 5.99;
+        total += price * item.quantity;
+      } else {
+        const price = 7.99;
+        total += price * item.quantity;
+      }
+    }
+
+    return total;
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -66,6 +92,8 @@ export const CartProvider = ({ children }) => {
         updateQuantity,
         clearCart,
         getItemCount,
+        getPrice,
+        getTotal,
       }}
     >
       {children}
