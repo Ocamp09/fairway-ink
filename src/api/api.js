@@ -127,7 +127,7 @@ export const verifySuccessfulCheckout = async (
   address
 ) => {
   const browser_ssid = get_ssid();
-  console.log("addr", address);
+
   try {
     const response = await axios.post(
       `${API_URL}/handle-order`,
@@ -145,12 +145,7 @@ export const verifySuccessfulCheckout = async (
       }
     );
 
-    if (response.data.success) {
-      console.log(response.data);
-      return response.data;
-    } else {
-      alert(response.data.message || "Payment failed");
-    }
+    return response;
   } catch (error) {
     console.error("Error verifying payment:", error);
     alert("Error verifying payment");
