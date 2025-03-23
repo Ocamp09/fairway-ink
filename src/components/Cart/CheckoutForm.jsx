@@ -19,6 +19,9 @@ const CheckoutForm = ({ clientSecret, intentId }) => {
   const [emailComplete, setEmailComplete] = useState(false);
   const [cardComplete, setCardComplete] = useState(false);
 
+  const [successfulOrder, setSuccessfulOrder] = useState(null);
+  const [orderInfo, setOrderInfo] = useState();
+
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   const handleEmailChange = (e) => {
@@ -76,51 +79,76 @@ const CheckoutForm = ({ clientSecret, intentId }) => {
       setMessage(error.message);
     }
 
-    verifySuccessfulCheckout(
+    let orderResponse = await verifySuccessfulCheckout(
       intentId,
       addressData.value.name,
       email,
       addressData.value.address
     );
 
+    if (orderResponse.data.success) {
+      // show success popup
+      const orderInfo = orderResponse.data.order;
+      setOrderInfo(orderInfo);
+      setSuccessfulOrder(true);
+    } else {
+      // show fail popup
+      setSuccessfulOrder(false);
+    }
     setIsLoading(false);
   };
 
-  return (
-    <form id="payment-form" onSubmit={handleSubmit}>
-      <AddressElement
-        options={{ mode: "shipping" }}
-        onChange={(e) => {
-          setAddressComplete(e.complete);
-        }}
-      />
-      <div className="email">
-        <label className="email-label">Email</label>
-        <input type="email" value={email} onChange={handleEmailChange} />
-      </div>
-      <div className="email top">
-        <label className="email-label">Card Information</label>
-        <div className="card">
-          <CardElement
-            options={{ hidePostalCode: true }}
-            onChange={(e) => {
-              setCardComplete(e.complete);
-            }}
-          />
+  if (successfulOrder === null) {
+    return (
+      <form id="payment-form" onSubmit={handleSubmit}>
+        <AddressElement
+          options={{ mode: "shipping" }}
+          onChange={(e) => {
+            setAddressComplete(e.complete);
+          }}
+        />
+        <div className="email">
+          <label className="email-label">Email</label>
+          <input type="email" value={email} onChange={handleEmailChange} />
         </div>
+        <div className="email top">
+          <label className="email-label">Card Information</label>
+          <div className="card">
+            <CardElement
+              options={{ hidePostalCode: true }}
+              onChange={(e) => {
+                setCardComplete(e.complete);
+              }}
+            />
+          </div>
+        </div>
+        {message && <div id="payment-message">{message}</div>}
+        <button
+          disabled={
+            !stripe ||
+            !addressComplete ||
+            !emailComplete ||
+            !cardComplete ||
+            isLoading
+          }
+          id="submit"
+          className="submit-button"
+        >
+          {isLoading ? "Processing..." : "Pay now"}
+        </button>
+      </form>
+    );
+  } else if (successfulOrder === true) {
+    return (
+      <div>
+        <h1>Your payment was successful</h1>
+        <p>Email: {orderInfo.email}</p>
+        <p>Total: ${orderInfo.amount / 100}</p>
       </div>
-      {message && <div id="payment-message">{message}</div>}
-      <button
-        disabled={
-          !stripe || !addressComplete || !emailComplete || !cardComplete
-        }
-        id="submit"
-        className="submit-button"
-      >
-        {isLoading ? "Processing..." : "Pay now"}
-      </button>
-    </form>
-  );
+    );
+  } else {
+    alert("checkout failed, you were not charged");
+  }
 };
 
 export default CheckoutForm;
