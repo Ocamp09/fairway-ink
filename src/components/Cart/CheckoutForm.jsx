@@ -7,6 +7,7 @@ import {
 } from "@stripe/react-stripe-js";
 import "./Checkout.css";
 import { verifySuccessfulCheckout } from "../../api/api";
+import { FaCheckCircle } from "react-icons/fa";
 
 const CheckoutForm = ({ clientSecret, intentId }) => {
   const stripe = useStripe();
@@ -20,7 +21,15 @@ const CheckoutForm = ({ clientSecret, intentId }) => {
   const [cardComplete, setCardComplete] = useState(false);
 
   const [successfulOrder, setSuccessfulOrder] = useState(null);
-  const [orderInfo, setOrderInfo] = useState();
+  const [orderInfo, setOrderInfo] = useState({
+    amount: 2083,
+    email: "test@gmail.com",
+    shipping_info: {
+      tracking_number: "1234",
+      carrier: "USPS",
+      estimated_delivery: 2,
+    },
+  });
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -98,7 +107,7 @@ const CheckoutForm = ({ clientSecret, intentId }) => {
     setIsLoading(false);
   };
 
-  if (successfulOrder === null) {
+  if (successfulOrder === "") {
     return (
       <form id="payment-form" onSubmit={handleSubmit}>
         <AddressElement
@@ -138,12 +147,25 @@ const CheckoutForm = ({ clientSecret, intentId }) => {
         </button>
       </form>
     );
-  } else if (successfulOrder === true) {
+  } else if (successfulOrder === null) {
     return (
-      <div>
-        <h1>Your payment was successful</h1>
+      <div className="paid">
+        <h3 className="success-text">
+          <FaCheckCircle color="4BB543" size={36} /> Your order has been
+          submitted
+        </h3>
+        <hr />
+        <label>Order info:</label>
         <p>Email: {orderInfo.email}</p>
-        <p>Total: ${orderInfo.amount / 100}</p>
+        <p>Amount paid: ${orderInfo.amount / 100}</p>
+        <hr />
+        <label>Shipping info:</label>
+        <p>Carrier: {orderInfo.shipping_info.carrier}</p>
+        <p>Tracking Number: {orderInfo.shipping_info.tracking_number}</p>
+        <p>
+          Estimated Delivery {orderInfo.shipping_info.estimated_delivery + 3}-
+          {orderInfo.shipping_info.estimated_delivery + 5} days
+        </p>
       </div>
     );
   } else {
