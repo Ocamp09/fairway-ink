@@ -1,16 +1,12 @@
 import { useRef, useState, useEffect } from "react";
 import { useSession } from "../../contexts/DesignContext";
-import {
-  drawImage,
-  drawLine,
-  getCoordinates,
-  centerCanvasDrawing,
-} from "../../utils/canvasUtils";
+import { drawImage, drawLine, getCoordinates } from "../../utils/canvasUtils";
 import InfoPane from "./InfoPane";
 import { uploadImage } from "../../api/api";
-import "./TabEditor.css";
 import UndoRedo from "../Image_Drawing/Toolbar/UndoRedo";
 import DrawTools from "../Image_Drawing/Toolbar/DrawTools";
+import global from "../../global.module.css";
+import "./TabEditor.css";
 
 const TabEditor = () => {
   const {
@@ -207,7 +203,7 @@ const TabEditor = () => {
         <InfoPane warnText="Indicates un-printable areas, click and draw bridges across yellow items to white areas for printing" />
       </div>
       <button
-        className="submit-button"
+        className={global.submit_button}
         onClick={() => {
           submitTabs();
         }}

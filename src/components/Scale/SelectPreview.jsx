@@ -1,6 +1,7 @@
 import { ReactSVG } from "react-svg";
 import { useSession } from "../../contexts/DesignContext";
 import InfoPane from "./InfoPane";
+import global from "../../global.module.css";
 import "./SelectPreview.css";
 
 const SelectPreview = () => {
@@ -109,7 +110,7 @@ const SelectPreview = () => {
         />
       </div>
       <button
-        className="submit-button"
+        className={global.submit_button}
         onClick={() => {
           submitSelected();
         }}

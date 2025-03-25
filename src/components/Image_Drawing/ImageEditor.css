@@ -62,26 +62,6 @@
   pointer-events: all;
 }
 
-.submit-button {
-  padding: 10px 20px;
-  width: auto;
-  background-color: var(--tool-button);
-  color: var(--icon);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-.submit-button:hover {
-  background-color: var(--submit-hover);
-}
-
-.submit-button:disabled {
-  background-color: var(--submit-disabled);
-  cursor: not-allowed;
-}
-
 .desc {
   margin-left: auto;
   margin-right: auto;

@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import STLViewer from "../3D-View/STLViewer";
 import { addToCartApi } from "../../api/api";
 import { useCart } from "../../contexts/CartContext";
-import "./BrowseItem.css";
 import SizeSelector from "./SizeSelector";
+import "./BrowseItem.css";
+import global from "../../global.module.css";
 
 const BrowseItem = ({ url }) => {
   const [isAdded, setIsAdded] = useState(false);
@@ -31,7 +32,7 @@ const BrowseItem = ({ url }) => {
       <SizeSelector size={size} setSize={setSize} setPrevSize={setPrevSize} />
       <button
         onClick={handleAddToCart}
-        className="submit-button"
+        className={global.submit_button}
         disabled={isAdded}
       >
         {!isAdded ? "Add to Cart" : "Item added!"}

@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./HomePage.css";
+import global from "../global.module.css";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -16,10 +17,16 @@ const HomePage = () => {
             Design your own logo in our designer, or select a logo from our
             daily updating library!
           </p>
-          <button className="submit-button" onClick={() => navigate("/design")}>
+          <button
+            className={global.submit_button}
+            onClick={() => navigate("/design")}
+          >
             Start designing
           </button>
-          <button className="submit-button" onClick={() => navigate("/browse")}>
+          <button
+            className={global.submit_button}
+            onClick={() => navigate("/browse")}
+          >
             Browse designs
           </button>
         </div>

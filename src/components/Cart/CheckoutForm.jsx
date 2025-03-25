@@ -5,9 +5,10 @@ import {
   useElements,
   AddressElement,
 } from "@stripe/react-stripe-js";
-import "./Checkout.css";
 import { verifySuccessfulCheckout } from "../../api/api";
 import { FaCheckCircle } from "react-icons/fa";
+import "./Checkout.css";
+import global from "../../global.module.css";
 
 const CheckoutForm = ({ clientSecret, intentId }) => {
   const stripe = useStripe();
@@ -141,7 +142,7 @@ const CheckoutForm = ({ clientSecret, intentId }) => {
             isLoading
           }
           id="submit"
-          className="submit-button"
+          className={global.submit_button}
         >
           {isLoading ? "Processing..." : "Pay now"}
         </button>

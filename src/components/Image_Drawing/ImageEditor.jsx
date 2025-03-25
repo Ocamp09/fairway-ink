@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import "./ImageEditor.css";
 import Toolbar from "./Toolbar/Toolbar";
 import { useSession } from "../../contexts/DesignContext";
 import TypeSelector from "./TypeSelector";
@@ -15,6 +14,8 @@ import { useFontLoader } from "../../hooks/useFontLoader";
 import { useCanvasScaling } from "../../hooks/useCanvasScaling";
 import { useCanvasEvents } from "../../hooks/useCanvasEvents";
 import { uploadImage } from "../../api/api";
+import global from "../../global.module.css";
+import "./ImageEditor.css";
 
 function ImageEditor() {
   const canvasRef = useRef(null);
@@ -284,7 +285,7 @@ function ImageEditor() {
         if (templateType === "solid") {
           setError("Unable to process drawing, make sure lines are connected");
         } else {
-          setError("Error processing drawing, make sure drawing is complete");
+          setError("Error processing drawing, make sure drawing is");
         }
         setIsLoading(false);
         return;
@@ -422,7 +423,7 @@ function ImageEditor() {
         <div className="editor-spacer"></div>
       </div>
       <button
-        className="submit-button"
+        className={global.submit_button}
         onClick={handleSvg}
         disabled={isLoading}
       >

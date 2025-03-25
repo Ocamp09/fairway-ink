@@ -4,6 +4,7 @@ import QuantityDropdown from "./QuantityDropdown";
 import { useCart } from "../../contexts/CartContext";
 import { useSession } from "../../contexts/DesignContext";
 import { addToCartApi } from "../../api/api";
+import global from "../../global.module.css";
 import "./PreviewTab.css";
 
 const PreviewTab = () => {
@@ -53,7 +54,7 @@ const PreviewTab = () => {
         />
         <button
           onClick={handleAddToCart}
-          className="submit-button"
+          className={global.submit_button}
           disabled={isAdded}
         >
           {!isAdded ? "Add to Cart" : "Item added!"}
