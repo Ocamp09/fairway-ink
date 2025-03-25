@@ -13,7 +13,7 @@
   width: 100%;
 }
 
-label {
+.dropdown label {
   cursor: pointer;
 }
 

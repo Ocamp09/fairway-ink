@@ -98,13 +98,13 @@ export const addToCartApi = (stlUrl, quantity, templateType) => {
   }
 };
 
-export const getCheckoutSession = async () => {
+export const getPaymentIntent = async () => {
   const formData = new FormData();
   formData.append("cart", sessionStorage.getItem("cart"));
 
   try {
     const response = await axios.post(
-      `${API_URL}/create-checkout-session`,
+      `${API_URL}/create-payment-intent`,
       formData,
       {
         headers: {
@@ -112,21 +112,32 @@ export const getCheckoutSession = async () => {
         },
       }
     );
-    console.log(response);
-    return response.data.id;
+
+    return response.data;
   } catch (error) {
     console.log("Error getting checkout session: ", error);
     throw error;
   }
 };
 
-export const verifySuccessfulCheckout = async (sessionId) => {
+export const verifySuccessfulCheckout = async (
+  intentId,
+  name,
+  email,
+  address
+) => {
   const browser_ssid = get_ssid();
 
   try {
     const response = await axios.post(
-      `${API_URL}/verify-payment`,
-      { stripe_ssid: sessionId, browser_ssid: browser_ssid },
+      `${API_URL}/handle-order`,
+      {
+        intent_id: intentId,
+        browser_ssid: browser_ssid,
+        address: address,
+        email: email,
+        name: name,
+      },
       {
         headers: {
           "Content-Type": "application/json",
@@ -134,11 +145,7 @@ export const verifySuccessfulCheckout = async (sessionId) => {
       }
     );
 
-    if (response.data.success) {
-      return response.data;
-    } else {
-      alert(response.data.message || "Payment failed");
-    }
+    return response;
   } catch (error) {
     console.error("Error verifying payment:", error);
     alert("Error verifying payment");
