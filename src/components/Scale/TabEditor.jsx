@@ -211,7 +211,7 @@ const TabEditor = () => {
         {!loading && "Add tabs"}
         {loading && "Loading"}
       </button>
-      {error && <p className="file-error-message">{error}</p>}
+      {error && <p className={global.error_message}>{error}</p>}
     </div>
   );
 };

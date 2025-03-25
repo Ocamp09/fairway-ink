@@ -59,7 +59,7 @@ const PreviewTab = () => {
         >
           {!isAdded ? "Add to Cart" : "Item added!"}
         </button>
-        {error && <p className="file-error-message">{error}</p>}
+        {error && <p className={global.error_message}>{error}</p>}
       </div>
     </div>
   );

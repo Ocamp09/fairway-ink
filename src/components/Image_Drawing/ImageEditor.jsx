@@ -430,7 +430,7 @@ function ImageEditor() {
         {!isLoading && "Proceed to Scale"}
         {isLoading && "Loading"}
       </button>
-      {error && <p className="file-error-message">{error}</p>}
+      {error && <p className={global.error_message}>{error}</p>}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useCart } from "../../contexts/CartContext";
 import STLViewer from "../3D-View/STLViewer";
+import global from "../../global.module.css";
 import "./ViewCartPopup.css";
 
 const CartDisplay = ({ setIsCheckout }) => {
@@ -73,7 +74,7 @@ const CartDisplay = ({ setIsCheckout }) => {
       )}
       <div className="checkout">
         <h3>Cart Total: ${total.toFixed(2)}</h3>
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
+        {errorMessage && <p className={global.error_message}>{errorMessage}</p>}
 
         <button
           onClick={handleCheckout}
