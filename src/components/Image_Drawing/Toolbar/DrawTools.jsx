@@ -1,4 +1,4 @@
-import QuantityDropdown from "../Preview/QuantityDropdown";
+import QuantityDropdown from "../../Preview/QuantityDropdown";
 import { MdLineWeight } from "react-icons/md";
 
 const DrawTools = ({ lineWidth, setLineWidth, iconSize }) => {
