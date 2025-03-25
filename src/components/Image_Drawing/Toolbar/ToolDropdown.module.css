@@ -20,7 +20,7 @@
 
 .dropdown_list {
   position: absolute;
-  bottom: 72%;
+  bottom: 100%;
   right: 0;
   margin: 0;
   padding: 0;
@@ -29,7 +29,7 @@
   background-color: var(--tone);
   box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
   z-index: 10;
-  width: 4rem;
+  width: 100%;
   overflow-y: auto;
   max-height: 255px;
 }
