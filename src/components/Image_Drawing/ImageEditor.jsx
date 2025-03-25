@@ -279,9 +279,18 @@ function ImageEditor() {
     try {
       // Call the uploadImage function from api.js
       const response = await uploadImage(blob, templateType);
-
+      const svgData = response.svgData;
+      if (!svgData.includes("path")) {
+        if (templateType === "solid") {
+          setError("Unable to process drawing, make sure lines are connected");
+        } else {
+          setError("Error processing drawing, make sure drawing is complete");
+        }
+        setIsLoading(false);
+        return;
+      }
       setIsLoading(false);
-      updateSvgData(response.svgData);
+      updateSvgData(svgData);
       if (templateType === "custom") {
         updateAdjustStage("remove");
       } else {
