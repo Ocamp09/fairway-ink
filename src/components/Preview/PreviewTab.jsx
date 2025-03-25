@@ -44,7 +44,7 @@ const PreviewTab = () => {
       </button>
       <p>3-D Render Preview</p>
       {stlUrl && <STLViewer stlUrl={stlUrl} />}
-      <div>
+      <div className="button_div">
         <QuantityDropdown
           setQuantity={setQuantity}
           quantity={quantity}

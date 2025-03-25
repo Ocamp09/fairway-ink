@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import "./QuantityDropdown.css";
+import { RiArrowDropDownLine } from "react-icons/ri";
+import styles from "./QuantityDropdown.module.css";
 
 function QuantityDropdown({
   setQuantity,
@@ -41,18 +42,25 @@ function QuantityDropdown({
   }, [isOpen]);
 
   return (
-    <div className="dropdown" title={title} ref={dropdownRef} hidden={hidden}>
-      <button className="dropdown-toggle" onClick={() => setIsOpen(!isOpen)}>
-        <label>{labelText}</label>
-        {quantity}
+    <div
+      className={styles.dropdown}
+      title={title}
+      ref={dropdownRef}
+      hidden={hidden}
+    >
+      <button
+        className={styles.dropdown_toggle}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {labelText} {quantity} <RiArrowDropDownLine size={28} />
       </button>
 
       {isOpen && (
-        <ul className="dropdown-list">
+        <ul className={styles.dropdown_list}>
           {quantities.map((qty) => (
             <li
               key={qty}
-              className={quantity === qty ? "selected" : ""}
+              className={quantity === qty ? styles.selected : ""}
               onClick={() => handleSelectQuantity(qty)}
             >
               {qty}
