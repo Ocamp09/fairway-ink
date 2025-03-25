@@ -13,6 +13,8 @@ function ToolDropdown({
   hidden = false,
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [customQty, setCustomQty] = useState();
+
   const dropdownRef = useRef(null);
 
   const quantities = [];
@@ -23,6 +25,16 @@ function ToolDropdown({
   const handleSelectQuantity = (value) => {
     setQuantity(value);
     setIsOpen(false);
+  };
+
+  const handleCustom = (e) => {
+    const inVal = parseInt(e.target.value);
+    if (!inVal || inVal <= 0) {
+      return;
+    }
+
+    setCustomQty(inVal);
+    setQuantity(inVal);
   };
 
   useEffect(() => {
@@ -66,6 +78,9 @@ function ToolDropdown({
               {qty}
             </li>
           ))}
+          <li className={quantity === customQty ? styles.selected : ""}>
+            <input placeholder="size" onChange={(e) => handleCustom(e)} />
+          </li>
         </ul>
       )}
     </div>

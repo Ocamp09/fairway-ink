@@ -44,6 +44,15 @@ li {
   padding: 8px 12px;
 }
 
+input {
+  background-color: #ccc;
+  width: 100%;
+  border: 0;
+  border-radius: 5px;
+  color: var(--text);
+  text-align: center;
+}
+
 .selected {
   background-color: var(--tool-button);
   color: #fff;
