@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getDesigns } from "../../api/api";
 import BrowseItem from "./BrowseItem";
-import "./Browse.css";
+import styles from "./Browse.module.css";
 
 const Browse = () => {
   const [designList, setDesignList] = useState([]);
@@ -20,7 +20,7 @@ const Browse = () => {
     <div>
       <h3> Pre-generated designs</h3>
 
-      <div className="browse-grid">
+      <div className={styles.browse_grid}>
         {designList.map((item, index) => (
           <BrowseItem key={index} url={item} />
         ))}

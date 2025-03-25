@@ -1,8 +1,8 @@
-import "./SizeSelector.css";
+import styles from "./SizeSelector.module.css";
 
 const SizeSelector = ({ size, setSize, setPrevSize }) => {
   return (
-    <div className="size-menu">
+    <div className={styles.size_menu}>
       <button
         className={`${size === "small" ? "active" : ""}`}
         onClick={() => {

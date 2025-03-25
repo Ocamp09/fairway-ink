@@ -3,8 +3,8 @@ import STLViewer from "../3D-View/STLViewer";
 import { addToCartApi } from "../../api/api";
 import { useCart } from "../../contexts/CartContext";
 import SizeSelector from "./SizeSelector";
-import "./BrowseItem.css";
 import global from "../../global.module.css";
+import styles from "./BrowseItem.module.css";
 
 const BrowseItem = ({ url }) => {
   const [isAdded, setIsAdded] = useState(false);
@@ -27,7 +27,7 @@ const BrowseItem = ({ url }) => {
   }, [size]);
 
   return (
-    <div className="browse-item">
+    <div className={styles.browse_item}>
       <STLViewer stlUrl={displayUrl} cart={true} zoomScale={1.75} />
       <SizeSelector size={size} setSize={setSize} setPrevSize={setPrevSize} />
       <button
