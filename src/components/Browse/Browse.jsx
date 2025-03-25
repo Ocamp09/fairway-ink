@@ -16,8 +16,6 @@ const Browse = () => {
     fetchDesigns();
   }, []);
 
-  console.log(designList);
-
   return (
     <div>
       <h3> Pre-generated designs</h3>
