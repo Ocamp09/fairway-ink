@@ -9,7 +9,7 @@ import { BiSolidPencil } from "react-icons/bi";
 import RemoveImage from "./RemoveImage";
 import { useSession } from "../../../contexts/DesignContext";
 import DrawTools from "./DrawTools";
-import TextTools from "../TextTools";
+import TextTools from "./TextTools";
 import UndoRedo from "./UndoRedo";
 
 const Toolbar = ({

@@ -1,10 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import "./ImageEditor.css";
-import Toolbar from "./Toolbar";
+import Toolbar from "./Toolbar/Toolbar";
 import { useSession } from "../../contexts/DesignContext";
 import TypeSelector from "./TypeSelector";
 import ModeExamples from "./ModeExamples";
-import getStroke from "perfect-freehand";
 import {
   getCoordinates,
   centerCanvasDrawing,

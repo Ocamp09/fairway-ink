@@ -9,8 +9,8 @@ import {
 import InfoPane from "./InfoPane";
 import { uploadImage } from "../../api/api";
 import "./TabEditor.css";
-import UndoRedo from "../Image_Drawing/UndoRedo";
-import DrawTools from "../Image_Drawing/DrawTools";
+import UndoRedo from "../Image_Drawing/Toolbar/UndoRedo";
+import DrawTools from "../Image_Drawing/Toolbar/DrawTools";
 
 const TabEditor = () => {
   const {
