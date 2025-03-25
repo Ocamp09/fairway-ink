@@ -89,7 +89,7 @@ const SelectPreview = () => {
   return (
     <div className="select-preview">
       <button
-        className="back-button preview-back-button"
+        className={global.back_button}
         onClick={() => {
           handleBackToDesigner();
         }}

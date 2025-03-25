@@ -157,7 +157,7 @@ const TabEditor = () => {
   return (
     <div className="tab-main">
       <button
-        className="back-button"
+        className={global.back_button}
         onClick={() => {
           handleBackToRemove();
         }}

@@ -36,7 +36,7 @@ const PreviewTab = () => {
   return (
     <div className="stl-viewer">
       <button
-        className="back-button"
+        className={global.back_button}
         onClick={() => {
           handleBack();
         }}

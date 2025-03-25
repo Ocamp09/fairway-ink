@@ -9,10 +9,6 @@
   align-items: center;
 }
 
-.preview-back-button {
-  top: 50px;
-}
-
 path:hover {
   cursor: pointer;
 }
