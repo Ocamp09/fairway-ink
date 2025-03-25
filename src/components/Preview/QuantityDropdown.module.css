@@ -30,7 +30,7 @@
   background-color: var(--tone);
   box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
   z-index: 10;
-  width: 4rem;
+  width: 6rem;
   overflow-y: auto;
   max-height: 255px;
 }
@@ -40,9 +40,17 @@ li {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  height: 2rem;
+  height: 2.125rem;
   border-bottom: 1px solid #ccc;
-  padding: 8px 12px;
+}
+
+input {
+  background-color: #ccc;
+  width: 100%;
+  border: 0;
+  border-radius: 5px;
+  color: var(--text);
+  text-align: center;
 }
 
 .selected {

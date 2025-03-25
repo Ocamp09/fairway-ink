@@ -13,6 +13,7 @@ function QuantityDropdown({
   hidden = false,
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [customQty, setCustomQty] = useState();
   const dropdownRef = useRef(null);
 
   const quantities = [];
@@ -23,6 +24,16 @@ function QuantityDropdown({
   const handleSelectQuantity = (value) => {
     setQuantity(value);
     setIsOpen(false);
+  };
+
+  const handleCustom = (e) => {
+    const inVal = parseInt(e.target.value);
+    if (!inVal || inVal <= 0) {
+      return;
+    }
+
+    setCustomQty(inVal);
+    setQuantity(inVal);
   };
 
   useEffect(() => {
@@ -66,6 +77,9 @@ function QuantityDropdown({
               {qty}
             </li>
           ))}
+          <li className={quantity === customQty ? styles.selected : ""}>
+            <input placeholder="Custom" onChange={(e) => handleCustom(e)} />
+          </li>
         </ul>
       )}
     </div>
