@@ -4,6 +4,12 @@
   height: 500px;
 }
 
+.button_div {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
 @media screen and (max-width: 525px) {
   .stl-viewer {
     height: 375px;

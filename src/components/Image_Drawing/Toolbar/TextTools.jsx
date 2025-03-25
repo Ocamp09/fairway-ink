@@ -1,4 +1,4 @@
-import QuantityDropdown from "../Preview/QuantityDropdown";
+import ToolDropdown from "./ToolDropdown";
 import { MdTextFields } from "react-icons/md";
 
 const TextTools = ({ fontSize, setFontSize, iconSize }) => {
@@ -6,7 +6,7 @@ const TextTools = ({ fontSize, setFontSize, iconSize }) => {
 
   return (
     <>
-      <QuantityDropdown
+      <ToolDropdown
         minQuantity={30}
         maxQuantity={80}
         labelText={lineLabel}

@@ -1,4 +1,4 @@
-import QuantityDropdown from "../Preview/QuantityDropdown";
+import ToolDropdown from "./ToolDropdown";
 import { MdLineWeight } from "react-icons/md";
 
 const DrawTools = ({ lineWidth, setLineWidth, iconSize }) => {
@@ -6,7 +6,7 @@ const DrawTools = ({ lineWidth, setLineWidth, iconSize }) => {
 
   return (
     <>
-      <QuantityDropdown
+      <ToolDropdown
         maxQuantity={20}
         labelText={lineLabel}
         step={2}
