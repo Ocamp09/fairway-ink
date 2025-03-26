@@ -1,13 +1,22 @@
 // import { LuSun } from "react-icons/lu";
+import { useState } from "react";
 import { IoIosCart } from "react-icons/io";
+import { RxHamburgerMenu } from "react-icons/rx";
 import { useCart } from "../contexts/CartContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./Header.module.css";
 
 const Header = ({ cartPopup, setCartPopup }) => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const { getItemCount } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const handleNavigate = (path) => {
+    navigate(path);
+    setMenuOpen(false);
+  };
 
   return (
     <>
@@ -52,6 +61,12 @@ const Header = ({ cartPopup, setCartPopup }) => {
           </div>
           <div className={styles.header_icons}>
             {/* <button className="icon-button">Login</button> */}
+            <button
+              className={styles.hamburger_button}
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <RxHamburgerMenu size={28} />
+            </button>
             <div>
               <button
                 className={styles.icon_button}
@@ -66,6 +81,27 @@ const Header = ({ cartPopup, setCartPopup }) => {
             {/* <LuSun size={32} color="yellow" fill="#242424" /> */}
           </div>
         </div>
+        {menuOpen && (
+          <div className={styles.mobile_nav}>
+            <hr />
+            <button
+              className={`${styles.nav_drop} ${
+                location.pathname === "/design" ? styles.active : ""
+              }`}
+              onClick={() => handleNavigate("/design")}
+            >
+              Design
+            </button>
+            <button
+              className={`${styles.nav_drop} ${
+                location.pathname === "/browse" ? styles.active : ""
+              }`}
+              onClick={() => handleNavigate("/browse")}
+            >
+              Browse
+            </button>
+          </div>
+        )}
         <hr />
       </div>
     </>
