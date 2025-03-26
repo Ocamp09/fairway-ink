@@ -19,6 +19,11 @@ const InfoPane = ({ warnText, redText }) => {
           <p>{redText}</p>
         </div>
       )}
+      {warnText && !redText && (
+        <div className={styles.info_item}>
+          <p>NOTE: tabs that are too small may cause template issues</p>
+        </div>
+      )}
     </div>
   );
 };
