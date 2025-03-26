@@ -25,7 +25,7 @@ const SelectPreview = () => {
     const fill = selectedPath.getAttribute("fill");
 
     // if the fill color is the warning color set the opacity for resetting
-    if (fill === "blue") {
+    if (fill === "#00004d") {
       selectedPath.setAttribute("fill-opacity", 1);
     }
 
@@ -36,7 +36,7 @@ const SelectPreview = () => {
     } else {
       // if we set the fill-opacity set back to warning color, else black
       if (selectedPath.getAttribute("fill-opacity") === "1") {
-        selectedPath.setAttribute("fill", "blue");
+        selectedPath.setAttribute("fill", "#00004d");
       } else {
         selectedPath.setAttribute("fill", "black");
       }
