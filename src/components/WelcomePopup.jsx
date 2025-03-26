@@ -1,9 +1,12 @@
+import global from "../global.module.css";
+import styles from "../components/Cart/ViewCartPopup.module.css";
+
 const WelcomePopup = ({ setWelcome }) => {
   return (
-    <div className="view-cart-overlay">
-      <div className="view-cart-popup">
+    <div className={styles.view_cart_overlay}>
+      <div className={styles.view_cart_popup}>
         <button
-          className="close-button"
+          className={styles.close_button}
           onClick={() => {
             setWelcome(false);
           }}
