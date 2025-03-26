@@ -1,3 +1,4 @@
+import { CUSTOM_PRICE, SOLID_PRICE } from "../../constants";
 import styles from "./ModeExamples.module.css";
 
 const ModeExamples = ({ small }) => {
@@ -5,6 +6,7 @@ const ModeExamples = ({ small }) => {
     <>
       <div className={small ? styles.mode_item_small : styles.mode_item}>
         <p className={styles.mode_desc}>Solid template:</p>
+        <p className={styles.mode_desc}>${SOLID_PRICE} ea</p>
         <div
           className={small ? styles.ball_display_small : styles.ball_display}
         >
@@ -20,6 +22,7 @@ const ModeExamples = ({ small }) => {
       </div>
       {/* <div className={small ? styles.mode_item_small : styles.mode_item}>
         <p className={styles.mode_desc}>Text template:</p>
+        <p className={styles.mode_desc}>${TEXT_PRICE} ea</p>
         <div className={small ? styles.ball_display_small : styles.ball_display}>
           <img
             src="/text.svg"
@@ -32,7 +35,8 @@ const ModeExamples = ({ small }) => {
         </div>
       </div> */}
       <div className={small ? styles.mode_item_small : styles.mode_item}>
-        <p className="mode-desc">Custom template:</p>
+        <p className={styles.mode_desc}>Custom template:</p>
+        <p className={styles.mode_desc}>${CUSTOM_PRICE} ea</p>
         <div
           className={small ? styles.ball_display_small : styles.ball_display}
         >

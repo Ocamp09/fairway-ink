@@ -1,4 +1,6 @@
 import React from "react";
+import { IoCloseSharp } from "react-icons/io5";
+import global from "../../global.module.css";
 import styles from "./ViewCartPopup.module.css";
 
 const ViewCartPopup = ({ isOpen, setIsOpen, children }) => {
@@ -10,12 +12,12 @@ const ViewCartPopup = ({ isOpen, setIsOpen, children }) => {
     <div className={styles.view_cart_overlay}>
       <div className={styles.view_cart_popup}>
         <button
-          className={styles.close_button}
+          className={global.close_button}
           onClick={() => {
             setIsOpen(false);
           }}
         >
-          X
+          <IoCloseSharp size={28} />
         </button>
         {children}
       </div>
