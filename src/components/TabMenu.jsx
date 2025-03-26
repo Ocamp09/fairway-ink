@@ -16,7 +16,7 @@ const TabMenu = () => {
             updateStage("design");
           }}
         >
-          <BsFill1CircleFill size={24} className="tab_number" />
+          <BsFill1CircleFill size={24} className={styles.tab_number} />
           Design
         </h3>
       </div>
@@ -26,18 +26,17 @@ const TabMenu = () => {
             updateStage("adjust");
           }}
         >
-          <BsFill2CircleFill size={24} className="tab_number" />
+          <BsFill2CircleFill size={24} className={styles.tab_number} />
           Adjust
         </h3>
       </div>
       <div className={stage === "preview" ? styles.active : ""}>
         <h3
-          className="tab_text"
           onClick={() => {
             updateStage("preview");
           }}
         >
-          <BsFill3CircleFill size={24} className="tab_number" />
+          <BsFill3CircleFill size={24} className={styles.tab_number} />
           Preview
         </h3>
       </div>
