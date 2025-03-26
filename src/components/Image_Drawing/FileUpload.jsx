@@ -2,8 +2,7 @@ import { useState, useRef } from "react";
 import { FaImage } from "react-icons/fa6";
 import { useSession } from "../../contexts/DesignContext";
 import global from "../../global.module.css";
-import "./FileUpload.css";
-import "./ImageEditor.css";
+import styles from "./FileUpload.module.css";
 
 const FileUpload = () => {
   const [error, setError] = useState("");
@@ -42,7 +41,7 @@ const FileUpload = () => {
   };
 
   return (
-    <div className="file-upload-container">
+    <div className={styles.file_upload_container}>
       <input
         type="file"
         onChange={handleFileChange}
