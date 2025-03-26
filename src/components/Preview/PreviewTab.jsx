@@ -5,7 +5,7 @@ import { useCart } from "../../contexts/CartContext";
 import { useSession } from "../../contexts/DesignContext";
 import { addToCartApi } from "../../api/api";
 import global from "../../global.module.css";
-import "./PreviewTab.css";
+import styles from "./PreviewTab.module.css";
 
 const PreviewTab = () => {
   const [quantity, setQuantity] = useState(1);
@@ -34,7 +34,7 @@ const PreviewTab = () => {
   };
 
   return (
-    <div className="stl-viewer">
+    <div className={styles.stl_viewer}>
       <button
         className={global.back_button}
         onClick={() => {
@@ -45,7 +45,7 @@ const PreviewTab = () => {
       </button>
       <p>3-D Render Preview</p>
       {stlUrl && <STLViewer stlUrl={stlUrl} />}
-      <div className="button_div">
+      <div className={styles.button_div}>
         <QuantityDropdown
           setQuantity={setQuantity}
           quantity={quantity}
