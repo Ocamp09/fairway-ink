@@ -1,15 +1,15 @@
-.remove-img {
+.remove_img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   position: relative;
 }
 
-.img-back {
+.img_back {
   position: relative;
 }
 
-.img-front {
+.img_front {
   position: absolute;
   right: 0%;
   transform: translate(30%, -45%);
