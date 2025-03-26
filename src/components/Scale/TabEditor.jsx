@@ -6,7 +6,9 @@ import { uploadImage } from "../../api/api";
 import UndoRedo from "../Image_Drawing/Toolbar/UndoRedo";
 import DrawTools from "../Image_Drawing/Toolbar/DrawTools";
 import global from "../../global.module.css";
-import "./TabEditor.css";
+import tools from "../Image_Drawing/Toolbar/Toolbar.module.css";
+import editor from "../Image_Drawing/ImageEditor.module.css";
+import styles from "./TabEditor.module.css";
 
 const TabEditor = () => {
   const {
@@ -155,7 +157,7 @@ const TabEditor = () => {
   }, [currPath, paths, reloadPaths]);
 
   return (
-    <div className="tab-main">
+    <div className={styles.tab_main}>
       <button
         className={global.back_button}
         onClick={() => {
@@ -165,8 +167,8 @@ const TabEditor = () => {
         Back
       </button>
       <p>Add tabs for printing</p>
-      <div className="tab">
-        <div className="toolbar tools buts">
+      <div className={styles.tab}>
+        <div className={`${tools.toolbar} ${tools.tools} ${styles.buts}`}>
           <UndoRedo
             paths={paths}
             setPaths={setPaths}
@@ -183,18 +185,18 @@ const TabEditor = () => {
             setLineWidth={setLineWidth}
           />
         </div>
-        <div className="canvas-container">
+        <div className={editor.canvas_container}>
           <canvas
             ref={imgCanvasRef}
             width={500}
             height={500}
-            className="img-canvas"
+            className={editor.img_canvas}
           />
           <canvas
             ref={canvasRef}
             width={500}
             height={500}
-            className="drawing-canvas"
+            className={editor.drawing_canvas}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}

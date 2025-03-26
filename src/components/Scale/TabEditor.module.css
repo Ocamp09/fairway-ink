@@ -1,4 +1,4 @@
-.tab-main {
+.tab_main {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -14,7 +14,7 @@
   gap: 1rem;
 }
 
-.tab-canvas {
+.tab_canvas {
   margin-top: 15px;
 }
 
