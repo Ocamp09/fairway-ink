@@ -4,6 +4,7 @@ import STLViewer from "../3D-View/STLViewer";
 import { LuPlus, LuMinus } from "react-icons/lu";
 import global from "../../global.module.css";
 import styles from "./CartDisplay.module.css";
+import { CUSTOM_PRICE, SOLID_PRICE, TEXT_PRICE } from "../../constants";
 
 const CartDisplay = ({ setIsCheckout }) => {
   const { cartItems, removeFromCart, updateQuantity, getTotal, getPrice } =
@@ -26,6 +27,24 @@ const CartDisplay = ({ setIsCheckout }) => {
     setIsCheckout(true);
   };
 
+  const getType = (type) => {
+    return type.charAt(0).toUpperCase() + type.slice(1);
+  };
+
+  const getCost = (type) => {
+    let cost = 0;
+    switch (type) {
+      case "solid":
+        cost = SOLID_PRICE;
+      case "text":
+        cost = TEXT_PRICE;
+      case "custom":
+        cost = CUSTOM_PRICE;
+    }
+
+    return cost;
+  };
+
   return (
     <div className={styles.cart}>
       <h2>Your Cart</h2>
@@ -39,8 +58,8 @@ const CartDisplay = ({ setIsCheckout }) => {
                 <STLViewer stlUrl={item.stl} cart={true} />
               </div>
               <div className={styles.item_details}>
-                <div className={styles.details}>
-                  <p>Quantity:</p>
+                <div className={styles.quantity}>
+                  <span className={styles.header}>Quantity:</span>
 
                   <div className={styles.quantity_controls}>
                     <button
@@ -66,8 +85,15 @@ const CartDisplay = ({ setIsCheckout }) => {
                     Remove
                   </button>
                 </div>
-
-                <p>Item Total: ${getPrice(item).toFixed(2)}</p>
+                <div className={styles.quantity}>
+                  <span className={styles.header}>Template Type:</span>
+                  <span>{getType(item.type)}</span>
+                  <span>${getCost(item.type)} ea</span>
+                </div>
+                <div>
+                  <span className={styles.header}>Item Total: </span>
+                  <p>${getPrice(item).toFixed(2)}</p>
+                </div>
               </div>
             </li>
           ))}

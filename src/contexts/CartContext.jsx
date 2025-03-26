@@ -71,12 +71,12 @@ export const CartProvider = ({ children }) => {
     let total = 0.0;
     for (let i = 0; i < cartItems.length; i++) {
       const item = cartItems[i];
-      if (item.type === "solid" || item.type === "text") {
-        const price = 5.99;
-        total += price * item.quantity;
+      if (item.type === "solid") {
+        total += SOLID_PRICE * item.quantity;
+      } else if (item.type === "text") {
+        total += TEXT_PRICE * item.quantity;
       } else {
-        const price = 7.99;
-        total += price * item.quantity;
+        total += CUSTOM_PRICE * item.quantity;
       }
     }
 
