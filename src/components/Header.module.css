@@ -5,46 +5,46 @@
   padding-top: 1rem;
 }
 
-.header-items {
+.header_items {
   display: flex;
   align-items: center;
   padding-bottom: 1rem;
 }
 
-.header-start {
+.header_start {
   width: 50%;
   display: flex;
   align-items: center;
 }
 
-.home-logo:hover {
+.home_logo:hover {
   cursor: pointer;
 }
 
-.header-nav {
+.header_nav {
   display: flex;
   width: 100%;
   justify-content: flex-start;
 }
 
-.header-icons {
+.header_icons {
   display: flex;
   justify-content: flex-end;
   width: 15%;
   padding-right: 0.25rem;
 }
 
-.home-name {
+.home_name {
   font-weight: 500;
   font-size: 24px;
 }
 
-.home-name:hover {
+.home_name:hover {
   text-decoration: underline;
   cursor: pointer;
 }
 
-.nav-item {
+.nav_item {
   border: none;
   margin-left: 0.5rem;
   color: var(--text);
@@ -55,18 +55,18 @@
   font-weight: 400;
 }
 
-.nav-item:hover {
+.nav_item:hover {
   border-color: var(--tool-button);
   color: var(--tool-button);
 }
 
-.nav-item.active {
+.nav_item.active {
   font-weight: 600;
   border-bottom: 2px solid var(--tool-button);
   color: var(--tool-button);
 }
 
-.icon-button {
+.icon_button {
   background-color: var(--icon);
   width: 3rem;
   height: 3rem;
@@ -77,40 +77,40 @@
   align-items: center;
 }
 
-.icon-button:focus {
+.icon_button:focus {
   outline: none;
 }
 
 @media screen and (max-width: 1350px) {
-  .header-start {
+  .header_start {
     margin-left: 2rem;
   }
 }
 
 @media screen and (max-width: 750px) {
-  .header-nav {
+  .header_nav {
     display: none;
   }
 
-  .header-start {
+  .header_start {
     width: 80%;
   }
 
-  .header-icons {
+  .header_icons {
     width: 20%;
   }
 }
 
 @media screen and (max-width: 400px) {
-  .home-name {
+  .home_name {
     display: none;
   }
-  .header-start {
+  .header_start {
     width: 75%;
     margin-left: 0.5rem;
   }
 
-  .header-start img {
+  .header_start img {
     height: 30px;
   }
 }
