@@ -1,5 +1,5 @@
-import "./TypeSelector.css";
 import { useSession } from "../../contexts/DesignContext";
+import styles from "./TypeSelector.module.css";
 
 const TypeSelector = ({ paths }) => {
   const {
@@ -28,21 +28,21 @@ const TypeSelector = ({ paths }) => {
   };
 
   return (
-    <div className="type-selector">
+    <div className={styles.type_selector}>
       <button
-        className={templateType === "solid" ? "active" : ""}
+        className={templateType === "solid" ? styles.active : ""}
         onClick={handleSolid}
       >
         Solid
       </button>
       {/* <button
-        className={templateType === "text" ? "active" : ""}
+        className={templateType === "text" ? styles.active : ""}
         onClick={handleText}
       >
         Text Only
       </button> */}
       <button
-        className={templateType === "custom" ? "active" : ""}
+        className={templateType === "custom" ? styles.active : ""}
         onClick={handleCustom}
       >
         Custom
