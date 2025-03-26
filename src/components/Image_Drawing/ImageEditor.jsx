@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import "./ImageEditor.css";
 import Toolbar from "./Toolbar/Toolbar";
 import { useSession } from "../../contexts/DesignContext";
 import TypeSelector from "./TypeSelector";
@@ -15,6 +14,8 @@ import { useFontLoader } from "../../hooks/useFontLoader";
 import { useCanvasScaling } from "../../hooks/useCanvasScaling";
 import { useCanvasEvents } from "../../hooks/useCanvasEvents";
 import { uploadImage } from "../../api/api";
+import global from "../../global.module.css";
+import styles from "./ImageEditor.module.css";
 
 function ImageEditor() {
   const canvasRef = useRef(null);
@@ -279,9 +280,18 @@ function ImageEditor() {
     try {
       // Call the uploadImage function from api.js
       const response = await uploadImage(blob, templateType);
-
+      const svgData = response.svgData;
+      if (!svgData.includes("path")) {
+        if (templateType === "solid") {
+          setError("Unable to process drawing, make sure lines are connected");
+        } else {
+          setError("Error processing drawing, make sure drawing is");
+        }
+        setIsLoading(false);
+        return;
+      }
       setIsLoading(false);
-      updateSvgData(response.svgData);
+      updateSvgData(svgData);
       if (templateType === "custom") {
         updateAdjustStage("remove");
       } else {
@@ -359,8 +369,8 @@ function ImageEditor() {
   }, [templateType, stage]);
 
   return (
-    <div className="designer">
-      <p className="desc">
+    <div className={styles.designer}>
+      <p className={styles.desc}>
         {templateType === "text" &&
           `Click inside the editor and type a message to get started`}
         {templateType === "solid" &&
@@ -369,13 +379,13 @@ function ImageEditor() {
         {templateType === "custom" &&
           `Upload an image (button or drag and drop), or select an editor mode to get started`}
       </p>
-      <div className="modes-top">
+      <div className={styles.modes_top}>
         <ModeExamples small={true} />
       </div>
       <TypeSelector paths={paths} />
-      <div className="displays">
-        <div className="editor">
-          <div className="tool">
+      <div className={styles.displays}>
+        <div className={styles.editor}>
+          <div className={styles.tool}>
             <Toolbar
               paths={paths}
               setPaths={setPaths}
@@ -388,39 +398,39 @@ function ImageEditor() {
               setFontSize={setFontSize}
             ></Toolbar>
           </div>
-          <div className="canvas-container">
+          <div className={styles.canvas_container}>
             <canvas
               ref={imgCanvasRef}
               width={500}
               height={500}
-              className="img-canvas"
+              className={styles.img_canvas}
               hidden={templateType === "text"}
             />
             <canvas
               ref={canvasRef}
               width={500}
               height={500}
-              className="drawing-canvas"
+              className={styles.drawing_canvas}
               onMouseDown={handleStartDrawing}
               onMouseMove={handleMoveDrawing}
               onMouseUp={handleStopDrawing}
             />
           </div>
         </div>
-        <div className="modes-bottom">
+        <div className={styles.modes_bottom}>
           <ModeExamples />
         </div>
-        <div className="editor-spacer"></div>
+        <div className={styles.editor_spacer}></div>
       </div>
       <button
-        className="submit-button"
+        className={global.submit_button}
         onClick={handleSvg}
         disabled={isLoading}
       >
         {!isLoading && "Proceed to Scale"}
         {isLoading && "Loading"}
       </button>
-      {error && <p className="file-error-message">{error}</p>}
+      {error && <p className={global.error_message}>{error}</p>}
     </div>
   );
 }

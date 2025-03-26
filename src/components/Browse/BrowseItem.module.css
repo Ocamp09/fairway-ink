@@ -1,4 +1,4 @@
-.browse-item {
+.browse_item {
   display: flex;
   flex-direction: column;
   background-color: var(--tone);

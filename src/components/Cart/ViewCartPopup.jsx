@@ -1,5 +1,5 @@
 import React from "react";
-import "./ViewCartPopup.css";
+import styles from "./ViewCartPopup.module.css";
 
 const ViewCartPopup = ({ isOpen, setIsOpen, children }) => {
   if (!isOpen) {
@@ -7,10 +7,10 @@ const ViewCartPopup = ({ isOpen, setIsOpen, children }) => {
   }
 
   return (
-    <div className="view-cart-overlay">
-      <div className="view-cart-popup">
+    <div className={styles.view_cart_overlay}>
+      <div className={styles.view_cart_popup}>
         <button
-          className="close-button"
+          className={styles.close_button}
           onClick={() => {
             setIsOpen(false);
           }}

@@ -1,4 +1,4 @@
-.type-selector {
+.type_selector {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6,7 +6,7 @@
   margin-bottom: 0.5rem;
 }
 
-.type-selector button {
+.type_selector button {
   background-color: transparent;
   border: none;
   padding: 10px 15px;
@@ -18,16 +18,16 @@
   border-bottom: 0.1em solid transparent;
 }
 
-.type-selector button:hover {
+.type_selector button:hover {
   color: var(--tool-button);
   border-color: var(--tool-button);
 }
 
-.type-selector button:focus {
+.type_selector button:focus {
   outline: none;
 }
 
-.type-selector button.active {
+.type_selector button.active {
   color: var(--tool-button);
   border-bottom: 2px solid var(--tool-button);
   font-weight: bold;

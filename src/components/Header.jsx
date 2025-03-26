@@ -1,8 +1,8 @@
-import "./Header.css";
 // import { LuSun } from "react-icons/lu";
 import { IoIosCart } from "react-icons/io";
 import { useCart } from "../contexts/CartContext";
 import { useNavigate, useLocation } from "react-router-dom";
+import styles from "./Header.module.css";
 
 const Header = ({ cartPopup, setCartPopup }) => {
   const { getItemCount } = useCart();
@@ -11,11 +11,11 @@ const Header = ({ cartPopup, setCartPopup }) => {
 
   return (
     <>
-      <div className="header">
-        <div className="header-items">
-          <div className="header-start">
+      <div className={styles.header}>
+        <div className={styles.header_items}>
+          <div className={styles.header_start}>
             <span
-              className="home-logo"
+              className={styles.home_logo}
               onClick={() => {
                 navigate("/");
               }}
@@ -28,10 +28,10 @@ const Header = ({ cartPopup, setCartPopup }) => {
               />
             </span>
           </div>
-          <div className="header-nav">
+          <div className={styles.header_nav}>
             <button
-              className={`nav-item ${
-                location.pathname === "/design" ? "active" : ""
+              className={`${styles.nav_item} ${
+                location.pathname === "/design" ? styles.active : ""
               }`}
               onClick={() => {
                 navigate("/design");
@@ -40,8 +40,8 @@ const Header = ({ cartPopup, setCartPopup }) => {
               Design
             </button>
             <button
-              className={`nav-item ${
-                location.pathname === "/browse" ? "active" : ""
+              className={`${styles.nav_item} ${
+                location.pathname === "/browse" ? styles.active : ""
               }`}
               onClick={() => {
                 navigate("browse");
@@ -50,11 +50,11 @@ const Header = ({ cartPopup, setCartPopup }) => {
               Browse
             </button>
           </div>
-          <div className="header-icons">
+          <div className={styles.header_icons}>
             {/* <button className="icon-button">Login</button> */}
             <div>
               <button
-                className="icon-button"
+                className={styles.icon_button}
                 onClick={() => {
                   setCartPopup(!cartPopup);
                 }}

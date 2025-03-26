@@ -16,7 +16,7 @@
   height: auto;
 }
 
-.home-description {
+.home_desc {
   width: 35%;
   display: flex;
   flex-direction: column;
@@ -24,7 +24,7 @@
   justify-content: center;
 }
 
-.home-description p {
+.home_desc p {
   width: 65%;
 }
 
@@ -37,7 +37,7 @@
     width: 100%;
   }
 
-  .home-description {
+  .home_desc {
     margin-top: 1rem;
     width: 95%;
     padding-bottom: 1rem;

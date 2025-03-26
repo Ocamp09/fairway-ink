@@ -1,4 +1,4 @@
-.info-main {
+.info_main {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,11 +9,11 @@
   padding: 1rem 5px 5px 5px;
 }
 
-.info-main p {
+.info_main p {
   width: 85%;
 }
 
-.info-item {
+.info_item {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,7 +35,7 @@
 }
 
 @media screen and (max-width: 700px) {
-  .info-main {
+  .info_main {
     width: 85%;
     max-width: 500px;
     padding: 0.5rem 0.5rem 0.5rem 0.5rem;
@@ -43,7 +43,7 @@
     align-items: flex-start;
   }
 
-  .info-item {
+  .info_item {
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
@@ -59,7 +59,7 @@
     height: 5rem;
   }
 
-  .info-main p {
+  .info_main p {
     margin-block-end: 0;
     margin-left: 0.5rem;
   }

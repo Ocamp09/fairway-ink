@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./Toolbar.css";
 import FileUpload from "../FileUpload";
 import { FiDownload } from "react-icons/fi";
 import { FaRegHandPaper } from "react-icons/fa";
@@ -11,6 +10,7 @@ import { useSession } from "../../../contexts/DesignContext";
 import DrawTools from "./DrawTools";
 import TextTools from "./TextTools";
 import UndoRedo from "./UndoRedo";
+import styles from "./Toolbar.module.css";
 
 const Toolbar = ({
   paths,
@@ -96,12 +96,14 @@ const Toolbar = ({
     (templateType === "solid" || templateType === "text") && screenWidth < 750;
 
   return (
-    <div className="tools">
-      <div className="tool-top" hidden={shouldHideTools}>
+    <div className={styles.tools}>
+      <div className={styles.tool_top} hidden={shouldHideTools}>
         <button
           title="Activate drawing mode"
           onClick={handleDraw}
-          className={editorMode === "draw" ? "editor-but-active" : "editor-but"}
+          className={
+            editorMode === "draw" ? styles.editor_but_active : styles.editor_but
+          }
           hidden={templateType == "text"}
         >
           <BiSolidPencil
@@ -112,7 +114,9 @@ const Toolbar = ({
         <button
           title="Activate text mode"
           onClick={handleText}
-          className={editorMode === "type" ? "editor-but-active" : "editor-but"}
+          className={
+            editorMode === "type" ? styles.editor_but_active : styles.editor_but
+          }
           hidden={templateType == "solid" || templateType == "custom"} // remove this when bringing text mode back
         >
           <IoText
@@ -125,8 +129,8 @@ const Toolbar = ({
           onClick={handleSelect}
           className={
             editorMode === "select" && templateType === "text"
-              ? "editor-but-active"
-              : "editor-but"
+              ? styles.editor_but_active
+              : styles.editor_but
           }
           hidden={templateType === "solid" || templateType === "custom"}
         >
@@ -136,7 +140,7 @@ const Toolbar = ({
           />
         </button>
       </div>
-      <div className="toolbar">
+      <div className={styles.toolbar}>
         {templateType != "text" && (
           <>
             <FileUpload />

@@ -1,4 +1,4 @@
-.select-preview {
+.select_preview {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -9,10 +9,6 @@
   align-items: center;
 }
 
-.preview-back-button {
-  top: 50px;
-}
-
 path:hover {
   cursor: pointer;
 }
@@ -20,5 +16,9 @@ path:hover {
 @media screen and (max-width: 700px) {
   .select {
     flex-direction: column;
+  }
+
+  .header {
+    margin-top: 3rem;
   }
 }

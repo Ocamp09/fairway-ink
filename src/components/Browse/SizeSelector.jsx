@@ -1,10 +1,10 @@
-import "./SizeSelector.css";
+import styles from "./SizeSelector.module.css";
 
 const SizeSelector = ({ size, setSize, setPrevSize }) => {
   return (
-    <div className="size-menu">
+    <div className={styles.size_menu}>
       <button
-        className={`${size === "small" ? "active" : ""}`}
+        className={`${size === "small" ? styles.active : ""}`}
         onClick={() => {
           setPrevSize(size);
           setSize("small");
@@ -13,7 +13,7 @@ const SizeSelector = ({ size, setSize, setPrevSize }) => {
         Small
       </button>
       <button
-        className={`${size === "medium" ? "active" : ""}`}
+        className={`${size === "medium" ? styles.active : ""}`}
         onClick={() => {
           setPrevSize(size);
           setSize("medium");
@@ -22,7 +22,7 @@ const SizeSelector = ({ size, setSize, setPrevSize }) => {
         Medium
       </button>
       <button
-        className={`${size === "large" ? "active" : ""}`}
+        className={`${size === "large" ? styles.active : ""}`}
         onClick={() => {
           setPrevSize(size);
           setSize("large");

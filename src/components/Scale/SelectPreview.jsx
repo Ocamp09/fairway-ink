@@ -1,7 +1,8 @@
 import { ReactSVG } from "react-svg";
 import { useSession } from "../../contexts/DesignContext";
 import InfoPane from "./InfoPane";
-import "./SelectPreview.css";
+import global from "../../global.module.css";
+import styles from "./SelectPreview.module.css";
 
 const SelectPreview = () => {
   const {
@@ -86,17 +87,17 @@ const SelectPreview = () => {
   };
 
   return (
-    <div className="select-preview">
+    <div className={styles.select_preview}>
       <button
-        className="back-button preview-back-button"
+        className={global.back_button}
         onClick={() => {
           handleBackToDesigner();
         }}
       >
         Back
       </button>
-      <h3>Select any curves to remove from design</h3>
-      <div className="select">
+      <h3 className={styles.header}>Select any curves to remove from design</h3>
+      <div className={styles.select}>
         {svgData && adjustStage === "remove" && (
           <ReactSVG
             src={`data:image/svg+xml;utf8,${encodeURIComponent(svgData)}`}
@@ -109,7 +110,7 @@ const SelectPreview = () => {
         />
       </div>
       <button
-        className="submit-button"
+        className={global.submit_button}
         onClick={() => {
           submitSelected();
         }}

@@ -5,9 +5,10 @@ import {
   useElements,
   AddressElement,
 } from "@stripe/react-stripe-js";
-import "./Checkout.css";
 import { verifySuccessfulCheckout } from "../../api/api";
 import { FaCheckCircle } from "react-icons/fa";
+import global from "../../global.module.css";
+import styles from "./CheckoutForm.module.css";
 
 const CheckoutForm = ({ clientSecret, intentId }) => {
   const stripe = useStripe();
@@ -116,13 +117,13 @@ const CheckoutForm = ({ clientSecret, intentId }) => {
             setAddressComplete(e.complete);
           }}
         />
-        <div className="email">
-          <label className="email-label">Email</label>
+        <div className={styles.email}>
+          <label className={styles.email_label}>Email</label>
           <input type="email" value={email} onChange={handleEmailChange} />
         </div>
-        <div className="email top">
-          <label className="email-label">Card Information</label>
-          <div className="card">
+        <div className={styles.email}>
+          <label className={styles.email_label}>Card Information</label>
+          <div className={styles.card}>
             <CardElement
               options={{ hidePostalCode: true }}
               onChange={(e) => {
@@ -131,7 +132,7 @@ const CheckoutForm = ({ clientSecret, intentId }) => {
             />
           </div>
         </div>
-        {message && <div id="payment-message">{message}</div>}
+        {message && <div className={styles.payment_message}>{message}</div>}
         <button
           disabled={
             !stripe ||
@@ -141,7 +142,7 @@ const CheckoutForm = ({ clientSecret, intentId }) => {
             isLoading
           }
           id="submit"
-          className="submit-button"
+          className={global.submit_button}
         >
           {isLoading ? "Processing..." : "Pay now"}
         </button>
@@ -149,8 +150,8 @@ const CheckoutForm = ({ clientSecret, intentId }) => {
     );
   } else if (successfulOrder === true) {
     return (
-      <div className="paid">
-        <h3 className="success-text">
+      <div className={styles.paid}>
+        <h3>
           <FaCheckCircle color="4BB543" size={36} /> Your order has been
           submitted
         </h3>
