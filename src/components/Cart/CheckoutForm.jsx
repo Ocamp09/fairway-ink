@@ -10,7 +10,12 @@ import { FaCheckCircle } from "react-icons/fa";
 import global from "../../global.module.css";
 import styles from "./CheckoutForm.module.css";
 
-const CheckoutForm = ({ clientSecret, intentId }) => {
+const CheckoutForm = ({
+  clientSecret,
+  intentId,
+  successfulOrder,
+  setSuccessfulOrder,
+}) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -21,7 +26,6 @@ const CheckoutForm = ({ clientSecret, intentId }) => {
   const [emailComplete, setEmailComplete] = useState(false);
   const [cardComplete, setCardComplete] = useState(false);
 
-  const [successfulOrder, setSuccessfulOrder] = useState(null);
   const [orderInfo, setOrderInfo] = useState({
     // amount: 2083,
     // email: "test@gmail.com",
