@@ -1,16 +1,15 @@
 import { useRef, useState, useEffect } from "react";
 import { useSession } from "../../contexts/DesignContext";
-import {
-  drawImage,
-  drawLine,
-  getCoordinates,
-  centerCanvasDrawing,
-} from "../../utils/canvasUtils";
+import { drawImage, drawLine, getCoordinates } from "../../utils/canvasUtils";
 import InfoPane from "./InfoPane";
 import { uploadImage } from "../../api/api";
-import "./TabEditor.css";
-import UndoRedo from "../Image_Drawing/UndoRedo";
-import DrawTools from "../Image_Drawing/DrawTools";
+import UndoRedo from "../Image_Drawing/Toolbar/UndoRedo";
+import { MdLineWeight } from "react-icons/md";
+import ToolDropdown from "../Image_Drawing/Toolbar/ToolDropdown";
+import global from "../../global.module.css";
+import tools from "../Image_Drawing/Toolbar/Toolbar.module.css";
+import editor from "../Image_Drawing/ImageEditor.module.css";
+import styles from "./TabEditor.module.css";
 
 const TabEditor = () => {
   const {
@@ -31,12 +30,12 @@ const TabEditor = () => {
   const [isDrawing, setIsDrawing] = useState(false);
   const [undoStack, setUndoStack] = useState([]);
   const [redoStack, setRedoStack] = useState([]);
-  const [lineWidth, setLineWidth] = useState(8);
+  const [lineWidth, setLineWidth] = useState(22);
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
   const iconSize = 28;
+  const lineLabel = <MdLineWeight size={iconSize} color="white" />;
 
   const handleBackToRemove = () => {
     updateAdjustStage("remove");
@@ -159,9 +158,9 @@ const TabEditor = () => {
   }, [currPath, paths, reloadPaths]);
 
   return (
-    <div className="tab-main">
+    <div className={styles.tab_main}>
       <button
-        className="back-button"
+        className={global.back_button}
         onClick={() => {
           handleBackToRemove();
         }}
@@ -169,8 +168,8 @@ const TabEditor = () => {
         Back
       </button>
       <p>Add tabs for printing</p>
-      <div className="tab">
-        <div className="toolbar tools buts">
+      <div className={styles.tab}>
+        <div className={`${tools.toolbar} ${tools.tools} ${styles.buts}`}>
           <UndoRedo
             paths={paths}
             setPaths={setPaths}
@@ -181,24 +180,28 @@ const TabEditor = () => {
             redoStack={redoStack}
             setRedoStack={setRedoStack}
           />
-          <DrawTools
-            iconSize={iconSize}
-            lineWidth={lineWidth}
-            setLineWidth={setLineWidth}
+          <ToolDropdown
+            minQuantity={16}
+            maxQuantity={60}
+            labelText={lineLabel}
+            step={4}
+            quantity={lineWidth}
+            setQuantity={setLineWidth}
+            title={"Adjust line width"}
           />
         </div>
-        <div className="canvas-container">
+        <div className={editor.canvas_container}>
           <canvas
             ref={imgCanvasRef}
             width={500}
             height={500}
-            className="img-canvas"
+            className={editor.img_canvas}
           />
           <canvas
             ref={canvasRef}
             width={500}
             height={500}
-            className="drawing-canvas"
+            className={editor.drawing_canvas}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
@@ -207,7 +210,7 @@ const TabEditor = () => {
         <InfoPane warnText="Indicates un-printable areas, click and draw bridges across yellow items to white areas for printing" />
       </div>
       <button
-        className="submit-button"
+        className={global.submit_button}
         onClick={() => {
           submitTabs();
         }}
@@ -215,7 +218,7 @@ const TabEditor = () => {
         {!loading && "Add tabs"}
         {loading && "Loading"}
       </button>
-      {error && <p className="file-error-message">{error}</p>}
+      {error && <p className={global.error_message}>{error}</p>}
     </div>
   );
 };

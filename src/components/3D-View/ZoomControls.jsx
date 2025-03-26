@@ -1,11 +1,10 @@
 import React from "react";
 import { BiSolidZoomIn, BiSolidZoomOut } from "react-icons/bi";
-
-import "./ZoomControls.css";
+import styles from "./ZoomControls.module.css";
 
 const ZoomControls = ({ onZoomIn, onZoomOut }) => {
   return (
-    <div className="zoom-body">
+    <div className={styles.zoom_body}>
       <button onClick={onZoomIn}>
         <BiSolidZoomIn color="black" size={32} />
       </button>

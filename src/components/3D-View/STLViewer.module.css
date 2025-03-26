@@ -1,0 +1,29 @@
+.stl_body {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.stl_canvas {
+  width: 100%;
+  height: 500px;
+  background: var(--tone);
+  border-radius: 10px;
+}
+
+.reset {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+  padding: 5px 10px;
+  background-color: var(--tool-button);
+  color: var(--icon);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.reset:hover {
+  background-color: var(--tool-button-hover);
+}

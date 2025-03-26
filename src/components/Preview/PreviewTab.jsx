@@ -4,7 +4,8 @@ import QuantityDropdown from "./QuantityDropdown";
 import { useCart } from "../../contexts/CartContext";
 import { useSession } from "../../contexts/DesignContext";
 import { addToCartApi } from "../../api/api";
-import "./PreviewTab.css";
+import global from "../../global.module.css";
+import styles from "./PreviewTab.module.css";
 
 const PreviewTab = () => {
   const [quantity, setQuantity] = useState(1);
@@ -33,9 +34,9 @@ const PreviewTab = () => {
   };
 
   return (
-    <div className="stl-viewer">
+    <div className={styles.stl_viewer}>
       <button
-        className="back-button"
+        className={global.back_button}
         onClick={() => {
           handleBack();
         }}
@@ -44,7 +45,7 @@ const PreviewTab = () => {
       </button>
       <p>3-D Render Preview</p>
       {stlUrl && <STLViewer stlUrl={stlUrl} />}
-      <div>
+      <div className={styles.button_div}>
         <QuantityDropdown
           setQuantity={setQuantity}
           quantity={quantity}
@@ -53,12 +54,12 @@ const PreviewTab = () => {
         />
         <button
           onClick={handleAddToCart}
-          className="submit-button"
+          className={global.submit_button}
           disabled={isAdded}
         >
           {!isAdded ? "Add to Cart" : "Item added!"}
         </button>
-        {error && <p className="file-error-message">{error}</p>}
+        {error && <p className={global.error_message}>{error}</p>}
       </div>
     </div>
   );

@@ -1,0 +1,6 @@
+.golf_ball_display {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -1,5 +1,7 @@
 import React from "react";
-import "./ViewCartPopup.css";
+import { IoCloseSharp } from "react-icons/io5";
+import global from "../../global.module.css";
+import styles from "./ViewCartPopup.module.css";
 
 const ViewCartPopup = ({ isOpen, setIsOpen, children }) => {
   if (!isOpen) {
@@ -7,15 +9,15 @@ const ViewCartPopup = ({ isOpen, setIsOpen, children }) => {
   }
 
   return (
-    <div className="view-cart-overlay">
-      <div className="view-cart-popup">
+    <div className={styles.view_cart_overlay}>
+      <div className={styles.view_cart_popup}>
         <button
-          className="close-button"
+          className={global.close_button}
           onClick={() => {
             setIsOpen(false);
           }}
         >
-          X
+          <IoCloseSharp size={28} />
         </button>
         {children}
       </div>

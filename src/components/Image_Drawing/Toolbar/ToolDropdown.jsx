@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import styles from "./QuantityDropdown.module.css";
+import styles from "./ToolDropdown.module.css";
 
-function QuantityDropdown({
+function ToolDropdown({
   setQuantity,
   quantity,
   minQuantity = 1,
@@ -14,6 +14,7 @@ function QuantityDropdown({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [customQty, setCustomQty] = useState();
+
   const dropdownRef = useRef(null);
 
   const quantities = [];
@@ -63,7 +64,7 @@ function QuantityDropdown({
         className={styles.dropdown_toggle}
         onClick={() => setIsOpen(!isOpen)}
       >
-        {labelText} {quantity} <RiArrowDropDownLine size={28} />
+        {labelText} {quantity}
       </button>
 
       {isOpen && (
@@ -78,7 +79,7 @@ function QuantityDropdown({
             </li>
           ))}
           <li className={quantity === customQty ? styles.selected : ""}>
-            <input placeholder="Custom" onChange={(e) => handleCustom(e)} />
+            <input placeholder="size" onChange={(e) => handleCustom(e)} />
           </li>
         </ul>
       )}
@@ -86,4 +87,4 @@ function QuantityDropdown({
   );
 }
 
-export default QuantityDropdown;
+export default ToolDropdown;

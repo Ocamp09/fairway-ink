@@ -1,18 +1,27 @@
-import "./InfoPane.css";
+import styles from "./InfoPane.module.css";
 
 const InfoPane = ({ warnText, redText }) => {
   return (
-    <div className="info-main" hidden={!warnText && !redText}>
+    <div className={styles.info_main} hidden={!warnText && !redText}>
       {warnText && (
-        <div className={redText ? "info-item hr" : "info-item"}>
-          <div className="warning"></div>
+        <div
+          className={
+            redText ? `${styles.info_item} ${styles.hr}` : styles.info_item
+          }
+        >
+          <div className={styles.warning}></div>
           <p>{warnText}</p>
         </div>
       )}
       {redText && (
-        <div className="info-item">
-          <div className="remove"></div>
+        <div className={styles.info_item}>
+          <div className={styles.remove}></div>
           <p>{redText}</p>
+        </div>
+      )}
+      {warnText && !redText && (
+        <div className={styles.info_item}>
+          <p>NOTE: tabs that are too small may cause template issues</p>
         </div>
       )}
     </div>

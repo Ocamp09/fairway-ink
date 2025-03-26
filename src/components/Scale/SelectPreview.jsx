@@ -1,7 +1,8 @@
 import { ReactSVG } from "react-svg";
 import { useSession } from "../../contexts/DesignContext";
 import InfoPane from "./InfoPane";
-import "./SelectPreview.css";
+import global from "../../global.module.css";
+import styles from "./SelectPreview.module.css";
 
 const SelectPreview = () => {
   const {
@@ -22,8 +23,9 @@ const SelectPreview = () => {
     if (e.target.localName !== "path") return;
 
     const fill = selectedPath.getAttribute("fill");
+
     // if the fill color is the warning color set the opacity for resetting
-    if (fill === "#EED202") {
+    if (fill === "#00004d") {
       selectedPath.setAttribute("fill-opacity", 1);
     }
 
@@ -34,7 +36,7 @@ const SelectPreview = () => {
     } else {
       // if we set the fill-opacity set back to warning color, else black
       if (selectedPath.getAttribute("fill-opacity") === "1") {
-        selectedPath.setAttribute("fill", "#EED202");
+        selectedPath.setAttribute("fill", "#00004d");
       } else {
         selectedPath.setAttribute("fill", "black");
       }
@@ -86,17 +88,17 @@ const SelectPreview = () => {
   };
 
   return (
-    <div className="select-preview">
+    <div className={styles.select_preview}>
       <button
-        className="back-button preview-back-button"
+        className={global.back_button}
         onClick={() => {
           handleBackToDesigner();
         }}
       >
         Back
       </button>
-      <h3>Select any curves to remove from design</h3>
-      <div className="select">
+      <h3 className={styles.header}>Select any curves to remove from design</h3>
+      <div className={styles.select}>
         {svgData && adjustStage === "remove" && (
           <ReactSVG
             src={`data:image/svg+xml;utf8,${encodeURIComponent(svgData)}`}
@@ -109,7 +111,7 @@ const SelectPreview = () => {
         />
       </div>
       <button
-        className="submit-button"
+        className={global.submit_button}
         onClick={() => {
           submitSelected();
         }}

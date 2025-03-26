@@ -1,21 +1,30 @@
-import "./Header.css";
 // import { LuSun } from "react-icons/lu";
+import { useState } from "react";
 import { IoIosCart } from "react-icons/io";
+import { RxHamburgerMenu } from "react-icons/rx";
 import { useCart } from "../contexts/CartContext";
 import { useNavigate, useLocation } from "react-router-dom";
+import styles from "./Header.module.css";
 
 const Header = ({ cartPopup, setCartPopup }) => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const { getItemCount } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
 
+  const handleNavigate = (path) => {
+    navigate(path);
+    setMenuOpen(false);
+  };
+
   return (
     <>
-      <div className="header">
-        <div className="header-items">
-          <div className="header-start">
+      <div className={styles.header}>
+        <div className={styles.header_items}>
+          <div className={styles.header_start}>
             <span
-              className="home-logo"
+              className={styles.home_logo}
               onClick={() => {
                 navigate("/");
               }}
@@ -28,10 +37,10 @@ const Header = ({ cartPopup, setCartPopup }) => {
               />
             </span>
           </div>
-          <div className="header-nav">
+          <div className={styles.header_nav}>
             <button
-              className={`nav-item ${
-                location.pathname === "/design" ? "active" : ""
+              className={`${styles.nav_item} ${
+                location.pathname === "/design" ? styles.active : ""
               }`}
               onClick={() => {
                 navigate("/design");
@@ -40,8 +49,8 @@ const Header = ({ cartPopup, setCartPopup }) => {
               Design
             </button>
             <button
-              className={`nav-item ${
-                location.pathname === "/browse" ? "active" : ""
+              className={`${styles.nav_item} ${
+                location.pathname === "/browse" ? styles.active : ""
               }`}
               onClick={() => {
                 navigate("browse");
@@ -50,11 +59,17 @@ const Header = ({ cartPopup, setCartPopup }) => {
               Browse
             </button>
           </div>
-          <div className="header-icons">
+          <div className={styles.header_icons}>
             {/* <button className="icon-button">Login</button> */}
+            <button
+              className={styles.hamburger_button}
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <RxHamburgerMenu size={28} />
+            </button>
             <div>
               <button
-                className="icon-button"
+                className={styles.icon_button}
                 onClick={() => {
                   setCartPopup(!cartPopup);
                 }}
@@ -66,6 +81,27 @@ const Header = ({ cartPopup, setCartPopup }) => {
             {/* <LuSun size={32} color="yellow" fill="#242424" /> */}
           </div>
         </div>
+        {menuOpen && (
+          <div className={styles.mobile_nav}>
+            <hr className={styles.rule} />
+            <button
+              className={`${styles.nav_drop} ${
+                location.pathname === "/design" ? styles.active : ""
+              }`}
+              onClick={() => handleNavigate("/design")}
+            >
+              Design
+            </button>
+            <button
+              className={`${styles.nav_drop} ${
+                location.pathname === "/browse" ? styles.active : ""
+              }`}
+              onClick={() => handleNavigate("/browse")}
+            >
+              Browse
+            </button>
+          </div>
+        )}
         <hr />
       </div>
     </>

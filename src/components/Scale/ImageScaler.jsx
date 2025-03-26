@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import styles from "./ImageScaler.module.css";
 
 const ImageScaler = ({ scale, setScale }) => {
   const handleScaleChange = (e) => {
@@ -6,20 +7,20 @@ const ImageScaler = ({ scale, setScale }) => {
   };
 
   return (
-    <div style={{ margin: "20px 0" }}>
-      <div style={{ marginTop: "10px" }}>
-        <label htmlFor="scale">Scale: </label>
-        <input
-          type="range"
-          id="scale"
-          min="0.1"
-          max="10"
-          step="0.1"
-          value={scale}
-          onChange={handleScaleChange}
-        />
-        <span> {scale.toFixed(1)}x</span>
-      </div>
+    <div className={styles.scaler}>
+      <span htmlFor="scale" className={styles.label}>
+        Scale:
+      </span>
+      <input
+        type="range"
+        id="scale"
+        min="0.1"
+        max="10"
+        step="0.1"
+        value={scale}
+        onChange={handleScaleChange}
+      />
+      <span className={styles.multiplier}> {scale.toFixed(1)}x</span>
     </div>
   );
 };

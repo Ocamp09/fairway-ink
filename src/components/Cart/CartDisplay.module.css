@@ -1,0 +1,83 @@
+.cart {
+  height: auto;
+}
+
+.cart_items {
+  list-style: none;
+  padding: 0;
+  height: 85%;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.cart_item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--cart-divider);
+  padding-bottom: 10px;
+  height: auto;
+}
+
+.cart_item:hover {
+  background-color: var(--background);
+  cursor: default;
+}
+
+.stl_viewer_container {
+  width: 200px;
+  height: 200px;
+  margin-right: 10px;
+}
+
+.item_details {
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  margin-left: 1rem;
+  gap: 3rem;
+}
+
+.header {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.quantity {
+  display: flex;
+  flex-direction: column;
+}
+
+.quantity_controls {
+  display: flex;
+  align-items: center;
+}
+
+.quantity_controls span {
+  font-size: 20px;
+}
+
+.quantity_controls button {
+  padding: 5px 5px;
+  background: none;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.quantity_controls span {
+  margin: 0 10px;
+}
+
+.remove_button {
+  background-color: var(--remove);
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.remove_button:hover {
+  background-color: var(--remove-hover);
+}

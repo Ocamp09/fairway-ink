@@ -1,0 +1,34 @@
+.type_selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  margin-bottom: 0.5rem;
+}
+
+.type_selector button {
+  background-color: transparent;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  transition: color 0.3s ease;
+  border-radius: 0;
+  border-bottom: 0.1em solid transparent;
+}
+
+.type_selector button:hover {
+  color: var(--tool-button);
+  border-color: var(--tool-button);
+}
+
+.type_selector button:focus {
+  outline: none;
+}
+
+.type_selector button.active {
+  color: var(--tool-button);
+  border-bottom: 2px solid var(--tool-button);
+  font-weight: bold;
+}

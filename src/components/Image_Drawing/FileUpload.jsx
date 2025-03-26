@@ -1,8 +1,8 @@
 import { useState, useRef } from "react";
 import { FaImage } from "react-icons/fa6";
 import { useSession } from "../../contexts/DesignContext";
-import "./FileUpload.css";
-import "./ImageEditor.css";
+import global from "../../global.module.css";
+import styles from "./FileUpload.module.css";
 
 const FileUpload = () => {
   const [error, setError] = useState("");
@@ -41,7 +41,7 @@ const FileUpload = () => {
   };
 
   return (
-    <div className="file-upload-container">
+    <div className={styles.file_upload_container}>
       <input
         type="file"
         onChange={handleFileChange}
@@ -52,7 +52,7 @@ const FileUpload = () => {
       <button title="Upload image" onClick={handleUploadClick}>
         <FaImage size={28} />
       </button>
-      {error && <p className="file-error-message">{error}</p>}
+      {error && <p className={global.error_message}>{error}</p>}
     </div>
   );
 };

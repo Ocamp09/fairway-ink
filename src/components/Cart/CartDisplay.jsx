@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useCart } from "../../contexts/CartContext";
 import STLViewer from "../3D-View/STLViewer";
-import "./ViewCartPopup.css";
+import { LuPlus, LuMinus } from "react-icons/lu";
+import global from "../../global.module.css";
+import styles from "./CartDisplay.module.css";
+import { CUSTOM_PRICE, SOLID_PRICE, TEXT_PRICE } from "../../constants";
 
 const CartDisplay = ({ setIsCheckout }) => {
   const { cartItems, removeFromCart, updateQuantity, getTotal, getPrice } =
@@ -24,29 +27,47 @@ const CartDisplay = ({ setIsCheckout }) => {
     setIsCheckout(true);
   };
 
+  const getType = (type) => {
+    return type.charAt(0).toUpperCase() + type.slice(1);
+  };
+
+  const getCost = (type) => {
+    let cost = 0;
+    switch (type) {
+      case "solid":
+        cost = SOLID_PRICE;
+      case "text":
+        cost = TEXT_PRICE;
+      case "custom":
+        cost = CUSTOM_PRICE;
+    }
+
+    return cost;
+  };
+
   return (
-    <div>
+    <div className={styles.cart}>
       <h2>Your Cart</h2>
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
-        <ul className="cart-items">
+        <ul className={styles.cart_items}>
           {cartItems.map((item) => (
-            <li key={item.stl} className="cart-item">
-              <div className="stl-viewer-container">
-                <STLViewer stlUrl={item.stl} cart={true} />{" "}
+            <li key={item.stl} className={styles.cart_item}>
+              <div className={styles.stl_viewer_container}>
+                <STLViewer stlUrl={item.stl} cart={true} />
               </div>
-              <div className="item-details">
-                <div className="quantity">
-                  <p>Quantity:</p>
+              <div className={styles.item_details}>
+                <div className={styles.quantity}>
+                  <span className={styles.header}>Quantity:</span>
 
-                  <div className="quantity-controls">
+                  <div className={styles.quantity_controls}>
                     <button
                       onClick={() =>
                         handleQuantityChange(item.stl, item.quantity - 1)
                       }
                     >
-                      -
+                      <LuMinus />
                     </button>
                     <span>{item.quantity}</span>
                     <button
@@ -54,30 +75,37 @@ const CartDisplay = ({ setIsCheckout }) => {
                         handleQuantityChange(item.stl, item.quantity + 1)
                       }
                     >
-                      +
+                      <LuPlus />
                     </button>
                   </div>
                   <button
                     onClick={() => removeFromCart(item.stl)}
-                    className="remove-button"
+                    className={styles.remove_button}
                   >
                     Remove
                   </button>
                 </div>
-
-                <p>Item Total: ${getPrice(item).toFixed(2)}</p>
+                <div className={styles.quantity}>
+                  <span className={styles.header}>Template Type:</span>
+                  <span>{getType(item.type)}</span>
+                  <span>${getCost(item.type)} ea</span>
+                </div>
+                <div>
+                  <span className={styles.header}>Item Total: </span>
+                  <p>${getPrice(item).toFixed(2)}</p>
+                </div>
               </div>
             </li>
           ))}
         </ul>
       )}
-      <div className="checkout">
+      <div>
         <h3>Cart Total: ${total.toFixed(2)}</h3>
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
+        {errorMessage && <p className={global.error_message}>{errorMessage}</p>}
 
         <button
           onClick={handleCheckout}
-          className="checkout-button"
+          className={global.submit_button}
           disabled={cartItems.length === 0}
         >
           {loading ? "Redirecting to Payment..." : "Proceed to Payment"}
