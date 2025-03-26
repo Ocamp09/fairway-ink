@@ -1,0 +1,19 @@
+.back_div {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  padding-bottom: 0.5rem;
+}
+
+.back_div h3 {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.back_cart {
+  border-radius: 5px;
+  background-color: red;
+  justify-content: flex-start;
+  padding: 5px 10px 5px 10px;
+  margin-left: 0;
+}

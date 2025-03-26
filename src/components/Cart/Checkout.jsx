@@ -4,6 +4,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { getPaymentIntent } from "../../api/api";
 import CheckoutForm from "./CheckoutForm";
 import { useCart } from "../../contexts/CartContext";
+import styles from "./Checkout.module.css";
 
 const stripePromise = loadStripe(
   "pk_test_51Qs6WuACPDsvvNfxem8wieeIWOMf7FDRdwepMv7kSRJ9h80oegevnSUyxwEhyq7BbCU5KEwjxdOFptaDUFyeo7s400o1D8zBSi"
@@ -38,10 +39,10 @@ const Checkout = ({ setIsCheckout }) => {
   }
 
   return (
-    <div className="checkout-form">
-      <div className="back-div">
+    <div>
+      <div className={styles.back_div}>
         <button
-          className="back-cart"
+          className={styles.back_cart}
           onClick={() => {
             setIsCheckout(false);
           }}
