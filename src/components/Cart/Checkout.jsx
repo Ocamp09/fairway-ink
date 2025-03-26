@@ -13,6 +13,7 @@ const stripePromise = loadStripe(
 const Checkout = ({ setIsCheckout }) => {
   const [clientSecret, setClientSecret] = useState("");
   const [intentId, setIntentId] = useState("");
+  const [successfulOrder, setSuccessfulOrder] = useState(null);
 
   const { getTotal } = useCart();
 
@@ -40,7 +41,7 @@ const Checkout = ({ setIsCheckout }) => {
 
   return (
     <div>
-      <div className={styles.back_div}>
+      <div className={styles.back_div} hidden={successfulOrder}>
         <button
           className={styles.back_cart}
           onClick={() => {
@@ -52,7 +53,12 @@ const Checkout = ({ setIsCheckout }) => {
         <h3>Cart Total: ${getTotal().toFixed(2)}</h3>
       </div>
       <Elements stripe={stripePromise}>
-        <CheckoutForm intentId={intentId} clientSecret={clientSecret} />
+        <CheckoutForm
+          intentId={intentId}
+          clientSecret={clientSecret}
+          setSuccessfulOrder={setSuccessfulOrder}
+          successfulOrder={successfulOrder}
+        />
       </Elements>
     </div>
   );

@@ -4,7 +4,8 @@ import { drawImage, drawLine, getCoordinates } from "../../utils/canvasUtils";
 import InfoPane from "./InfoPane";
 import { uploadImage } from "../../api/api";
 import UndoRedo from "../Image_Drawing/Toolbar/UndoRedo";
-import DrawTools from "../Image_Drawing/Toolbar/DrawTools";
+import { MdLineWeight } from "react-icons/md";
+import ToolDropdown from "../Image_Drawing/Toolbar/ToolDropdown";
 import global from "../../global.module.css";
 import tools from "../Image_Drawing/Toolbar/Toolbar.module.css";
 import editor from "../Image_Drawing/ImageEditor.module.css";
@@ -29,12 +30,12 @@ const TabEditor = () => {
   const [isDrawing, setIsDrawing] = useState(false);
   const [undoStack, setUndoStack] = useState([]);
   const [redoStack, setRedoStack] = useState([]);
-  const [lineWidth, setLineWidth] = useState(8);
+  const [lineWidth, setLineWidth] = useState(22);
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
   const iconSize = 28;
+  const lineLabel = <MdLineWeight size={iconSize} color="white" />;
 
   const handleBackToRemove = () => {
     updateAdjustStage("remove");
@@ -179,10 +180,14 @@ const TabEditor = () => {
             redoStack={redoStack}
             setRedoStack={setRedoStack}
           />
-          <DrawTools
-            iconSize={iconSize}
-            lineWidth={lineWidth}
-            setLineWidth={setLineWidth}
+          <ToolDropdown
+            minQuantity={16}
+            maxQuantity={60}
+            labelText={lineLabel}
+            step={4}
+            quantity={lineWidth}
+            setQuantity={setLineWidth}
+            title={"Adjust line width"}
           />
         </div>
         <div className={editor.canvas_container}>

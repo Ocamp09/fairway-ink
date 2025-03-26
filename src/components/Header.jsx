@@ -83,7 +83,7 @@ const Header = ({ cartPopup, setCartPopup }) => {
         </div>
         {menuOpen && (
           <div className={styles.mobile_nav}>
-            <hr />
+            <hr className={styles.rule} />
             <button
               className={`${styles.nav_drop} ${
                 location.pathname === "/design" ? styles.active : ""
