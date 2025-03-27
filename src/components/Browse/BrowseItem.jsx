@@ -9,7 +9,6 @@ import styles from "./BrowseItem.module.css";
 const BrowseItem = ({ url }) => {
   const [isAdded, setIsAdded] = useState(false);
   const [size, setSize] = useState("medium");
-  const [prevSize, setPrevSize] = useState(size);
   const [displayUrl, setDisplayUrl] = useState(url);
   const { addToCart } = useCart();
 
@@ -22,14 +21,16 @@ const BrowseItem = ({ url }) => {
   };
 
   useEffect(() => {
-    setDisplayUrl(url.replace(prevSize, size));
+    setDisplayUrl((prevUrl) => {
+      return prevUrl.replace(/(small|medium|large)/, size);
+    });
     setIsAdded(false);
   }, [size]);
 
   return (
     <div className={styles.browse_item}>
       <STLViewer stlUrl={displayUrl} cart={true} zoomScale={1.75} />
-      <SizeSelector size={size} setSize={setSize} setPrevSize={setPrevSize} />
+      <SizeSelector size={size} setSize={setSize} />
       <button
         onClick={handleAddToCart}
         className={global.submit_button}
