@@ -1,6 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import { v4 as uuidv4 } from "uuid";
+import { useCart } from "../contexts/CartContext";
 
 let API_URL = "https://api.fairway-ink.com";
 if (process.env.NODE_ENV === "development") API_URL = "http://localhost:5000";
@@ -79,17 +80,17 @@ export const generateStl = async (svgData, scale, stlKey, templateType) => {
 
 export const addToCartApi = (stlUrl, quantity, templateType) => {
   const session_id = get_ssid();
-
-  const formData = new FormData();
-  formData.append("ssid", session_id);
-  formData.append("stlUrl", stlUrl);
-  formData.append("quantity", quantity);
-  formData.append("templateType", templateType);
+  const cartItem = {
+    ssid: session_id,
+    stlUrl: stlUrl,
+    quantity: quantity,
+    templateType: templateType,
+  };
 
   try {
-    axios.post(`${API_URL}/cart`, formData, {
+    axios.post(`${API_URL}/cart`, cartItem, {
       headers: {
-        "Content-Type": "multi-part/form-data",
+        "Content-Type": "application/sjon",
       },
     });
   } catch (error) {
