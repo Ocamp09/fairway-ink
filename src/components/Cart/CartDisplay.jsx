@@ -53,9 +53,9 @@ const CartDisplay = ({ setIsCheckout }) => {
       ) : (
         <ul className={styles.cart_items}>
           {cartItems.map((item) => (
-            <li key={item.stl} className={styles.cart_item}>
+            <li key={item.stlUrl} className={styles.cart_item}>
               <div className={styles.stl_viewer_container}>
-                <STLViewer stlUrl={item.stl} cart={true} />
+                <STLViewer stlUrl={item.stlUrl} cart={true} />
               </div>
               <div className={styles.item_details}>
                 <div className={styles.quantity}>
@@ -64,7 +64,7 @@ const CartDisplay = ({ setIsCheckout }) => {
                   <div className={styles.quantity_controls}>
                     <button
                       onClick={() =>
-                        handleQuantityChange(item.stl, item.quantity - 1)
+                        handleQuantityChange(item.stlUrl, item.quantity - 1)
                       }
                     >
                       <LuMinus />
@@ -72,14 +72,14 @@ const CartDisplay = ({ setIsCheckout }) => {
                     <span>{item.quantity}</span>
                     <button
                       onClick={() =>
-                        handleQuantityChange(item.stl, item.quantity + 1)
+                        handleQuantityChange(item.stlUrl, item.quantity + 1)
                       }
                     >
                       <LuPlus />
                     </button>
                   </div>
                   <button
-                    onClick={() => removeFromCart(item.stl)}
+                    onClick={() => removeFromCart(item.stlUrl)}
                     className={styles.remove_button}
                   >
                     Remove
@@ -87,8 +87,8 @@ const CartDisplay = ({ setIsCheckout }) => {
                 </div>
                 <div className={styles.quantity}>
                   <span className={styles.header}>Template Type:</span>
-                  <span>{getType(item.type)}</span>
-                  <span>${getCost(item.type)} ea</span>
+                  <span>{getType(item.templateType)}</span>
+                  <span>${getCost(item.templateType)} ea</span>
                 </div>
                 <div>
                   <span className={styles.header}>Item Total: </span>

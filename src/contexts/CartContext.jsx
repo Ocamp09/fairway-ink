@@ -20,11 +20,11 @@ export const CartProvider = ({ children }) => {
   }, [cartItems]);
 
   const addToCart = (key, item, quantity, type) => {
-    const existingItem = cartItems.find((cartItem) => cartItem.stl === item);
+    const existingItem = cartItems.find((cartItem) => cartItem.stlUrl === item);
     if (existingItem) {
       setCartItems(
         cartItems.map((cartItem) =>
-          cartItem.stl === item.stl
+          cartItem.stlUrl === item.stlUrl
             ? { ...cartItem, quantity: cartItem.quantity + Number(quantity) }
             : cartItem
         )
@@ -32,19 +32,24 @@ export const CartProvider = ({ children }) => {
     } else {
       setCartItems([
         ...cartItems,
-        { id: key, stl: item, quantity: Number(quantity), type: type },
+        {
+          id: key,
+          stlUrl: item,
+          quantity: Number(quantity),
+          templateType: type,
+        },
       ]);
     }
   };
 
   const removeFromCart = (itemStl) => {
-    setCartItems(cartItems.filter((item) => item.stl !== itemStl));
+    setCartItems(cartItems.filter((item) => item.stlUrl !== itemStl));
   };
 
   const updateQuantity = (itemStl, quantity) => {
     setCartItems(
       cartItems.map((item) =>
-        item.stl === itemStl ? { ...item, quantity } : item
+        item.stlUrl === itemStl ? { ...item, quantity } : item
       )
     );
   };
@@ -58,9 +63,9 @@ export const CartProvider = ({ children }) => {
   };
 
   const getPrice = (item) => {
-    if (item.type === "solid") {
+    if (item.templateType === "solid") {
       return SOLID_PRICE * item.quantity;
-    } else if (item.type === "text") {
+    } else if (item.templateType === "text") {
       return TEXT_PRICE * item.quantity;
     } else {
       return CUSTOM_PRICE * item.quantity;
@@ -71,9 +76,9 @@ export const CartProvider = ({ children }) => {
     let total = 0.0;
     for (let i = 0; i < cartItems.length; i++) {
       const item = cartItems[i];
-      if (item.type === "solid") {
+      if (item.templateType === "solid") {
         total += SOLID_PRICE * item.quantity;
-      } else if (item.type === "text") {
+      } else if (item.templateType === "text") {
         total += TEXT_PRICE * item.quantity;
       } else {
         total += CUSTOM_PRICE * item.quantity;
