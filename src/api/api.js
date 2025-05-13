@@ -100,12 +100,15 @@ export const addToCartApi = (stlUrl, quantity, templateType) => {
 };
 
 export const getPaymentIntent = async () => {
-  const { cartItems } = useCart();
+  let cart = {
+    cart: JSON.parse(sessionStorage.getItem("cart")),
+  };
 
+  console.log(cart);
   try {
     const response = await axios.post(
       `${API_URL}/create-payment-intent`,
-      { cart: cartItems },
+      cart,
       {
         headers: {
           "Content-Type": "application/json",
