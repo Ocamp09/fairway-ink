@@ -55,28 +55,23 @@ jobs:
         with:
           sarif_file: eslint-results.sarif
 
-  semgrep:
-    name: Semgrep Scan
+  semgrep-diff:
     runs-on: ubuntu-latest
-    permissions:
-      security-events: write
+    container:
+      image: returntocorp/semgrep
 
     steps:
-      - name: clone application code
-        uses: actions/checkout@v4
-
-      - name: full scan
-        uses: returntocorp/semgrep-action@v1
+      # step 1
+      - name: clone application source code
+        uses: actions/checkout@v3
         with:
-          config: p/default
+          fetch-depth: 0
 
-      - name: save report as pipeline artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: semgrep.sarif
-          path: semgrep.sarif
-
-      - name: Upload SARIF
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: semgrep.sarif
+      # step 2
+      - name: differential scan
+        run: |
+          semgrep scan \
+            --error \
+            --metrics=off \
+            --baseline-commit $ \
+            --config="p/default"
