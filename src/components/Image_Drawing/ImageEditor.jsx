@@ -36,7 +36,6 @@ function ImageEditor() {
     stage,
     updateStage,
     updateAdjustStage,
-    uploadedPaths,
     updateUploadedPaths,
     updateSvgData,
     templateType,
@@ -171,7 +170,7 @@ function ImageEditor() {
 
     if (editorMode === "select" && isDragging) {
       setPaths((prevPaths) => {
-        return prevPaths.map((path, index) => {
+        return prevPaths.map((path) => {
           if (path.selected) {
             const updatedPath = { ...path };
 

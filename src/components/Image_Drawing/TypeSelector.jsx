@@ -15,11 +15,11 @@ const TypeSelector = ({ paths }) => {
     updateUploadedPaths(paths);
   };
 
-  const handleText = () => {
-    updateTemplateType("text");
-    updateEditorMode("type");
-    updateUploadedPaths(paths);
-  };
+  // const handleText = () => {
+  //   updateTemplateType("text");
+  //   updateEditorMode("type");
+  //   updateUploadedPaths(paths);
+  // };
 
   const handleCustom = () => {
     updateTemplateType("custom");

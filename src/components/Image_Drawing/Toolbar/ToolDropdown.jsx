@@ -1,5 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
-import { RiArrowDropDownLine } from "react-icons/ri";
+import { useState, useRef, useEffect } from "react";
 import styles from "./ToolDropdown.module.css";
 
 function ToolDropdown({

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   CardElement,
   useStripe,
@@ -69,25 +69,22 @@ const CheckoutForm = ({
       return;
     }
 
-    const { paymentIntent, error } = await stripe.confirmCardPayment(
-      clientSecret,
-      {
-        payment_method: {
-          card: cardElement,
-          billing_details: {
-            email: email,
-            address: {
-              line1: line1,
-              line2: line2,
-              city: city,
-              state: state,
-              postal_code: postal_code,
-              country: country,
-            },
+    const { error } = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: cardElement,
+        billing_details: {
+          email: email,
+          address: {
+            line1: line1,
+            line2: line2,
+            city: city,
+            state: state,
+            postal_code: postal_code,
+            country: country,
           },
         },
-      }
-    );
+      },
+    });
 
     if (error) {
       setMessage(error.message);
