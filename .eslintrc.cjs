@@ -22,5 +22,6 @@ module.exports = {
   rules: {
     // Add your custom rules here
     "react/react-in-jsx-scope": "off", // Needed for React 17+
+    "react/prop-types": "off",
   },
 };
