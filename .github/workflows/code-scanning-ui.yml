@@ -20,22 +20,17 @@ jobs:
 
       - name: Install ESLint and SARIF formatter
         run: |
-          npm install --save-dev eslint@8.57.0 \
+          npm install --save-dev eslint@8.57.0 
           npm install --save-dev @microsoft/eslint-formatter-sarif@3.1.0
-
-      - name: Debug file tree
-        run: |
-          echo "Files in workspace:"
-          find . -type f
 
       - name: Run ESLint
         env:
           SARIF_ESLINT_IGNORE_SUPPRESSED: "true"
         run: |
-          npx eslint . \
-          --config .eslintrc.cjs \
-          --ext .js,.jsx,.ts,.tsx \
-          --format @microsoft/eslint-formatter-sarif \
+          npx eslint . 
+          --config .eslintrc.cjs 
+          --ext .js,.jsx,.ts,.tsx 
+          --format @microsoft/eslint-formatter-sarif 
           --output-file eslint-results.sarif
         continue-on-error: true
 
