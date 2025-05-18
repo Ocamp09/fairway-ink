@@ -1,5 +1,5 @@
-import React from "react";
 import { IoCloseSharp } from "react-icons/io5";
+
 import global from "../../global.module.css";
 import styles from "./ViewCartPopup.module.css";
 

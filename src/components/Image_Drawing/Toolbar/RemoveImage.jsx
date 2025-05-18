@@ -1,5 +1,6 @@
 import { FaImage } from "react-icons/fa6";
 import { MdRemoveCircle } from "react-icons/md";
+
 import styles from "./RemoveImage.module.css";
 
 const RemoveImage = () => {

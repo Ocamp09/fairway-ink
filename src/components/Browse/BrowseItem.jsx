@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import STLViewer from "../3D-View/STLViewer";
+
 import { addToCartApi } from "../../api/api";
 import { useCart } from "../../contexts/CartContext";
-import SizeSelector from "./SizeSelector";
 import global from "../../global.module.css";
+import STLViewer from "../3D-View/STLViewer";
 import styles from "./BrowseItem.module.css";
+import SizeSelector from "./SizeSelector";
 
 const BrowseItem = ({ url }) => {
   const [isAdded, setIsAdded] = useState(false);

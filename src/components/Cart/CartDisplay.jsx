@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useCart } from "../../contexts/CartContext";
-import STLViewer from "../3D-View/STLViewer";
-import { LuPlus, LuMinus } from "react-icons/lu";
-import global from "../../global.module.css";
-import styles from "./CartDisplay.module.css";
+import { useEffect, useState } from "react";
+import { LuMinus, LuPlus } from "react-icons/lu";
+
 import { CUSTOM_PRICE, SOLID_PRICE, TEXT_PRICE } from "../../constants";
+import { useCart } from "../../contexts/CartContext";
+import global from "../../global.module.css";
+import STLViewer from "../3D-View/STLViewer";
+import styles from "./CartDisplay.module.css";
 
 const CartDisplay = ({ setIsCheckout }) => {
   const { cartItems, removeFromCart, updateQuantity, getTotal, getPrice } =

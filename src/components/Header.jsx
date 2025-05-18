@@ -2,8 +2,9 @@
 import { useState } from "react";
 import { IoIosCart } from "react-icons/io";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import { useCart } from "../contexts/CartContext";
-import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./Header.module.css";
 
 const Header = ({ cartPopup, setCartPopup }) => {

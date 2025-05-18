@@ -1,5 +1,5 @@
-import React from "react";
 import { BiSolidZoomIn, BiSolidZoomOut } from "react-icons/bi";
+
 import styles from "./ZoomControls.module.css";
 
 const ZoomControls = ({ onZoomIn, onZoomOut }) => {

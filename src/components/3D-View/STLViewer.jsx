@@ -1,10 +1,11 @@
 /* eslint-disable react/no-unknown-property */
-import React, { useRef, useEffect, useState } from "react";
 import { Canvas, useLoader, useThree } from "@react-three/fiber";
-import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
+import { useEffect, useRef, useState } from "react";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import ZoomControls from "./ZoomControls";
+import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
+
 import styles from "./STLViewer.module.css";
+import ZoomControls from "./ZoomControls";
 
 const STLModel = ({ url }) => {
   const stl = useLoader(STLLoader, url);

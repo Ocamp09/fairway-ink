@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { useEffect, useState } from "react";
+
 import { getPaymentIntent } from "../../api/api";
-import CheckoutForm from "./CheckoutForm";
 import { useCart } from "../../contexts/CartContext";
 import styles from "./Checkout.module.css";
+import CheckoutForm from "./CheckoutForm";
 
 const stripePromise = loadStripe(
   "pk_test_51Qs6WuACPDsvvNfxem8wieeIWOMf7FDRdwepMv7kSRJ9h80oegevnSUyxwEhyq7BbCU5KEwjxdOFptaDUFyeo7s400o1D8zBSi"

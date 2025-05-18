@@ -1,19 +1,21 @@
 import "./App.css";
-import GolfBallDisplay from "./components/GolfBallDisplay";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import Header from "./components/Header";
-import { CartProvider } from "./contexts/CartContext";
-import { FileProvider } from "./contexts/DesignContext";
-import { useState, useEffect } from "react";
-import ViewCartPopup from "./components/Cart/ViewCartPopup";
+
 import Cookies from "js-cookie";
-import { v4 as uuidv4 } from "uuid";
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import WelcomePopup from "./components/WelcomePopup";
-import HomePage from "./components/HomePage";
+import { v4 as uuidv4 } from "uuid";
+
 import Browse from "./components/Browse/Browse";
 import CartDisplay from "./components/Cart/CartDisplay";
 import Checkout from "./components/Cart/Checkout";
+import ViewCartPopup from "./components/Cart/ViewCartPopup";
+import GolfBallDisplay from "./components/GolfBallDisplay";
+import Header from "./components/Header";
+import HomePage from "./components/HomePage";
+import WelcomePopup from "./components/WelcomePopup";
+import { CartProvider } from "./contexts/CartContext";
+import { FileProvider } from "./contexts/DesignContext";
 
 function App() {
   const [cartPopup, setCartPopup] = useState(false);

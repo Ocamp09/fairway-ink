@@ -1,5 +1,6 @@
-import ToolDropdown from "./ToolDropdown";
 import { MdLineWeight } from "react-icons/md";
+
+import ToolDropdown from "./ToolDropdown";
 
 const DrawTools = ({ lineWidth, setLineWidth, iconSize }) => {
   const lineLabel = <MdLineWeight size={iconSize} color="white" />;

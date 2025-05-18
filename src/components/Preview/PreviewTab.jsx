@@ -1,11 +1,12 @@
 import { useState } from "react";
-import STLViewer from "../3D-View/STLViewer";
-import QuantityDropdown from "./QuantityDropdown";
+
+import { addToCartApi } from "../../api/api";
 import { useCart } from "../../contexts/CartContext";
 import { useSession } from "../../contexts/DesignContext";
-import { addToCartApi } from "../../api/api";
 import global from "../../global.module.css";
+import STLViewer from "../3D-View/STLViewer";
 import styles from "./PreviewTab.module.css";
+import QuantityDropdown from "./QuantityDropdown";
 
 const PreviewTab = () => {
   const [quantity, setQuantity] = useState(1);
