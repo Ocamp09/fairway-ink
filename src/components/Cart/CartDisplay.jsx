@@ -11,9 +11,6 @@ const CartDisplay = ({ setIsCheckout }) => {
     useCart();
   const [total, setTotal] = useState(0.0);
 
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null);
-
   useEffect(() => {
     setTotal(getTotal);
   }, [cartItems]);
@@ -36,8 +33,10 @@ const CartDisplay = ({ setIsCheckout }) => {
     switch (type) {
       case "solid":
         cost = SOLID_PRICE;
+        break;
       case "text":
         cost = TEXT_PRICE;
+        break;
       case "custom":
         cost = CUSTOM_PRICE;
     }
@@ -101,15 +100,12 @@ const CartDisplay = ({ setIsCheckout }) => {
       )}
       <div>
         <h3>Cart Total: ${total.toFixed(2)}</h3>
-        {errorMessage && <p className={global.error_message}>{errorMessage}</p>}
 
         <button
           onClick={handleCheckout}
           className={global.submit_button}
           disabled={cartItems.length === 0}
-        >
-          {loading ? "Redirecting to Payment..." : "Proceed to Payment"}
-        </button>
+        ></button>
       </div>
     </div>
   );
