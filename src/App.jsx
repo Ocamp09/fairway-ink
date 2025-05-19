@@ -8,13 +8,13 @@ import { v4 as uuidv4 } from "uuid";
 import CartDisplay from "./components/Cart/CartDisplay";
 import Checkout from "./components/Cart/Checkout";
 import ViewCartPopup from "./components/Cart/ViewCartPopup";
-import GolfBallDisplay from "./components/GolfBallDisplay";
 import Header from "./components/Header";
 import WelcomePopup from "./components/WelcomePopup";
 import { CartProvider } from "./contexts/CartContext";
 import { FileProvider } from "./contexts/DesignContext";
 import Browse from "./pages/Browse";
 import Home from "./pages/Home";
+import StencilDesigner from "./pages/StencilDesigner";
 
 function App() {
   const [cartPopup, setCartPopup] = useState(false);
@@ -45,7 +45,7 @@ function App() {
           <Header cartPopup={cartPopup} setCartPopup={setCartPopup} />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/design" element={<GolfBallDisplay />} />
+            <Route path="/design" element={<StencilDesigner />} />
             <Route path="/browse" element={<Browse />} />
           </Routes>
           <ViewCartPopup isOpen={cartPopup} setIsOpen={setCartPopup}>
