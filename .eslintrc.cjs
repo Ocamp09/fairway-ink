@@ -26,4 +26,12 @@ module.exports = {
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
   },
+  overrides: [
+    {
+      files: ["**/*.test.{js,jsx}"],
+      env: {
+        vitest: true,
+      },
+    },
+  ],
 };

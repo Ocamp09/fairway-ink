@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
-import { describe, expect, it } from "vitest";
 
 import { useSession } from "../contexts/DesignContext";
 import StencilDesigner from "./StencilDesigner";
