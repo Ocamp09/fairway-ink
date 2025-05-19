@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { getDesigns } from "../api/api";
+import { getDesigns } from "../api/browse";
 import BrowseItem from "../components/Browse/BrowseItem";
 import styles from "./Browse.module.css";
 
