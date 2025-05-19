@@ -6,13 +6,18 @@ import styles from "./Home.module.css";
 const Home = () => {
   const navigate = useNavigate();
 
+  const handleStartDesigning = () => navigate("/design");
+  const handleBrowseDesigns = () => navigate("/browse");
+
   return (
-    <div>
-      <h3>Welcome to Fairway Ink!</h3>
-      <div className={styles.intro}>
-        <img src="/home/home.jpg" />
+    <main>
+      <h1>Welcome to Fairway Ink!</h1>
+
+      <section className={styles.intro}>
+        <img src="/home/home.jpg" alt="Golf balls with stencil designs" />
+
         <div className={styles.home_desc}>
-          <h3>Custom golf ball templates</h3>
+          <h2>Custom golf ball templates</h2>
           <p>Elevate your style with a custom designed logo!</p>
           <p>
             Design your own logo in our designer, or select a logo from our
@@ -20,19 +25,19 @@ const Home = () => {
           </p>
           <button
             className={global.submit_button}
-            onClick={() => navigate("/design")}
+            onClick={handleStartDesigning}
           >
             Start designing
           </button>
           <button
             className={global.submit_button}
-            onClick={() => navigate("/browse")}
+            onClick={handleBrowseDesigns}
           >
             Browse designs
           </button>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 
