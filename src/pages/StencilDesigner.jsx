@@ -12,7 +12,6 @@ const StencilDesigner = () => {
     <div className={styles.golf_ball_display}>
       <TabMenu />
       {stage === "design" && <ImageEditor />}
-
       {stage === "adjust" && <ScaleSvg />}
       {stage === "preview" && <PreviewTab />}
     </div>
