@@ -13,10 +13,13 @@ describe("Browse", () => {
     vi.clearAllMocks();
   });
 
-  it("displays loading state initially", () => {
+  it("displays loading state initially", async () => {
     vi.spyOn(api, "getDesigns").mockResolvedValue([]);
     render(<Browse />);
     expect(screen.getByText("Loading designs...")).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.queryByText("Loading designs...")).not.toBeInTheDocument()
+    );
   });
 
   it("renders fetched designs", async () => {
@@ -45,6 +48,8 @@ describe("Browse", () => {
   });
 
   it("displays an error if fetching designs fails", async () => {
+    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {}); // Suppress console.error
+
     vi.spyOn(api, "getDesigns").mockRejectedValue(new Error("Fetch error"));
 
     render(<Browse />);
@@ -54,5 +59,7 @@ describe("Browse", () => {
         "Failed to load designs"
       );
     });
+
+    consoleSpy.mockRestore(); // Restore console after test
   });
 });
