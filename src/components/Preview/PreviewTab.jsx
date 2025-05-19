@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { addToCartApi } from "../../api/api";
+import { addToCartApi } from "../../api/checkout";
 import { useCart } from "../../contexts/CartContext";
 import { useSession } from "../../contexts/DesignContext";
 import global from "../../global.module.css";

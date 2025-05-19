@@ -2,7 +2,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";
 
-import { getPaymentIntent } from "../../api/api";
+import { getPaymentIntent } from "../../api/checkout";
 import { useCart } from "../../contexts/CartContext";
 import styles from "./Checkout.module.css";
 import CheckoutForm from "./CheckoutForm";

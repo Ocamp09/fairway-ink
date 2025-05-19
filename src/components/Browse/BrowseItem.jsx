@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { addToCartApi } from "../../api/api";
+import { addToCartApi } from "../../api/checkout";
 import { useCart } from "../../contexts/CartContext";
 import global from "../../global.module.css";
 import STLViewer from "../3D-View/STLViewer";
