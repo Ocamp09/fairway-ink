@@ -15,10 +15,10 @@ const StencilDesigner = () => {
   };
 
   return (
-    <div className={styles.designer}>
+    <main className={styles.designer}>
       <TabMenu />
       {stageComp[stage] ?? null}
-    </div>
+    </main>
   );
 };
 
