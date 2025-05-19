@@ -25,7 +25,7 @@ const PreviewTab = () => {
   const handleAddToCart = (event) => {
     event.preventDefault();
 
-    if (stlUrl == "default.stl") {
+    if (stlUrl == "designer/default.stl") {
       setError("No custom design uploaded");
       return;
     }

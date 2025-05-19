@@ -51,7 +51,7 @@ const ScaleSvg = () => {
     }
 
     setIsLoading(true);
-    updateStl("default.stl");
+    updateStl("designer/default.stl");
 
     try {
       const response = await generateStl(svgData, scale, stlKey, templateType);

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 export const useFontLoader = () => {
   useEffect(() => {
-    const myFont = new FontFace("stencil", "url(/gunplay.otf)");
+    const myFont = new FontFace("stencil", "url(/designer/gunplay.otf)");
 
     myFont
       .load()
