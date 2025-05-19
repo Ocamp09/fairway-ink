@@ -8,12 +8,16 @@ import styles from "./StencilDesigner.module.css";
 const StencilDesigner = () => {
   const { stage } = useSession();
 
+  const stageComp = {
+    design: <ImageEditor />,
+    adjust: <ScaleSvg />,
+    preview: <PreviewTab />,
+  };
+
   return (
-    <div className={styles.golf_ball_display}>
+    <div className={styles.designer}>
       <TabMenu />
-      {stage === "design" && <ImageEditor />}
-      {stage === "adjust" && <ScaleSvg />}
-      {stage === "preview" && <PreviewTab />}
+      {stageComp[stage] ?? null}
     </div>
   );
 };
