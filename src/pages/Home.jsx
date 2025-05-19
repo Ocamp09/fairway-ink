@@ -10,7 +10,7 @@ const Home = () => {
     <div>
       <h3>Welcome to Fairway Ink!</h3>
       <div className={styles.intro}>
-        <img src="/home.jpg" />
+        <img src="/home/home.jpg" />
         <div className={styles.home_desc}>
           <h3>Custom golf ball templates</h3>
           <p>Elevate your style with a custom designed logo!</p>
