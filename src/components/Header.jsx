@@ -31,7 +31,7 @@ const Header = ({ cartPopup, setCartPopup }) => {
               }}
             >
               <img
-                src="/logo_full.png"
+                src="/logos/logo_full.png"
                 height={40}
                 className="d-inline-block align-top"
                 alt="Fairway Ink"
