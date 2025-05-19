@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { uploadImage } from "../../api/api";
+import { uploadImage } from "../../api/designer";
 import { useSession } from "../../contexts/DesignContext";
 import global from "../../global.module.css";
 import { useCanvasEvents } from "../../hooks/useCanvasEvents";
