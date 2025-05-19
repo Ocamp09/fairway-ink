@@ -10,11 +10,11 @@ import Checkout from "./components/Cart/Checkout";
 import ViewCartPopup from "./components/Cart/ViewCartPopup";
 import GolfBallDisplay from "./components/GolfBallDisplay";
 import Header from "./components/Header";
-import HomePage from "./components/HomePage";
 import WelcomePopup from "./components/WelcomePopup";
 import { CartProvider } from "./contexts/CartContext";
 import { FileProvider } from "./contexts/DesignContext";
 import Browse from "./pages/Browse";
+import Home from "./pages/Home";
 
 function App() {
   const [cartPopup, setCartPopup] = useState(false);
@@ -44,7 +44,7 @@ function App() {
           {welcome && <WelcomePopup setWelcome={setWelcome} />}
           <Header cartPopup={cartPopup} setCartPopup={setCartPopup} />
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<Home />} />
             <Route path="/design" element={<GolfBallDisplay />} />
             <Route path="/browse" element={<Browse />} />
           </Routes>

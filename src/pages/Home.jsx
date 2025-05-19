@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 
 import global from "../global.module.css";
-import styles from "./HomePage.module.css";
+import styles from "./Home.module.css";
 
-const HomePage = () => {
+const Home = () => {
   const navigate = useNavigate();
 
   return (
@@ -36,4 +36,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Home;
