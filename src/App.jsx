@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
-import Browse from "./components/Browse/Browse";
 import CartDisplay from "./components/Cart/CartDisplay";
 import Checkout from "./components/Cart/Checkout";
 import ViewCartPopup from "./components/Cart/ViewCartPopup";
@@ -15,6 +14,7 @@ import HomePage from "./components/HomePage";
 import WelcomePopup from "./components/WelcomePopup";
 import { CartProvider } from "./contexts/CartContext";
 import { FileProvider } from "./contexts/DesignContext";
+import Browse from "./pages/Browse";
 
 function App() {
   const [cartPopup, setCartPopup] = useState(false);

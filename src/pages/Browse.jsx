@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-import { getDesigns } from "../../api/api";
+import { getDesigns } from "../api/api";
+import BrowseItem from "../components/Browse/BrowseItem";
 import styles from "./Browse.module.css";
-import BrowseItem from "./BrowseItem";
 
 const Browse = () => {
   const [designList, setDesignList] = useState([]);
