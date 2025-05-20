@@ -1,21 +1,19 @@
 import { IoCloseSharp } from "react-icons/io5";
 
-import global from "../../global.module.css";
+import global from "../../../global.module.css";
 import styles from "./CartPopup.module.css";
 
 const CartPopup = ({ isOpen, setIsOpen, children }) => {
-  if (!isOpen) {
-    return null;
-  }
+  if (!isOpen) return null;
 
   return (
-    <div className={styles.view_cart_overlay}>
+    <div className={styles.view_cart_overlay} data-testid="view-cart-overlay">
       <div className={styles.view_cart_popup}>
         <button
           className={global.close_button}
-          onClick={() => {
-            setIsOpen(false);
-          }}
+          onClick={() => setIsOpen(false)}
+          data-testid="close-button"
+          aria-label="Close cart popup"
         >
           <IoCloseSharp size={28} />
         </button>
