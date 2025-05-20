@@ -5,21 +5,21 @@ import { useSession } from "../../contexts/DesignContext";
 import StencilDesigner from "./StencilDesigner";
 
 // Mock the useSession context
-vi.mock("../contexts/DesignContext", () => ({
+vi.mock("../../contexts/DesignContext", () => ({
   useSession: vi.fn(),
 }));
 
 // Mock child components
-vi.mock("../components/TabMenu", () => ({
+vi.mock("../../components/TabMenu", () => ({
   default: () => <div>Tab Menu</div>,
 }));
-vi.mock("../components/Image_Drawing/ImageEditor", () => ({
+vi.mock("../../components/Image_Drawing/ImageEditor", () => ({
   default: () => <div>Image Editor</div>,
 }));
-vi.mock("../components/Scale/ScaleSvg", () => ({
+vi.mock("../../components/Scale/ScaleSvg", () => ({
   default: () => <div>Scale SVG</div>,
 }));
-vi.mock("../components/Preview/PreviewTab", () => ({
+vi.mock("../../components/Preview/PreviewTab", () => ({
   default: () => <div>Preview Tab</div>,
 }));
 
