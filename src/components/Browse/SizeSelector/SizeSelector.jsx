@@ -1,32 +1,21 @@
 import styles from "./SizeSelector.module.css";
 
+const sizes = ["small", "medium", "large"];
+
 const SizeSelector = ({ size, setSize }) => {
   return (
-    <div className={styles.size_menu}>
-      <button
-        className={`${size === "small" ? styles.active : ""}`}
-        onClick={() => {
-          setSize("small");
-        }}
-      >
-        Small
-      </button>
-      <button
-        className={`${size === "medium" ? styles.active : ""}`}
-        onClick={() => {
-          setSize("medium");
-        }}
-      >
-        Medium
-      </button>
-      <button
-        className={`${size === "large" ? styles.active : ""}`}
-        onClick={() => {
-          setSize("large");
-        }}
-      >
-        Large
-      </button>
+    <div className={styles.size_menu} role="group" aria-label="Size selector">
+      {sizes.map((s) => (
+        <button
+          key={s}
+          data-testid={`size-${s}`}
+          className={size === s ? styles.active : ""}
+          onClick={() => setSize(s)}
+          aria-pressed={size === s}
+        >
+          {s.charAt(0).toUpperCase() + s.slice(1)}
+        </button>
+      ))}
     </div>
   );
 };
