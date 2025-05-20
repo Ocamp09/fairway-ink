@@ -1,19 +1,20 @@
-import "./App.css";
-import GolfBallDisplay from "./components/GolfBallDisplay";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
+
+import CartInfo from "./components/Cart/CartInfo/CartInfo";
+import Checkout from "./components/Cart/Checkout";
+import CartPopup from "./components/Cart/CartPopup/CartPopup";
 import Header from "./components/Header";
+import WelcomePopup from "./components/WelcomePopup";
 import { CartProvider } from "./contexts/CartContext";
 import { FileProvider } from "./contexts/DesignContext";
-import { useState, useEffect } from "react";
-import ViewCartPopup from "./components/Cart/ViewCartPopup";
-import Cookies from "js-cookie";
-import { v4 as uuidv4 } from "uuid";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import WelcomePopup from "./components/WelcomePopup";
-import HomePage from "./components/HomePage";
-import Browse from "./components/Browse/Browse";
-import CartDisplay from "./components/Cart/CartDisplay";
-import Checkout from "./components/Cart/Checkout";
+import Browse from "./pages/Browse/Browse";
+import Home from "./pages/Home/Home";
+import StencilDesigner from "./pages/StencilDesigner/StencilDesigner";
 
 function App() {
   const [cartPopup, setCartPopup] = useState(false);
@@ -43,17 +44,17 @@ function App() {
           {welcome && <WelcomePopup setWelcome={setWelcome} />}
           <Header cartPopup={cartPopup} setCartPopup={setCartPopup} />
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/design" element={<GolfBallDisplay />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/design" element={<StencilDesigner />} />
             <Route path="/browse" element={<Browse />} />
           </Routes>
-          <ViewCartPopup isOpen={cartPopup} setIsOpen={setCartPopup}>
+          <CartPopup isOpen={cartPopup} setIsOpen={setCartPopup}>
             {isCheckout ? (
               <Checkout setIsCheckout={setIsCheckout} />
             ) : (
-              <CartDisplay setIsCheckout={setIsCheckout} />
+              <CartInfo setIsCheckout={setIsCheckout} />
             )}
-          </ViewCartPopup>
+          </CartPopup>
         </CartProvider>
       </FileProvider>
     </Router>

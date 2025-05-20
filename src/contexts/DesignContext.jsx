@@ -32,7 +32,7 @@ export const FileProvider = ({ children }) => {
   );
 
   const [stlUrl, setStlUrl] = useState(
-    sessionStorage.getItem("stlUrl") || "default.stl"
+    sessionStorage.getItem("stlUrl") || "designer/default.stl"
   );
 
   const [stlKey, setStlKey] = useState(sessionStorage.getItem("stlKey") || 0);

@@ -1,12 +1,13 @@
-import { useState } from "react";
 import {
-  CardElement,
-  useStripe,
-  useElements,
   AddressElement,
+  CardElement,
+  useElements,
+  useStripe,
 } from "@stripe/react-stripe-js";
-import { verifySuccessfulCheckout } from "../../api/api";
+import { useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
+
+import { verifySuccessfulCheckout } from "../../api/checkout";
 import global from "../../global.module.css";
 import styles from "./CheckoutForm.module.css";
 

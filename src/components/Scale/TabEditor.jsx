@@ -1,14 +1,15 @@
-import { useRef, useState, useEffect } from "react";
-import { useSession } from "../../contexts/DesignContext";
-import { drawImage, drawLine, getCoordinates } from "../../utils/canvasUtils";
-import InfoPane from "./InfoPane";
-import { uploadImage } from "../../api/api";
-import UndoRedo from "../Image_Drawing/Toolbar/UndoRedo";
+import { useEffect, useRef, useState } from "react";
 import { MdLineWeight } from "react-icons/md";
-import ToolDropdown from "../Image_Drawing/Toolbar/ToolDropdown";
+
+import { uploadImage } from "../../api/designer";
+import { useSession } from "../../contexts/DesignContext";
 import global from "../../global.module.css";
-import tools from "../Image_Drawing/Toolbar/Toolbar.module.css";
+import { drawImage, drawLine, getCoordinates } from "../../utils/canvasUtils";
 import editor from "../Image_Drawing/ImageEditor.module.css";
+import tools from "../Image_Drawing/Toolbar/Toolbar.module.css";
+import ToolDropdown from "../Image_Drawing/Toolbar/ToolDropdown";
+import UndoRedo from "../Image_Drawing/Toolbar/UndoRedo";
+import InfoPane from "./InfoPane";
 import styles from "./TabEditor.module.css";
 
 const TabEditor = () => {

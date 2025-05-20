@@ -31,6 +31,15 @@
   --warning: #00004d;
 }
 
+#root {
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  height: 100vh;
+  background-color: var(--background);
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;

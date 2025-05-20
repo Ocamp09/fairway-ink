@@ -11,7 +11,7 @@ const ModeExamples = ({ small }) => {
           className={small ? styles.ball_display_small : styles.ball_display}
         >
           <img
-            src="/solid.svg"
+            src="/designer/solid.svg"
             alt="Uploaded"
             className={styles.display_img}
             style={{
@@ -25,7 +25,7 @@ const ModeExamples = ({ small }) => {
         <p className={styles.mode_desc}>${TEXT_PRICE} ea</p>
         <div className={small ? styles.ball_display_small : styles.ball_display}>
           <img
-            src="/text.svg"
+            src="/designer/text.svg"
             alt="Uploaded"
             className={styles.display_img}
             style={{
@@ -41,7 +41,7 @@ const ModeExamples = ({ small }) => {
           className={small ? styles.ball_display_small : styles.ball_display}
         >
           <img
-            src="/custom.svg"
+            src="/designer/custom.svg"
             alt="Uploaded"
             className={styles.display_img}
             style={{

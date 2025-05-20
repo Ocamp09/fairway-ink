@@ -1,11 +1,12 @@
 import { useState } from "react";
-import STLViewer from "../3D-View/STLViewer";
-import QuantityDropdown from "./QuantityDropdown";
+
+import { addToCartApi } from "../../api/checkout";
 import { useCart } from "../../contexts/CartContext";
 import { useSession } from "../../contexts/DesignContext";
-import { addToCartApi } from "../../api/api";
 import global from "../../global.module.css";
+import STLViewer from "../3D-View/STLViewer/STLViewer";
 import styles from "./PreviewTab.module.css";
+import QuantityDropdown from "./QuantityDropdown";
 
 const PreviewTab = () => {
   const [quantity, setQuantity] = useState(1);
@@ -24,7 +25,7 @@ const PreviewTab = () => {
   const handleAddToCart = (event) => {
     event.preventDefault();
 
-    if (stlUrl == "default.stl") {
+    if (stlUrl == "designer/default.stl") {
       setError("No custom design uploaded");
       return;
     }

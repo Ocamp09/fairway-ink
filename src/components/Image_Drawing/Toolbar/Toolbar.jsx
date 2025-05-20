@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
-import FileUpload from "../FileUpload";
-import { FiDownload } from "react-icons/fi";
+import { BiSolidPencil } from "react-icons/bi";
 import { FaRegHandPaper } from "react-icons/fa";
 import { FaDeleteLeft } from "react-icons/fa6";
+import { FiDownload } from "react-icons/fi";
 import { IoText } from "react-icons/io5";
-import { BiSolidPencil } from "react-icons/bi";
-import RemoveImage from "./RemoveImage";
+
 import { useSession } from "../../../contexts/DesignContext";
+import FileUpload from "../FileUpload";
 import DrawTools from "./DrawTools";
+import RemoveImage from "./RemoveImage";
 import TextTools from "./TextTools";
-import UndoRedo from "./UndoRedo";
 import styles from "./Toolbar.module.css";
+import UndoRedo from "./UndoRedo";
 
 const Toolbar = ({
   paths,

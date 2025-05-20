@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import ImageScaler from "./ImageScaler";
+
+import { generateStl } from "../../api/designer";
 import { useSession } from "../../contexts/DesignContext";
-import { generateStl } from "../../api/api";
+import global from "../../global.module.css";
+import ImageScaler from "./ImageScaler";
+import styles from "./ScaleSvg.module.css";
 import SelectPreview from "./SelectPreview";
 import TabEditor from "./TabEditor";
-import styles from "./ScaleSvg.module.css";
-import global from "../../global.module.css";
 
 const ScaleSvg = () => {
   const [scale, setScale] = useState(1);
@@ -50,7 +51,7 @@ const ScaleSvg = () => {
     }
 
     setIsLoading(true);
-    updateStl("default.stl");
+    updateStl("designer/default.stl");
 
     try {
       const response = await generateStl(svgData, scale, stlKey, templateType);

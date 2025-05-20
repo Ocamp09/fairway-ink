@@ -2,8 +2,9 @@
 import { useState } from "react";
 import { IoIosCart } from "react-icons/io";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import { useCart } from "../contexts/CartContext";
-import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./Header.module.css";
 
 const Header = ({ cartPopup, setCartPopup }) => {
@@ -30,7 +31,7 @@ const Header = ({ cartPopup, setCartPopup }) => {
               }}
             >
               <img
-                src="/logo_full.png"
+                src="/logos/logo_full.png"
                 height={40}
                 className="d-inline-block align-top"
                 alt="Fairway Ink"

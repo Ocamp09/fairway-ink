@@ -1,5 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
+
 import styles from "./QuantityDropdown.module.css";
 
 function QuantityDropdown({

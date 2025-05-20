@@ -1,5 +1,6 @@
-import ToolDropdown from "./ToolDropdown";
 import { MdTextFields } from "react-icons/md";
+
+import ToolDropdown from "./ToolDropdown";
 
 const TextTools = ({ fontSize, setFontSize, iconSize }) => {
   const lineLabel = <MdTextFields size={iconSize} color="white" />;

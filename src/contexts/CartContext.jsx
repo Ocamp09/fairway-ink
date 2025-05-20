@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
-import { SOLID_PRICE, TEXT_PRICE, CUSTOM_PRICE } from "../constants";
+import { createContext, useContext, useEffect, useState } from "react";
+
+import { CUSTOM_PRICE, SOLID_PRICE, TEXT_PRICE } from "../constants";
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {

@@ -13,7 +13,7 @@ module.exports = {
       jsx: true,
     },
   },
-  plugins: ["react"],
+  plugins: ["react", "simple-import-sort"],
   settings: {
     react: {
       version: "detect",
@@ -23,5 +23,15 @@ module.exports = {
     // Add your custom rules here
     "react/react-in-jsx-scope": "off", // Needed for React 17+
     "react/prop-types": "off",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
   },
+  overrides: [
+    {
+      files: ["**/*.test.{js,jsx}"],
+      env: {
+        vitest: true,
+      },
+    },
+  ],
 };

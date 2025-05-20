@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { IoMdUndo, IoMdRedo } from "react-icons/io";
+import { IoMdRedo, IoMdUndo } from "react-icons/io";
+
 import { useSession } from "../../../contexts/DesignContext";
 
 const UndoRedo = ({

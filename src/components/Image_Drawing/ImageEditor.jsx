@@ -1,21 +1,22 @@
-import { useState, useRef, useEffect } from "react";
-import Toolbar from "./Toolbar/Toolbar";
+import { useEffect, useRef, useState } from "react";
+
+import { uploadImage } from "../../api/designer";
 import { useSession } from "../../contexts/DesignContext";
-import TypeSelector from "./TypeSelector";
-import ModeExamples from "./ModeExamples";
+import global from "../../global.module.css";
+import { useCanvasEvents } from "../../hooks/useCanvasEvents";
+import { useCanvasScaling } from "../../hooks/useCanvasScaling";
+import { useFontLoader } from "../../hooks/useFontLoader";
 import {
-  getCoordinates,
+  calculateBbox,
   centerCanvasDrawing,
   drawImage,
   drawPaths,
-  calculateBbox,
+  getCoordinates,
 } from "../../utils/canvasUtils";
-import { useFontLoader } from "../../hooks/useFontLoader";
-import { useCanvasScaling } from "../../hooks/useCanvasScaling";
-import { useCanvasEvents } from "../../hooks/useCanvasEvents";
-import { uploadImage } from "../../api/api";
-import global from "../../global.module.css";
 import styles from "./ImageEditor.module.css";
+import ModeExamples from "./ModeExamples";
+import Toolbar from "./Toolbar/Toolbar";
+import TypeSelector from "./TypeSelector";
 
 function ImageEditor() {
   const canvasRef = useRef(null);
