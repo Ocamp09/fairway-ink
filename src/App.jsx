@@ -52,7 +52,7 @@ function App() {
             {isCheckout ? (
               <Checkout setIsCheckout={setIsCheckout} />
             ) : (
-              <CartDisplay setIsCheckout={setIsCheckout} />
+              <CartInfo setIsCheckout={setIsCheckout} />
             )}
           </CartPopup>
         </CartProvider>

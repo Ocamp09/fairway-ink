@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { LuMinus, LuPlus } from "react-icons/lu";
 
-import { CUSTOM_PRICE, SOLID_PRICE, TEXT_PRICE } from "../../constants";
-import { useCart } from "../../contexts/CartContext";
-import global from "../../global.module.css";
-import STLViewer from "../3D-View/STLViewer";
-import styles from "./CartDisplay.module.css";
+import { CUSTOM_PRICE, SOLID_PRICE, TEXT_PRICE } from "../../../constants";
+import { useCart } from "../../../contexts/CartContext";
+import global from "../../../global.module.css";
+import STLViewer from "../../3D-View/STLViewer";
+import styles from "./CartInfo.module.css";
 
-const CartDisplay = ({ setIsCheckout }) => {
+const CartInfo = ({ setIsCheckout }) => {
   const { cartItems, removeFromCart, updateQuantity, getTotal, getPrice } =
     useCart();
   const [total, setTotal] = useState(0.0);
@@ -112,4 +112,4 @@ const CartDisplay = ({ setIsCheckout }) => {
   );
 };
 
-export default CartDisplay;
+export default CartInfo;
