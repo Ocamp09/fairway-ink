@@ -3,5 +3,5 @@ export const CUSTOM_PRICE = 15.99;
 export const TEXT_PRICE = 18.99;
 export const API_URL =
   process.env.NODE_ENV === "development"
-    ? "http://localhost:5000"
+    ? "http://localhost:8000"
     : "https://api.fairway-ink.com";
