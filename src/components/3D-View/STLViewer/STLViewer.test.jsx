@@ -11,7 +11,7 @@ vi.mock("three/examples/jsm/loaders/STLLoader", () => ({
 }));
 
 // Mock ZoomControls so we can verify props
-vi.mock("./ZoomControls", () => ({
+vi.mock("../ZoomControls/ZoomControls", () => ({
   default: ({ onZoomIn, onZoomOut }) => (
     <div>
       <button onClick={onZoomIn}>Zoom In</button>

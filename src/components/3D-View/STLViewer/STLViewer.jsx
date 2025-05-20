@@ -5,7 +5,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 
 import styles from "./STLViewer.module.css";
-import ZoomControls from "./ZoomControls";
+import ZoomControls from "../ZoomControls/ZoomControls";
 
 const STLModel = ({ url }) => {
   const stl = useLoader(STLLoader, url);
