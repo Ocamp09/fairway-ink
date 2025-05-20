@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-import global from "../global.module.css";
+import global from "../../global.module.css";
 import styles from "./Home.module.css";
 
 const Home = () => {

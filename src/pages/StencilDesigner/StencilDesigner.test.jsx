@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
 
-import { useSession } from "../contexts/DesignContext";
+import { useSession } from "../../contexts/DesignContext";
 import StencilDesigner from "./StencilDesigner";
 
 // Mock the useSession context

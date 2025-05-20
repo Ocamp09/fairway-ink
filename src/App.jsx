@@ -12,9 +12,9 @@ import Header from "./components/Header";
 import WelcomePopup from "./components/WelcomePopup";
 import { CartProvider } from "./contexts/CartContext";
 import { FileProvider } from "./contexts/DesignContext";
-import Browse from "./pages/Browse";
-import Home from "./pages/Home";
-import StencilDesigner from "./pages/StencilDesigner";
+import Browse from "./pages/Browse/Browse";
+import Home from "./pages/Home/Home";
+import StencilDesigner from "./pages/StencilDesigner/StencilDesigner";
 
 function App() {
   const [cartPopup, setCartPopup] = useState(false);

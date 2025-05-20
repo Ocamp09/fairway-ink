@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 
 import Browse from "./Browse";
-import * as api from "../api/browse";
+import * as api from "../../api/browse";
 
 // Mock component
 vi.mock("../components/Browse/BrowseItem", () => ({
