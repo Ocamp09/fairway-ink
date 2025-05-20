@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 import { Canvas, useLoader, useThree } from "@react-three/fiber";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 
@@ -47,22 +47,13 @@ const STLViewer = ({ stlUrl, cart = false, zoomScale = 1 }) => {
   const cameraRef = useRef();
   const [resetKey, setResetKey] = useState(0); // Use a key to force re-render
 
-  const handleZoomIn = () => {
+  const adjustZoom = useCallback((delta) => {
     if (cameraRef.current) {
-      cameraRef.current.position.z -= 10; // Move camera closer
+      cameraRef.current.position.z += delta;
     }
-  };
+  }, []);
 
-  const handleZoomOut = () => {
-    if (cameraRef.current) {
-      cameraRef.current.position.z += 10; // Move camera farther
-    }
-  };
-
-  const handleReset = () => {
-    // Increment the resetKey to force a re-render of CameraController
-    setResetKey((prev) => prev + 1);
-  };
+  const handleReset = () => setResetKey((prev) => prev + 1); // force re-render
 
   return (
     <div className={styles.stl_body}>
@@ -83,7 +74,10 @@ const STLViewer = ({ stlUrl, cart = false, zoomScale = 1 }) => {
       </Canvas>
       {!cart && (
         <>
-          <ZoomControls onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} />
+          <ZoomControls
+            onZoomIn={() => adjustZoom(-10)}
+            onZoomOut={() => adjustZoom(10)}
+          />
           <button onClick={handleReset} className={styles.reset}>
             Reset View
           </button>
