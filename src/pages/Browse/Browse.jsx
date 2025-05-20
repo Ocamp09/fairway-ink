@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { getDesigns } from "../../api/browse";
-import BrowseItem from "../../components/Browse/BrowseItem";
+import BrowseItem from "../../components/Browse/BrowseItem/BrowseItem";
 import styles from "./Browse.module.css";
 
 const Browse = () => {

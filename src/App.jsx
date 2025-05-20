@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
-import CartDisplay from "./components/Cart/CartDisplay";
+import CartInfo from "./components/Cart/CartInfo/CartInfo";
 import Checkout from "./components/Cart/Checkout";
 import CartPopup from "./components/Cart/CartPopup/CartPopup";
 import Header from "./components/Header";

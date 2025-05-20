@@ -4,7 +4,7 @@ import { addToCartApi } from "../../api/checkout";
 import { useCart } from "../../contexts/CartContext";
 import { useSession } from "../../contexts/DesignContext";
 import global from "../../global.module.css";
-import STLViewer from "../3D-View/STLViewer";
+import STLViewer from "../3D-View/STLViewer/STLViewer";
 import styles from "./PreviewTab.module.css";
 import QuantityDropdown from "./QuantityDropdown";
 

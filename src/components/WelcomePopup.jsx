@@ -1,6 +1,6 @@
 import { IoCloseSharp } from "react-icons/io5";
 
-import styles from "../components/Cart/ViewCartPopup.module.css";
+import styles from "../components/Cart/CartPopup/CartPopup.module.css";
 import global from "../global.module.css";
 
 const WelcomePopup = ({ setWelcome }) => {
