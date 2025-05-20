@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import CartDisplay from "./components/Cart/CartDisplay";
 import Checkout from "./components/Cart/Checkout";
-import ViewCartPopup from "./components/Cart/ViewCartPopup";
+import CartPopup from "./components/Cart/CartPopup/CartPopup";
 import Header from "./components/Header";
 import WelcomePopup from "./components/WelcomePopup";
 import { CartProvider } from "./contexts/CartContext";
@@ -48,13 +48,13 @@ function App() {
             <Route path="/design" element={<StencilDesigner />} />
             <Route path="/browse" element={<Browse />} />
           </Routes>
-          <ViewCartPopup isOpen={cartPopup} setIsOpen={setCartPopup}>
+          <CartPopup isOpen={cartPopup} setIsOpen={setCartPopup}>
             {isCheckout ? (
               <Checkout setIsCheckout={setIsCheckout} />
             ) : (
               <CartDisplay setIsCheckout={setIsCheckout} />
             )}
-          </ViewCartPopup>
+          </CartPopup>
         </CartProvider>
       </FileProvider>
     </Router>

@@ -1,9 +1,9 @@
 import { IoCloseSharp } from "react-icons/io5";
 
 import global from "../../global.module.css";
-import styles from "./ViewCartPopup.module.css";
+import styles from "./CartPopup.module.css";
 
-const ViewCartPopup = ({ isOpen, setIsOpen, children }) => {
+const CartPopup = ({ isOpen, setIsOpen, children }) => {
   if (!isOpen) {
     return null;
   }
@@ -25,4 +25,4 @@ const ViewCartPopup = ({ isOpen, setIsOpen, children }) => {
   );
 };
 
-export default ViewCartPopup;
+export default CartPopup;
