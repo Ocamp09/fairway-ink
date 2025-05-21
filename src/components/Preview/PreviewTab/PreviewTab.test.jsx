@@ -19,7 +19,7 @@ vi.mock("../../../api/checkout", () => ({
 }));
 
 // Mock QuantityDropdown component
-vi.mock("../QuantityDropdown", () => ({
+vi.mock("../QuantityDropdown/QuantityDropdown", () => ({
   default: ({ setQuantity, quantity }) => (
     <button data-testid="quantity-mock" onClick={() => setQuantity(5)}>
       Qty: {quantity}

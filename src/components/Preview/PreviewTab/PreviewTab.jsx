@@ -6,7 +6,7 @@ import { useSession } from "../../../contexts/DesignContext";
 import global from "../../../global.module.css";
 import STLViewer from "../../3D-View/STLViewer/STLViewer";
 import styles from "./PreviewTab.module.css";
-import QuantityDropdown from "../QuantityDropdown";
+import QuantityDropdown from "../QuantityDropdown/QuantityDropdown";
 
 const DEFAULT_STL_URL = "designer/default.stl";
 

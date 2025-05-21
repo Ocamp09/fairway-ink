@@ -1,5 +1,5 @@
 import ImageEditor from "../../components/Image_Drawing/ImageEditor";
-import PreviewTab from "../../components/Preview/PreviewTab";
+import PreviewTab from "../../components/Preview/PreviewTab/PreviewTab";
 import ScaleSvg from "../../components/Scale/ScaleSvg";
 import TabMenu from "../../components/TabMenu";
 import { useSession } from "../../contexts/DesignContext";
