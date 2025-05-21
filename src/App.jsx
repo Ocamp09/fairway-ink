@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 import CartInfo from "./components/Cart/CartInfo/CartInfo";
-import Checkout from "./components/Cart/Checkout";
+import Checkout from "./components/Cart/Checkout/Checkout";
 import CartPopup from "./components/Cart/CartPopup/CartPopup";
 import Header from "./components/Header";
 import WelcomePopup from "./components/WelcomePopup";

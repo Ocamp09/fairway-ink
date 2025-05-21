@@ -2,27 +2,24 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";
 
-import { getPaymentIntent } from "../../api/checkout";
-import { useCart } from "../../contexts/CartContext";
+import { getPaymentIntent } from "../../../api/checkout";
+import { useCart } from "../../../contexts/CartContext";
+import CheckoutForm from "../CheckoutForm";
 import styles from "./Checkout.module.css";
-import CheckoutForm from "./CheckoutForm";
 
-const stripePromise = loadStripe(
-  "pk_test_51Qs6WuACPDsvvNfxem8wieeIWOMf7FDRdwepMv7kSRJ9h80oegevnSUyxwEhyq7BbCU5KEwjxdOFptaDUFyeo7s400o1D8zBSi"
-);
+// Replace this with an environment variable in production
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 const Checkout = ({ setIsCheckout }) => {
+  const { getTotal } = useCart();
+
   const [clientSecret, setClientSecret] = useState("");
   const [intentId, setIntentId] = useState("");
   const [successfulOrder, setSuccessfulOrder] = useState(null);
 
-  const { getTotal } = useCart();
-
   useEffect(() => {
-    console.log("load");
     const fetchClientSecret = async () => {
       try {
-        // Call your API to create a payment intent with the cart total
         const intent = await getPaymentIntent();
         setClientSecret(intent.client_secret);
         setIntentId(intent.payment_intent);
@@ -34,20 +31,19 @@ const Checkout = ({ setIsCheckout }) => {
     if (getTotal() > 0) {
       fetchClientSecret();
     }
-  }, []);
+  }, [getTotal]);
 
   if (!clientSecret) {
-    return <div>Loading...</div>;
+    return <div data-testid="loading">Loading...</div>;
   }
 
   return (
-    <div>
+    <div data-testid="checkout-component">
       <div className={styles.back_div} hidden={successfulOrder}>
         <button
           className={styles.back_cart}
-          onClick={() => {
-            setIsCheckout(false);
-          }}
+          onClick={() => setIsCheckout(false)}
+          data-testid="back-button"
         >
           Back
         </button>
