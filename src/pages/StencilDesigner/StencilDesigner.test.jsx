@@ -10,7 +10,7 @@ vi.mock("../../contexts/DesignContext", () => ({
 }));
 
 // Mock child components
-vi.mock("../../components/TabMenu", () => ({
+vi.mock("../../components/StageMenu", () => ({
   default: () => <div>Tab Menu</div>,
 }));
 vi.mock("../../components/Image_Drawing/ImageEditor", () => ({
@@ -24,7 +24,7 @@ vi.mock("../../components/Preview/PreviewTab", () => ({
 }));
 
 describe("StencilDesigner", () => {
-  it("renders TabMenu and ImageEditor when stage is 'design'", () => {
+  it("renders StageMenu and ImageEditor when stage is 'design'", () => {
     useSession.mockReturnValue({ stage: "design" });
     render(<StencilDesigner />);
 
@@ -50,7 +50,7 @@ describe("StencilDesigner", () => {
     useSession.mockReturnValue({ stage: "unknown" });
     render(<StencilDesigner />);
 
-    // Still renders TabMenu
+    // Still renders StageMenu
     expect(screen.getByText("Tab Menu")).toBeInTheDocument();
     expect(screen.queryByText("Image Editor")).not.toBeInTheDocument();
     expect(screen.queryByText("Scale SVG")).not.toBeInTheDocument();
