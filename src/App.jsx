@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import CartInfo from "./components/Cart/CartInfo/CartInfo";
 import Checkout from "./components/Cart/Checkout/Checkout";
 import CartPopup from "./components/Cart/CartPopup/CartPopup";
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 import WelcomePopup from "./components/WelcomePopup";
 import { CartProvider } from "./contexts/CartContext";
 import { FileProvider } from "./contexts/DesignContext";
