@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "npm run test -- --run --reporter verbose --coverage"
   },
   "dependencies": {
     "@react-three/fiber": "^8.17.14",
