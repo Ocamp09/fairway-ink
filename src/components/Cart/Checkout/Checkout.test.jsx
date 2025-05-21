@@ -5,7 +5,7 @@ import { useCart } from "../../../contexts/CartContext";
 import * as checkoutApi from "../../../api/checkout";
 
 vi.mock("../../../contexts/CartContext");
-vi.mock("../CheckoutForm", () => ({
+vi.mock("../CheckoutForm/CheckoutForm", () => ({
   __esModule: true,
   default: () => <div data-testid="checkout-form">Checkout Form</div>,
 }));

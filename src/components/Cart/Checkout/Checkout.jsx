@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { getPaymentIntent } from "../../../api/checkout";
 import { useCart } from "../../../contexts/CartContext";
-import CheckoutForm from "../CheckoutForm";
+import CheckoutForm from "../CheckoutForm/CheckoutForm";
 import styles from "./Checkout.module.css";
 
 // Replace this with an environment variable in production
