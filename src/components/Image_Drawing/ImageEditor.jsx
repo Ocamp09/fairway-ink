@@ -14,9 +14,9 @@ import {
   getCoordinates,
 } from "../../utils/canvasUtils";
 import styles from "./ImageEditor.module.css";
-import ModeExamples from "./ModeExamples";
+import ModeExamples from "./ModeExamples/ModeExamples";
 import Toolbar from "./Toolbar/Toolbar";
-import TypeSelector from "./TypeSelector";
+import TypeSelector from "./TypeSelector/TypeSelector";
 
 function ImageEditor() {
   const canvasRef = useRef(null);

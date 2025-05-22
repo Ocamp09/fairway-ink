@@ -1,4 +1,4 @@
-import { useSession } from "../../contexts/DesignContext";
+import { useSession } from "../../../contexts/DesignContext";
 import styles from "./TypeSelector.module.css";
 
 const TypeSelector = ({ paths }) => {
@@ -9,23 +9,17 @@ const TypeSelector = ({ paths }) => {
     updateEditorMode,
   } = useSession();
 
-  const handleSolid = () => {
-    updateTemplateType("solid");
-    updateEditorMode("draw");
+  const handleTypeChange = (type, mode) => {
+    updateTemplateType(type);
+    updateEditorMode(mode);
     updateUploadedPaths(paths);
   };
 
-  // const handleText = () => {
-  //   updateTemplateType("text");
-  //   updateEditorMode("type");
-  //   updateUploadedPaths(paths);
-  // };
+  const handleSolid = () => handleTypeChange("solid", "draw");
 
-  const handleCustom = () => {
-    updateTemplateType("custom");
-    updateEditorMode("draw");
-    updateUploadedPaths(paths);
-  };
+  // const handleText = () => handleTypeChange("text", "type");
+
+  const handleCustom = () => handleTypeChange("custom", "draw");
 
   return (
     <div className={styles.type_selector}>
@@ -35,12 +29,14 @@ const TypeSelector = ({ paths }) => {
       >
         Solid
       </button>
+
       {/* <button
         className={templateType === "text" ? styles.active : ""}
         onClick={handleText}
       >
         Text Only
       </button> */}
+
       <button
         className={templateType === "custom" ? styles.active : ""}
         onClick={handleCustom}
