@@ -5,10 +5,11 @@ import global from "../../../global.module.css";
 
 const WelcomePopup = ({ setWelcome }) => {
   return (
-    <div className={styles.popup_overlay}>
+    <div className={styles.popup_overlay} data-testid="welcome-overlay">
       <div className={styles.popup}>
         <button
           className={global.close_button}
+          data-testid="close-button"
           onClick={() => {
             setWelcome(false);
           }}
