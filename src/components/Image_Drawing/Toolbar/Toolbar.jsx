@@ -6,7 +6,7 @@ import { FiDownload } from "react-icons/fi";
 import { IoText } from "react-icons/io5";
 
 import { useSession } from "../../../contexts/DesignContext";
-import FileUpload from "../FileUpload";
+import FileUpload from "./FileUpload/FileUpload";
 import DrawTools from "./DrawTools";
 import RemoveImage from "./RemoveImage";
 import TextTools from "./TextTools";

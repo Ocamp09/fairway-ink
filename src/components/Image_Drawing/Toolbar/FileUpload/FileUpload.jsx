@@ -1,14 +1,13 @@
 import { useRef, useState } from "react";
 import { FaImage } from "react-icons/fa6";
+import { useSession } from "../../../../contexts/DesignContext";
 
-import { useSession } from "../../contexts/DesignContext";
-import global from "../../global.module.css";
+import global from "../../../../global.module.css";
 import styles from "./FileUpload.module.css";
 
 const FileUpload = () => {
-  const [error, setError] = useState("");
   const fileInputRef = useRef(null);
-
+  const [error, setError] = useState("");
   const { updateImageUrl } = useSession();
 
   const allowedTypes = [
@@ -19,26 +18,31 @@ const FileUpload = () => {
   ];
   const maxFileSize = 5 * 1024 * 1024; // 5MB
 
-  const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-
-    if (!allowedTypes.includes(selectedFile.type)) {
+  const validateFile = (file) => {
+    if (!allowedTypes.includes(file.type)) {
       setError("Invalid file type. Please upload a PNG, JPEG, or JPG file.");
-      return;
+      return false;
     }
-
-    if (selectedFile.size > maxFileSize) {
+    if (file.size > maxFileSize) {
       setError("File size is too large. Maximum size is 5MB.");
-      return;
+      return false;
     }
+    return true;
+  };
 
-    setError("");
-    updateImageUrl(URL.createObjectURL(selectedFile));
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file && validateFile(file)) {
+      setError("");
+      updateImageUrl(URL.createObjectURL(file));
+    }
   };
 
   const handleUploadClick = () => {
-    fileInputRef.current.value = "";
-    fileInputRef.current.click();
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+      fileInputRef.current.click();
+    }
   };
 
   return (
@@ -49,8 +53,13 @@ const FileUpload = () => {
         accept=".png,.jpg,.jpeg,.svg"
         ref={fileInputRef}
         hidden
+        data-testid="file-input"
       />
-      <button title="Upload image" onClick={handleUploadClick}>
+      <button
+        title="Upload image"
+        onClick={handleUploadClick}
+        data-testid="upload-button"
+      >
         <FaImage size={28} />
       </button>
       {error && <p className={global.error_message}>{error}</p>}
