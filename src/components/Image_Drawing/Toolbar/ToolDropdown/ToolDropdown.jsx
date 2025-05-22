@@ -13,14 +13,13 @@ function ToolDropdown({
   hidden = false,
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [customQty, setCustomQty] = useState();
-
+  const [customQty, setCustomQty] = useState("");
   const dropdownRef = useRef(null);
 
-  const quantities = [];
-  for (let i = minQuantity; i <= maxQuantity; i += step) {
-    quantities.push(i);
-  }
+  const quantities = Array.from(
+    { length: Math.floor((maxQuantity - minQuantity) / step) + 1 },
+    (_, i) => minQuantity + i * step
+  );
 
   const handleSelectQuantity = (value) => {
     setQuantity(value);
@@ -28,13 +27,11 @@ function ToolDropdown({
   };
 
   const handleCustom = (e) => {
-    const inVal = parseInt(e.target.value);
-    if (!inVal || inVal <= 0) {
-      return;
+    const value = parseInt(e.target.value);
+    if (!isNaN(value) && value > 0) {
+      setCustomQty(value);
+      setQuantity(value);
     }
-
-    setCustomQty(inVal);
-    setQuantity(inVal);
   };
 
   useEffect(() => {
@@ -59,27 +56,35 @@ function ToolDropdown({
       title={title}
       ref={dropdownRef}
       hidden={hidden}
+      data-testid="tool-dropdown"
     >
       <button
         className={styles.dropdown_toggle}
         onClick={() => setIsOpen(!isOpen)}
+        data-testid="dropdown-toggle"
       >
         {labelText} {quantity}
       </button>
 
       {isOpen && (
-        <ul className={styles.dropdown_list}>
+        <ul className={styles.dropdown_list} data-testid="dropdown-list">
           {quantities.map((qty) => (
             <li
               key={qty}
               className={quantity === qty ? styles.selected : ""}
               onClick={() => handleSelectQuantity(qty)}
+              data-testid={`option-${qty}`}
             >
               {qty}
             </li>
           ))}
           <li className={quantity === customQty ? styles.selected : ""}>
-            <input placeholder="size" onChange={(e) => handleCustom(e)} />
+            <input
+              placeholder="size"
+              value={customQty}
+              onChange={handleCustom}
+              data-testid="custom-input"
+            />
           </li>
         </ul>
       )}

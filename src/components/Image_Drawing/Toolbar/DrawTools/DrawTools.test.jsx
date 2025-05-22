@@ -3,7 +3,7 @@ import DrawTools from "./DrawTools";
 import { describe, it, expect, vi } from "vitest";
 
 // Mock ToolDropdown to verify props
-vi.mock("../ToolDropdown", () => ({
+vi.mock("../ToolDropdown/ToolDropdown", () => ({
   default: ({ maxQuantity, labelText, step, quantity, setQuantity, title }) => (
     <div data-testid="tool-dropdown">
       <span data-testid="title">{title}</span>
