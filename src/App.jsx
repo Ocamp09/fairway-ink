@@ -1,5 +1,3 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
