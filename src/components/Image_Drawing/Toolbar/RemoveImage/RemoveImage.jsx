@@ -5,7 +5,7 @@ import styles from "./RemoveImage.module.css";
 
 const RemoveImage = () => {
   return (
-    <div className={styles.remove_img}>
+    <div className={styles.remove_img} data-testid="remove-image">
       <div className={styles.img_back}>
         <FaImage size={28} />
       </div>
