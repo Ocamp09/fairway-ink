@@ -7,9 +7,9 @@ import { IoText } from "react-icons/io5";
 
 import { useSession } from "../../../contexts/DesignContext";
 import FileUpload from "./FileUpload/FileUpload";
-import DrawTools from "./DrawTools";
+import DrawTools from "./DrawTools/DrawTools";
 import RemoveImage from "./RemoveImage/RemoveImage";
-import TextTools from "./TextTools";
+import TextTools from "./TextTools/TextTools";
 import styles from "./Toolbar.module.css";
 import UndoRedo from "./UndoRedo/UndoRedo";
 

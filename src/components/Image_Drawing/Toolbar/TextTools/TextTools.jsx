@@ -1,6 +1,6 @@
 import { MdTextFields } from "react-icons/md";
 
-import ToolDropdown from "./ToolDropdown";
+import ToolDropdown from "../ToolDropdown";
 
 const TextTools = ({ fontSize, setFontSize, iconSize }) => {
   return (
