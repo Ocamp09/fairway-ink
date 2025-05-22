@@ -3,9 +3,9 @@ import { Route, Routes } from "react-router-dom";
 
 import CartInfo from "./components/Cart/CartInfo/CartInfo";
 import Checkout from "./components/Cart/Checkout/Checkout";
-import CartPopup from "./components/Cart/CartPopup/CartPopup";
+import CartPopup from "./components/Popups/CartPopup/CartPopup";
 import Header from "./components/Header/Header";
-import WelcomePopup from "./components/WelcomePopup";
+import WelcomePopup from "./components/Popups/WelcomePopup/WelcomePopup";
 import { CartProvider } from "./contexts/CartContext";
 import { FileProvider } from "./contexts/DesignContext";
 import Browse from "./pages/Browse/Browse";

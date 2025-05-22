@@ -1,12 +1,12 @@
 import { IoCloseSharp } from "react-icons/io5";
 
-import styles from "../components/Cart/CartPopup/CartPopup.module.css";
-import global from "../global.module.css";
+import styles from "../Popup.module.css";
+import global from "../../../global.module.css";
 
 const WelcomePopup = ({ setWelcome }) => {
   return (
-    <div className={styles.view_cart_overlay}>
-      <div className={styles.view_cart_popup}>
+    <div className={styles.popup_overlay}>
+      <div className={styles.popup}>
         <button
           className={global.close_button}
           onClick={() => {

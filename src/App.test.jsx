@@ -7,7 +7,7 @@ import App from "./App";
 vi.mock("./components/Header/Header", () => ({
   default: () => <div data-testid="header">Header</div>,
 }));
-vi.mock("./components/Cart/CartPopup/CartPopup", () => ({
+vi.mock("./components/Popups/CartPopup/CartPopup", () => ({
   default: ({ children }) => <div data-testid="cart-popup">{children}</div>,
 }));
 vi.mock("./components/Cart/CartInfo/CartInfo", () => ({
@@ -24,7 +24,7 @@ vi.mock("./components/Cart/Checkout/Checkout", () => ({
     </div>
   ),
 }));
-vi.mock("./components/WelcomePopup", () => ({
+vi.mock("./components/Popups/WelcomePopup/WelcomePopup", () => ({
   default: ({ setWelcome }) => (
     <div data-testid="welcome-popup" onClick={() => setWelcome(false)}>
       WelcomePopup
