@@ -8,7 +8,7 @@ import { drawImage, drawLine, getCoordinates } from "../../utils/canvasUtils";
 import editor from "../Image_Drawing/ImageEditor.module.css";
 import tools from "../Image_Drawing/Toolbar/Toolbar.module.css";
 import ToolDropdown from "../Image_Drawing/Toolbar/ToolDropdown";
-import UndoRedo from "../Image_Drawing/Toolbar/UndoRedo";
+import UndoRedo from "../Image_Drawing/Toolbar/UndoRedo/UndoRedo";
 import InfoPane from "./InfoPane/InfoPane";
 import styles from "./TabEditor.module.css";
 

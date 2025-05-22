@@ -11,7 +11,7 @@ import DrawTools from "./DrawTools";
 import RemoveImage from "./RemoveImage/RemoveImage";
 import TextTools from "./TextTools";
 import styles from "./Toolbar.module.css";
-import UndoRedo from "./UndoRedo";
+import UndoRedo from "./UndoRedo/UndoRedo";
 
 const Toolbar = ({
   paths,
