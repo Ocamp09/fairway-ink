@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { generateStl } from "../../api/designer";
 import { useSession } from "../../contexts/DesignContext";
 import global from "../../global.module.css";
-import ImageScaler from "./ImageScaler";
 import styles from "./ScaleSvg.module.css";
 import SelectPreview from "./SelectPreview";
 import TabEditor from "./TabEditor";
+import ScaleSlider from "./ScaleSlider/ScaleSlider";
 
 const ScaleSvg = () => {
   const [scale, setScale] = useState(1);
@@ -123,7 +123,7 @@ const ScaleSvg = () => {
               </div>
             </div>
           </div>
-          <ImageScaler scale={scale} setScale={setScale}></ImageScaler>
+          <ScaleSlider scale={scale} setScale={setScale}></ScaleSlider>
           <form onSubmit={handleSubmit}>
             <button
               type="submit"
