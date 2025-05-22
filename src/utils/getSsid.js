@@ -6,7 +6,9 @@ export const get_ssid = () => {
 
   if (!sessionId) {
     sessionId = uuidv4();
-    Cookies.set("session_id", sessionId, { expires: 1 }); // Expires in 1 day
+    Cookies.set("session_id", sessionId, {
+      expires: 2, // expires after 2 days
+    });
   }
 
   return sessionId;
