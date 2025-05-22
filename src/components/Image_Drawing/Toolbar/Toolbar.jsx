@@ -10,8 +10,9 @@ import FileUpload from "./FileUpload/FileUpload";
 import DrawTools from "./DrawTools/DrawTools";
 import RemoveImage from "./RemoveImage/RemoveImage";
 import TextTools from "./TextTools/TextTools";
-import styles from "./Toolbar.module.css";
 import UndoRedo from "./UndoRedo/UndoRedo";
+
+import styles from "./Toolbar.module.css";
 
 const Toolbar = ({
   paths,
@@ -27,6 +28,7 @@ const Toolbar = ({
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [undoStack, setUndoStack] = useState([]);
   const [redoStack, setRedoStack] = useState([]);
+
   const {
     imageUrl,
     updateImageUrl,
@@ -37,17 +39,17 @@ const Toolbar = ({
 
   const iconSize = 28;
 
-  const handleText = () => {
-    updateEditorMode("type");
-  };
+  // Derived flags for readability
+  const isTextTemplate = templateType === "text";
+  const isSolidTemplate = templateType === "solid";
+  const isCustomTemplate = templateType === "custom";
 
-  const handleDraw = () => {
-    updateEditorMode("draw");
-  };
+  const shouldHideTools =
+    (isSolidTemplate || isTextTemplate) && screenWidth < 750;
 
-  const handleSelect = () => {
-    updateEditorMode("select");
-  };
+  const handleText = () => updateEditorMode("type");
+  const handleDraw = () => updateEditorMode("draw");
+  const handleSelect = () => updateEditorMode("select");
 
   const handleRemoveImage = () => {
     updateImageUrl("");
@@ -62,15 +64,15 @@ const Toolbar = ({
   };
 
   useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth);
-    };
+    const onResize = () => setScreenWidth(window.innerWidth);
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   const saveCanvas = () => {
+    if (!canvasRef.current || !imgCanvasRef.current) return;
+
     const canvas = canvasRef.current;
     const imgCanvas = imgCanvasRef.current;
 
@@ -91,49 +93,56 @@ const Toolbar = ({
     link.setAttribute("download", "fairway-ink-canvas.jpg");
     document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
   };
 
-  const shouldHideTools =
-    (templateType === "solid" || templateType === "text") && screenWidth < 750;
-
   return (
-    <div className={styles.tools}>
-      <div className={styles.tool_top} hidden={shouldHideTools}>
+    <div className={styles.tools} data-testid="toolbar">
+      <div
+        className={styles.tool_top}
+        hidden={shouldHideTools}
+        data-testid="tool-top"
+      >
         <button
           title="Activate drawing mode"
           onClick={handleDraw}
           className={
             editorMode === "draw" ? styles.editor_but_active : styles.editor_but
           }
-          hidden={templateType == "text"}
+          hidden={isTextTemplate}
+          data-testid="btn-draw"
         >
           <BiSolidPencil
             size={iconSize}
             color={editorMode === "draw" ? "white" : "black"}
           />
         </button>
+
         <button
           title="Activate text mode"
           onClick={handleText}
           className={
             editorMode === "type" ? styles.editor_but_active : styles.editor_but
           }
-          hidden={templateType == "solid" || templateType == "custom"} // remove this when bringing text mode back
+          hidden={isSolidTemplate || isCustomTemplate}
+          data-testid="btn-text"
         >
           <IoText
             size={iconSize}
             color={editorMode === "type" ? "white" : "black"}
           />
         </button>
+
         <button
           title="Activate select mode"
           onClick={handleSelect}
           className={
-            editorMode === "select" && templateType === "text"
+            editorMode === "select" && isTextTemplate
               ? styles.editor_but_active
               : styles.editor_but
           }
-          hidden={templateType === "solid" || templateType === "custom"}
+          hidden={isSolidTemplate || isCustomTemplate}
+          data-testid="btn-select"
         >
           <FaRegHandPaper
             size={iconSize}
@@ -141,19 +150,22 @@ const Toolbar = ({
           />
         </button>
       </div>
-      <div className={styles.toolbar}>
-        {templateType != "text" && (
+
+      <div className={styles.toolbar} data-testid="toolbar-main">
+        {!isTextTemplate && (
           <>
             <FileUpload />
             <button
               title="Remove image"
               onClick={handleRemoveImage}
               disabled={imageUrl === ""}
+              data-testid="btn-remove-image"
             >
               <RemoveImage />
             </button>
           </>
         )}
+
         <UndoRedo
           paths={paths}
           setPaths={setPaths}
@@ -164,29 +176,37 @@ const Toolbar = ({
           redoStack={redoStack}
           setRedoStack={setRedoStack}
         />
+
         <button
           title="Delete drawings"
           onClick={handleClear}
           disabled={paths.length === 0}
+          data-testid="btn-delete-drawings"
         >
           <FaDeleteLeft size={iconSize} />
         </button>
-        {editorMode == "draw" && (
+
+        {editorMode === "draw" && (
           <DrawTools
             lineWidth={lineWidth}
             setLineWidth={setLineWidth}
             iconSize={iconSize}
           />
         )}
-        {editorMode == "type" &&
-          (templateType === "text" || templateType === "custom") && (
-            <TextTools
-              fontSize={fontSize}
-              setFontSize={setFontSize}
-              iconSize={iconSize}
-            />
-          )}
-        <button title="Download drawings" onClick={saveCanvas}>
+
+        {editorMode === "type" && (isTextTemplate || isCustomTemplate) && (
+          <TextTools
+            fontSize={fontSize}
+            setFontSize={setFontSize}
+            iconSize={iconSize}
+          />
+        )}
+
+        <button
+          title="Download drawings"
+          onClick={saveCanvas}
+          data-testid="btn-download"
+        >
           <FiDownload size={iconSize} />
         </button>
       </div>
