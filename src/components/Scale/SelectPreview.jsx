@@ -1,6 +1,6 @@
 import { ReactSVG } from "react-svg";
 import { useSession } from "../../contexts/DesignContext";
-import InfoPane from "./InfoPane";
+import InfoPane from "./InfoPane/InfoPane";
 import global from "../../global.module.css";
 import styles from "./SelectPreview.module.css";
 
