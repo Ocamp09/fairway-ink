@@ -1,5 +1,28 @@
 import getStroke from "perfect-freehand";
 
+export const saveCanvas = (canvas, imgCanvas) => {
+  if (!canvas || !imgCanvas) return;
+
+  const canvasBackground = document.createElement("canvas");
+  canvasBackground.width = canvas.width;
+  canvasBackground.height = canvas.height;
+
+  const ctx = canvasBackground.getContext("2d");
+  ctx.fillStyle = "white";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(imgCanvas, 0, 0);
+  ctx.drawImage(canvas, 0, 0);
+
+  const dataUrl = canvasBackground.toDataURL("image/png");
+
+  const link = document.createElement("a");
+  link.href = dataUrl;
+  link.setAttribute("download", "fairway-ink-canvas.jpg");
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
 export const getSvgPathFromStroke = (stroke) => {
   if (!stroke.length) return "";
 

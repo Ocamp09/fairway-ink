@@ -11,6 +11,7 @@ import DrawTools from "./DrawTools/DrawTools";
 import RemoveImage from "./RemoveImage/RemoveImage";
 import TextTools from "./TextTools/TextTools";
 import UndoRedo from "./UndoRedo/UndoRedo";
+import { saveCanvas } from "../../../utils/canvasUtils";
 
 import styles from "./Toolbar.module.css";
 
@@ -69,32 +70,6 @@ const Toolbar = ({
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
-
-  const saveCanvas = () => {
-    if (!canvasRef.current || !imgCanvasRef.current) return;
-
-    const canvas = canvasRef.current;
-    const imgCanvas = imgCanvasRef.current;
-
-    const canvasBackground = document.createElement("canvas");
-    canvasBackground.width = canvas.width;
-    canvasBackground.height = canvas.height;
-
-    const ctx = canvasBackground.getContext("2d");
-    ctx.fillStyle = "white";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(imgCanvas, 0, 0);
-    ctx.drawImage(canvas, 0, 0);
-
-    const dataUrl = canvasBackground.toDataURL("image/png");
-
-    const link = document.createElement("a");
-    link.href = dataUrl;
-    link.setAttribute("download", "fairway-ink-canvas.jpg");
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
 
   return (
     <div className={styles.tools} data-testid="toolbar">
@@ -204,7 +179,7 @@ const Toolbar = ({
 
         <button
           title="Download drawings"
-          onClick={saveCanvas}
+          onClick={() => saveCanvas(canvasRef.current, imgCanvasRef.current)}
           data-testid="btn-download"
         >
           <FiDownload size={iconSize} />
