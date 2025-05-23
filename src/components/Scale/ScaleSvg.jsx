@@ -7,6 +7,7 @@ import styles from "./ScaleSvg.module.css";
 import SelectPreview from "./SelectPreview/SelectPreview";
 import TabEditor from "./TabEditor";
 import ScaleSlider from "./ScaleSlider/ScaleSlider";
+import SvgPreview from "./SvgPreview/SvgPreview";
 
 const ScaleSvg = () => {
   const [scale, setScale] = useState(1);
@@ -98,31 +99,11 @@ const ScaleSvg = () => {
             Back
           </button>
           <p>Scale the image to the desired size</p>
-          <div className={styles.ball_displays}>
-            <div className={styles.golf_template}>
-              <img
-                src={svgUrl}
-                alt="Uploaded"
-                className={styles.upload_img}
-                style={{
-                  width: `${canvasSizePx}px`,
-                }}
-              />
-            </div>
-            <div className={styles.life_size}>
-              <p>Life Size</p>
-              <div className={styles.golf_real_size}>
-                <img
-                  src={svgUrl}
-                  alt="Uploaded"
-                  className={styles.upload_img}
-                  style={{
-                    width: `${(canvasSizePx * 210) / 500}px`,
-                  }}
-                />
-              </div>
-            </div>
-          </div>
+          <SvgPreview
+            svgUrl={svgUrl}
+            scale={scale}
+            templateType={templateType}
+          />
           <ScaleSlider scale={scale} setScale={setScale}></ScaleSlider>
           <form onSubmit={handleSubmit}>
             <button
