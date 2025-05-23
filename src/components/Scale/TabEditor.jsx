@@ -8,7 +8,7 @@ import { drawImage, drawLine, getCoordinates } from "../../utils/canvasUtils";
 import editor from "../Image_Drawing/ImageEditor.module.css";
 import tools from "../Image_Drawing/Toolbar/Toolbar.module.css";
 import ToolDropdown from "../Image_Drawing/Toolbar/ToolDropdown/ToolDropdown";
-import UndoRedo from "../Image_Drawing/Toolbar/UndoRedo/UndoRedo";
+import UndoRedoDel from "../Image_Drawing/Toolbar/UndoRedoDel/UndoRedoDel";
 import InfoPane from "./InfoPane/InfoPane";
 import styles from "./TabEditor.module.css";
 
@@ -171,7 +171,7 @@ const TabEditor = () => {
       <p>Add tabs for printing</p>
       <div className={styles.tab}>
         <div className={`${tools.toolbar} ${tools.tools} ${styles.buts}`}>
-          <UndoRedo
+          <UndoRedoDel
             paths={paths}
             setPaths={setPaths}
             iconSize={28}
