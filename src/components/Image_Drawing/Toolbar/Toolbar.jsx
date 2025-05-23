@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
-import { BiSolidPencil } from "react-icons/bi";
-import { FaRegHandPaper } from "react-icons/fa";
 import { FaDeleteLeft } from "react-icons/fa6";
 import { FiDownload } from "react-icons/fi";
-import { IoText } from "react-icons/io5";
 
 import { useSession } from "../../../contexts/DesignContext";
 import FileUpload from "./FileUpload/FileUpload";
@@ -12,8 +9,10 @@ import RemoveImage from "./RemoveImage/RemoveImage";
 import TextTools from "./TextTools/TextTools";
 import UndoRedo from "./UndoRedo/UndoRedo";
 import { saveCanvas } from "../../../utils/canvasUtils";
+import { TOOL_ICON_SIZE } from "../../../constants";
 
 import styles from "./Toolbar.module.css";
+import ToolSelector from "./ToolSelector/ToolSelector";
 
 const Toolbar = ({
   paths,
@@ -26,31 +25,15 @@ const Toolbar = ({
   fontSize,
   setFontSize,
 }) => {
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [undoStack, setUndoStack] = useState([]);
   const [redoStack, setRedoStack] = useState([]);
 
-  const {
-    imageUrl,
-    updateImageUrl,
-    templateType,
-    editorMode,
-    updateEditorMode,
-  } = useSession();
-
-  const iconSize = 28;
+  const { imageUrl, updateImageUrl, templateType, editorMode } = useSession();
 
   // Derived flags for readability
   const isTextTemplate = templateType === "text";
   const isSolidTemplate = templateType === "solid";
   const isCustomTemplate = templateType === "custom";
-
-  const shouldHideTools =
-    (isSolidTemplate || isTextTemplate) && screenWidth < 750;
-
-  const handleText = () => updateEditorMode("type");
-  const handleDraw = () => updateEditorMode("draw");
-  const handleSelect = () => updateEditorMode("select");
 
   const handleRemoveImage = () => {
     updateImageUrl("");
@@ -64,68 +47,13 @@ const Toolbar = ({
     setReloadPaths(true);
   };
 
-  useEffect(() => {
-    const onResize = () => setScreenWidth(window.innerWidth);
-
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
-
   return (
     <div className={styles.tools} data-testid="toolbar">
-      <div
-        className={styles.tool_top}
-        hidden={shouldHideTools}
-        data-testid="tool-top"
-      >
-        <button
-          title="Activate drawing mode"
-          onClick={handleDraw}
-          className={
-            editorMode === "draw" ? styles.editor_but_active : styles.editor_but
-          }
-          hidden={isTextTemplate}
-          data-testid="btn-draw"
-        >
-          <BiSolidPencil
-            size={iconSize}
-            color={editorMode === "draw" ? "white" : "black"}
-          />
-        </button>
-
-        <button
-          title="Activate text mode"
-          onClick={handleText}
-          className={
-            editorMode === "type" ? styles.editor_but_active : styles.editor_but
-          }
-          hidden={isSolidTemplate || isCustomTemplate}
-          data-testid="btn-text"
-        >
-          <IoText
-            size={iconSize}
-            color={editorMode === "type" ? "white" : "black"}
-          />
-        </button>
-
-        <button
-          title="Activate select mode"
-          onClick={handleSelect}
-          className={
-            editorMode === "select" && isTextTemplate
-              ? styles.editor_but_active
-              : styles.editor_but
-          }
-          hidden={isSolidTemplate || isCustomTemplate}
-          data-testid="btn-select"
-        >
-          <FaRegHandPaper
-            size={iconSize}
-            color={editorMode === "select" ? "white" : "black"}
-          />
-        </button>
-      </div>
-
+      <ToolSelector
+        isSolidTemplate={isSolidTemplate}
+        isTextTemplate={isTextTemplate}
+        isCustomTemplate={isCustomTemplate}
+      />
       <div className={styles.toolbar} data-testid="toolbar-main">
         {!isTextTemplate && (
           <>
@@ -144,7 +72,7 @@ const Toolbar = ({
         <UndoRedo
           paths={paths}
           setPaths={setPaths}
-          iconSize={iconSize}
+          iconSize={TOOL_ICON_SIZE}
           setReloadPaths={setReloadPaths}
           undoStack={undoStack}
           setUndoStack={setUndoStack}
@@ -158,14 +86,14 @@ const Toolbar = ({
           disabled={paths.length === 0}
           data-testid="btn-delete-drawings"
         >
-          <FaDeleteLeft size={iconSize} />
+          <FaDeleteLeft size={TOOL_ICON_SIZE} />
         </button>
 
         {editorMode === "draw" && (
           <DrawTools
             lineWidth={lineWidth}
             setLineWidth={setLineWidth}
-            iconSize={iconSize}
+            iconSize={TOOL_ICON_SIZE}
           />
         )}
 
@@ -173,7 +101,7 @@ const Toolbar = ({
           <TextTools
             fontSize={fontSize}
             setFontSize={setFontSize}
-            iconSize={iconSize}
+            iconSize={TOOL_ICON_SIZE}
           />
         )}
 
@@ -182,7 +110,7 @@ const Toolbar = ({
           onClick={() => saveCanvas(canvasRef.current, imgCanvasRef.current)}
           data-testid="btn-download"
         >
-          <FiDownload size={iconSize} />
+          <FiDownload size={TOOL_ICON_SIZE} />
         </button>
       </div>
     </div>
