@@ -13,7 +13,7 @@ vi.mock("../../contexts/DesignContext", () => ({
 vi.mock("../../components/StageMenu/StageMenu", () => ({
   default: () => <div>Stage Menu</div>,
 }));
-vi.mock("../../components/Image_Drawing/ImageEditor", () => ({
+vi.mock("../../components/ImageDesigner/ImageDesigner", () => ({
   default: () => <div>Image Editor</div>,
 }));
 vi.mock("../../components/Scale/ScaleSvg", () => ({
@@ -24,7 +24,7 @@ vi.mock("../../components/Preview/PreviewTab/PreviewTab", () => ({
 }));
 
 describe("StencilDesigner", () => {
-  it("renders StageMenu and ImageEditor when stage is 'design'", () => {
+  it("renders StageMenu and ImageDesigner when stage is 'design'", () => {
     useSession.mockReturnValue({ stage: "design" });
     render(<StencilDesigner />);
 

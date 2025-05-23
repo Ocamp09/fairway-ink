@@ -4,12 +4,12 @@ import { uploadImage } from "../../api/designer";
 import { useSession } from "../../contexts/DesignContext";
 import global from "../../global.module.css";
 import { centerCanvasDrawing } from "../../utils/canvasUtils";
-import styles from "./ImageEditor.module.css";
+import styles from "./ImageDesigner.module.css";
 import ModeExamples from "./ModeExamples/ModeExamples";
 import TypeSelector from "./TypeSelector/TypeSelector";
 import CanvasEditor from "../CanvasEditor/CanvasEditor";
 
-function ImageEditor() {
+function ImageDesigner() {
   const canvasRef = useRef(null);
   const imgCanvasRef = useRef(null);
 
@@ -146,4 +146,4 @@ function ImageEditor() {
   );
 }
 
-export default ImageEditor;
+export default ImageDesigner;

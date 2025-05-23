@@ -1,4 +1,4 @@
-import ImageEditor from "../../components/Image_Drawing/ImageEditor";
+import ImageDesigner from "../../components/ImageDesigner/ImageDesigner";
 import PreviewTab from "../../components/Preview/PreviewTab/PreviewTab";
 import ScaleSvg from "../../components/Scale/ScaleSvg";
 import StageMenu from "../../components/StageMenu/StageMenu";
@@ -9,7 +9,7 @@ const StencilDesigner = () => {
   const { stage } = useSession();
 
   const stageComp = {
-    design: <ImageEditor />,
+    design: <ImageDesigner />,
     adjust: <ScaleSvg />,
     preview: <PreviewTab />,
   };

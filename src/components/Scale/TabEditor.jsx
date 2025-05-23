@@ -5,7 +5,7 @@ import { uploadImage } from "../../api/designer";
 import { useSession } from "../../contexts/DesignContext";
 import global from "../../global.module.css";
 import { drawImage, drawLine, getCoordinates } from "../../utils/canvasUtils";
-import editor from "../Image_Drawing/ImageEditor.module.css";
+import editor from "../ImageDesigner/ImageDesigner.module.css";
 import tools from "../CanvasEditor/Toolbar/Toolbar.module.css";
 import ToolDropdown from "../CanvasEditor/Toolbar/ToolDropdown/ToolDropdown";
 import UndoRedoDel from "../CanvasEditor/Toolbar/UndoRedoDel/UndoRedoDel";
