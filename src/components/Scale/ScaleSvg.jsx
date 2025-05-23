@@ -28,13 +28,6 @@ const ScaleSvg = () => {
     templateType,
   } = useSession();
 
-  let canvasSizePx;
-  if (templateType === "text") {
-    canvasSizePx = 110 * scale * 2.5;
-  } else {
-    canvasSizePx = 110 * scale;
-  }
-
   const handleBackToTab = () => {
     updateAdjustStage("tab");
     updateSvgData(prevSvgData);
@@ -105,7 +98,7 @@ const ScaleSvg = () => {
             templateType={templateType}
           />
           <ScaleSlider scale={scale} setScale={setScale}></ScaleSlider>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} data-testid="scale-form">
             <button
               type="submit"
               className={global.submit_button}
