@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { FaDeleteLeft } from "react-icons/fa6";
+import { useState } from "react";
 import { FiDownload } from "react-icons/fi";
 
 import { useSession } from "../../../contexts/DesignContext";
@@ -7,7 +6,7 @@ import FileUpload from "./FileUpload/FileUpload";
 import DrawTools from "./DrawTools/DrawTools";
 import RemoveImage from "./RemoveImage/RemoveImage";
 import TextTools from "./TextTools/TextTools";
-import UndoRedo from "./UndoRedo/UndoRedo";
+import UndoRedoDel from "./UndoRedoDel/UndoRedoDel";
 import { saveCanvas } from "../../../utils/canvasUtils";
 import { TOOL_ICON_SIZE } from "../../../constants";
 
@@ -40,13 +39,6 @@ const Toolbar = ({
     setReloadPaths(true);
   };
 
-  const handleClear = () => {
-    setUndoStack([...undoStack, ...paths]);
-    setRedoStack([]);
-    setPaths([]);
-    setReloadPaths(true);
-  };
-
   return (
     <div className={styles.tools} data-testid="toolbar">
       <ToolSelector
@@ -69,7 +61,7 @@ const Toolbar = ({
           </>
         )}
 
-        <UndoRedo
+        <UndoRedoDel
           paths={paths}
           setPaths={setPaths}
           iconSize={TOOL_ICON_SIZE}
@@ -79,15 +71,6 @@ const Toolbar = ({
           redoStack={redoStack}
           setRedoStack={setRedoStack}
         />
-
-        <button
-          title="Delete drawings"
-          onClick={handleClear}
-          disabled={paths.length === 0}
-          data-testid="btn-delete-drawings"
-        >
-          <FaDeleteLeft size={TOOL_ICON_SIZE} />
-        </button>
 
         {editorMode === "draw" && (
           <DrawTools

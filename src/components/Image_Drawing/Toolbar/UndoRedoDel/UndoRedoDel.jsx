@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { IoMdRedo, IoMdUndo } from "react-icons/io";
+import { FaDeleteLeft } from "react-icons/fa6";
 
 import { useSession } from "../../../../contexts/DesignContext";
+import { TOOL_ICON_SIZE } from "../../../../constants";
 
-const UndoRedo = ({
+const UndoRedoDel = ({
   paths,
   setPaths,
-  iconSize,
   setReloadPaths,
   undoStack,
   setUndoStack,
@@ -38,6 +39,13 @@ const UndoRedo = ({
     setReloadPaths(true);
   };
 
+  const handleClear = () => {
+    setUndoStack([...undoStack, ...paths]);
+    setRedoStack([]);
+    setPaths([]);
+    setReloadPaths(true);
+  };
+
   return (
     <>
       <button
@@ -46,7 +54,7 @@ const UndoRedo = ({
         disabled={paths.length === 0}
         data-testid="undo-button"
       >
-        <IoMdUndo size={iconSize} />
+        <IoMdUndo size={TOOL_ICON_SIZE} />
       </button>
       <button
         title="Redo"
@@ -54,10 +62,18 @@ const UndoRedo = ({
         disabled={redoStack.length === 0}
         data-testid="redo-button"
       >
-        <IoMdRedo size={iconSize} />
+        <IoMdRedo size={TOOL_ICON_SIZE} />
+      </button>
+      <button
+        title="Delete drawings"
+        onClick={handleClear}
+        disabled={paths.length === 0}
+        data-testid="btn-delete-drawings"
+      >
+        <FaDeleteLeft size={TOOL_ICON_SIZE} />
       </button>
     </>
   );
 };
 
-export default UndoRedo;
+export default UndoRedoDel;
