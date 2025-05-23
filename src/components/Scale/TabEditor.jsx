@@ -6,9 +6,9 @@ import { useSession } from "../../contexts/DesignContext";
 import global from "../../global.module.css";
 import { drawImage, drawLine, getCoordinates } from "../../utils/canvasUtils";
 import editor from "../Image_Drawing/ImageEditor.module.css";
-import tools from "../Image_Drawing/Toolbar/Toolbar.module.css";
-import ToolDropdown from "../Image_Drawing/Toolbar/ToolDropdown/ToolDropdown";
-import UndoRedoDel from "../Image_Drawing/Toolbar/UndoRedoDel/UndoRedoDel";
+import tools from "../CanvasEditor/Toolbar/Toolbar.module.css";
+import ToolDropdown from "../CanvasEditor/Toolbar/ToolDropdown/ToolDropdown";
+import UndoRedoDel from "../CanvasEditor/Toolbar/UndoRedoDel/UndoRedoDel";
 import InfoPane from "./InfoPane/InfoPane";
 import styles from "./TabEditor.module.css";
 

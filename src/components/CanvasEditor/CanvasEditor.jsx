@@ -11,7 +11,7 @@ import {
   drawPaths,
   getCoordinates,
 } from "../../utils/canvasUtils";
-import Toolbar from "../Image_Drawing/Toolbar/Toolbar";
+import Toolbar from "./Toolbar/Toolbar";
 
 const CanvasEditor = ({ canvasRef, imgCanvasRef, paths, setPaths }) => {
   const [isDrawing, setIsDrawing] = useState(false);
