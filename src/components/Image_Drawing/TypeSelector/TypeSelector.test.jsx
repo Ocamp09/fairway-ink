@@ -10,7 +10,6 @@ vi.mock("../../../contexts/DesignContext", () => ({
 describe("TypeSelector", () => {
   const mockUpdateTemplateType = vi.fn();
   const mockUpdateEditorMode = vi.fn();
-  const mockUpdateUploadedPaths = vi.fn();
 
   const pathsMock = [{ d: "M10 10H90V90H10Z" }];
 
@@ -19,7 +18,6 @@ describe("TypeSelector", () => {
       templateType: "",
       updateTemplateType: mockUpdateTemplateType,
       updateEditorMode: mockUpdateEditorMode,
-      updateUploadedPaths: mockUpdateUploadedPaths,
     });
 
     vi.clearAllMocks();
@@ -37,7 +35,6 @@ describe("TypeSelector", () => {
 
     expect(mockUpdateTemplateType).toHaveBeenCalledWith("solid");
     expect(mockUpdateEditorMode).toHaveBeenCalledWith("draw");
-    expect(mockUpdateUploadedPaths).toHaveBeenCalledWith(pathsMock);
   });
 
   it("calls correct functions when 'Custom' is clicked", () => {
@@ -46,7 +43,6 @@ describe("TypeSelector", () => {
 
     expect(mockUpdateTemplateType).toHaveBeenCalledWith("custom");
     expect(mockUpdateEditorMode).toHaveBeenCalledWith("draw");
-    expect(mockUpdateUploadedPaths).toHaveBeenCalledWith(pathsMock);
   });
 
   it("applies active class when templateType matches", () => {
@@ -54,7 +50,6 @@ describe("TypeSelector", () => {
       templateType: "solid",
       updateTemplateType: mockUpdateTemplateType,
       updateEditorMode: mockUpdateEditorMode,
-      updateUploadedPaths: mockUpdateUploadedPaths,
     });
 
     render(<TypeSelector paths={pathsMock} />);
