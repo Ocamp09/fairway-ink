@@ -1,18 +1,12 @@
 import { useSession } from "../../../contexts/DesignContext";
 import styles from "./TypeSelector.module.css";
 
-const TypeSelector = ({ paths }) => {
-  const {
-    updateUploadedPaths,
-    templateType,
-    updateTemplateType,
-    updateEditorMode,
-  } = useSession();
+const TypeSelector = () => {
+  const { templateType, updateTemplateType, updateEditorMode } = useSession();
 
   const handleTypeChange = (type, mode) => {
     updateTemplateType(type);
     updateEditorMode(mode);
-    updateUploadedPaths(paths);
   };
 
   const handleSolid = () => handleTypeChange("solid", "draw");
