@@ -107,12 +107,12 @@ function ImageDesigner() {
   };
 
   return (
-    <div className={styles.designer}>
-      <p className={styles.desc}>
+    <div className={styles.designer} data-testid="designer">
+      <p className={styles.desc} data-testid="desc">
         {templateType === "text" &&
           `Click inside the editor and type a message to get started`}
         {templateType === "solid" &&
-          ` Upload an image (button or drag and drop), or draw with your mouse to
+          `Upload an image (button or drag and drop), or draw with your mouse to
         get started`}
         {templateType === "custom" &&
           `Upload an image (button or drag and drop), or select an editor mode to get started`}
@@ -121,7 +121,7 @@ function ImageDesigner() {
         <ModeExamples small={true} />
       </div>
       <TypeSelector />
-      <div className={styles.displays}>
+      <div className={styles.displays} data-testid="displays">
         <CanvasEditor
           paths={paths}
           setPaths={setPaths}
@@ -137,6 +137,7 @@ function ImageDesigner() {
         className={global.submit_button}
         onClick={handleSvg}
         disabled={isLoading}
+        data-testid="btn-submit"
       >
         {!isLoading && "Proceed to Scale"}
         {isLoading && "Loading"}
