@@ -16,7 +16,7 @@ vi.mock("./SelectPreview/SelectPreview", () => ({
   default: () => <div data-testid="select-preview">SelectPreview</div>,
 }));
 
-vi.mock("./TabEditor", () => ({
+vi.mock("./TabEditor/TabEditor", () => ({
   default: () => <div data-testid="tab-editor">TabEditor</div>,
 }));
 

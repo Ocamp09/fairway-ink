@@ -5,7 +5,7 @@ import { useSession } from "../../contexts/DesignContext";
 import global from "../../global.module.css";
 import styles from "./ScaleSvg.module.css";
 import SelectPreview from "./SelectPreview/SelectPreview";
-import TabEditor from "./TabEditor";
+import TabEditor from "./TabEditor/TabEditor";
 import ScaleSlider from "./ScaleSlider/ScaleSlider";
 import SvgPreview from "./SvgPreview/SvgPreview";
 

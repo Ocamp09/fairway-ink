@@ -1,12 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
-import { uploadImage } from "../../api/designer";
-import { useSession } from "../../contexts/DesignContext";
-import global from "../../global.module.css";
-import { drawImage, drawLine, getCoordinates } from "../../utils/canvasUtils";
-import InfoPane from "./InfoPane/InfoPane";
+import { uploadImage } from "../../../api/designer";
+import { useSession } from "../../../contexts/DesignContext";
+import global from "../../../global.module.css";
+import InfoPane from "../InfoPane/InfoPane";
 import styles from "./TabEditor.module.css";
-import CanvasEditor from "../CanvasEditor/CanvasEditor";
+import CanvasEditor from "../../CanvasEditor/CanvasEditor";
 
 const TabEditor = () => {
   const {
