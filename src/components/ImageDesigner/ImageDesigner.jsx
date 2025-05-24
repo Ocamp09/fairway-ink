@@ -127,6 +127,7 @@ function ImageDesigner() {
           setPaths={setPaths}
           canvasRef={canvasRef}
           imgCanvasRef={imgCanvasRef}
+          tabEditor={false}
         />
         <div className={styles.modes_bottom}>
           <ModeExamples />

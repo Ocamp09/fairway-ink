@@ -9,21 +9,30 @@ import {
   calculateBbox,
   drawImage,
   drawPaths,
+  drawLine,
   getCoordinates,
 } from "../../utils/canvasUtils";
 import Toolbar from "./Toolbar/Toolbar";
 
-const CanvasEditor = ({ canvasRef, imgCanvasRef, paths, setPaths }) => {
+const CanvasEditor = ({
+  canvasRef,
+  imgCanvasRef,
+  paths,
+  setPaths,
+  tabEditor,
+}) => {
   const [isDrawing, setIsDrawing] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [currPath, setCurrPath] = useState(null);
   const [reloadPaths, setReloadPaths] = useState(false);
   const [canvasScale, setCanvasScale] = useState(1);
   const [lineWidth, setLineWidth] = useState(5);
   const [fontSize, setFontSize] = useState(80);
 
-  const { imageUrl, stage, templateType, editorMode } = useSession();
+  const { imageUrl, stage, templateType, editorMode, svgData } = useSession();
 
-  const lineColor = "#00000";
+  const effectiveEditorMode = tabEditor ? "line" : editorMode;
+  const lineColor = tabEditor ? "#FFFFFF" : "#00000";
 
   useFontLoader();
   useCanvasScaling(canvasRef, setCanvasScale);
@@ -39,7 +48,7 @@ const CanvasEditor = ({ canvasRef, imgCanvasRef, paths, setPaths }) => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
 
-    if (editorMode === "select") {
+    if (effectiveEditorMode === "select") {
       paths.forEach((path, index) => {
         if (path.type === "text") {
           // get the bounding box for text selection
@@ -82,7 +91,7 @@ const CanvasEditor = ({ canvasRef, imgCanvasRef, paths, setPaths }) => {
       return;
     }
 
-    if (editorMode === "type") {
+    if (effectiveEditorMode === "type") {
       var inputText = prompt("Enter text: ");
       if (inputText) {
         context.font = fontSize + "px stencil";
@@ -123,31 +132,45 @@ const CanvasEditor = ({ canvasRef, imgCanvasRef, paths, setPaths }) => {
           ];
         });
       }
-    } else {
-      setPaths((prevPaths) => {
-        return [
-          ...prevPaths,
-          {
-            points: [[x, y, pressure]],
-            lineColor,
-            width: lineWidth,
-            type: "draw",
-          },
-        ];
-      });
+      return;
     }
+
+    if (effectiveEditorMode === "line") {
+      setCurrPath({
+        start: [x, y],
+        end: [x, y],
+        width: lineWidth,
+        type: "line",
+      });
+
+      return;
+    }
+
+    // if not one of the prior options, draw
+    setPaths((prevPaths) => {
+      return [
+        ...prevPaths,
+        {
+          points: [[x, y, pressure]],
+          lineColor,
+          width: lineWidth,
+          type: "draw",
+        },
+      ];
+    });
   };
 
   const handleMoveDrawing = (e) => {
     e.preventDefault();
-    if (editorMode === "type") return; // Skip for text typing mode
+    // Skip for text typing mode or if not drawing
+    if (effectiveEditorMode === "type" && !isDrawing) return;
 
     const coords = getCoordinates(e, canvasRef, canvasScale);
     if (!coords || !isDrawing) return;
 
     const { x, y, pressure } = coords;
 
-    if (editorMode === "select" && isDragging) {
+    if (effectiveEditorMode === "select" && isDragging) {
       setPaths((prevPaths) => {
         return prevPaths.map((path) => {
           if (path.selected) {
@@ -185,6 +208,15 @@ const CanvasEditor = ({ canvasRef, imgCanvasRef, paths, setPaths }) => {
       return;
     }
 
+    if (effectiveEditorMode === "line") {
+      setCurrPath((prevPath) => ({
+        ...prevPath,
+        end: [x, y],
+      }));
+      return;
+    }
+
+    // draw
     setPaths((prevPaths) => {
       const updatedPaths = [...prevPaths];
       const lastPath = updatedPaths[updatedPaths.length - 1];
@@ -201,10 +233,18 @@ const CanvasEditor = ({ canvasRef, imgCanvasRef, paths, setPaths }) => {
   const handleStopDrawing = () => {
     setIsDrawing(false);
     setIsDragging(false);
+
+    if (effectiveEditorMode === "line") {
+      setCurrPath(null);
+      setPaths((prevPaths) => {
+        return [...prevPaths, currPath];
+      });
+    }
   };
 
   // handles new image upload
   useEffect(() => {
+    if (tabEditor) return;
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
 
@@ -220,6 +260,18 @@ const CanvasEditor = ({ canvasRef, imgCanvasRef, paths, setPaths }) => {
       templateType
     );
   }, [imageUrl]);
+
+  // Load the SVG onto the canvas if tabEditor
+  useEffect(() => {
+    if (!tabEditor) return;
+    const placeholder = () => {};
+    const svgBlob = new Blob([svgData], { type: "image/svg+xml" });
+    const url = URL.createObjectURL(svgBlob);
+
+    if (canvasRef.current) {
+      drawImage(false, url, imgCanvasRef, placeholder, setReloadPaths, "solid");
+    }
+  }, [svgData]);
 
   //will only run when paths or lineWidth changes
   useEffect(() => {
@@ -263,6 +315,36 @@ const CanvasEditor = ({ canvasRef, imgCanvasRef, paths, setPaths }) => {
     }
     setPaths([]);
   }, [templateType, stage]);
+
+  useEffect(() => {
+    if (effectiveEditorMode !== "line") return;
+
+    const canvas = canvasRef.current;
+    const context = canvas.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (!paths) return;
+    paths.forEach((path) => {
+      if (path.type === "line") {
+        const startX = path.start[0];
+        const startY = path.start[1];
+        const endX = path.end[0];
+        const endY = path.end[1];
+        drawLine(canvasRef, startX, startY, endX, endY, path.width);
+      }
+    });
+
+    if (currPath) {
+      const { start, end } = currPath;
+      drawLine(canvasRef, start[0], start[1], end[0], end[1], currPath.width);
+    }
+  }, [currPath, paths, reloadPaths]);
+
+  useEffect(() => {
+    if ((effectiveEditorMode === "line" || tabEditor) && lineWidth !== 22) {
+      setLineWidth(22);
+    }
+  }, [effectiveEditorMode, lineWidth, tabEditor]);
 
   return (
     <div className={styles.editor}>

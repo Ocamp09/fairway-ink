@@ -1,16 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { MdLineWeight } from "react-icons/md";
 
 import { uploadImage } from "../../api/designer";
 import { useSession } from "../../contexts/DesignContext";
 import global from "../../global.module.css";
 import { drawImage, drawLine, getCoordinates } from "../../utils/canvasUtils";
-import editor from "../ImageDesigner/ImageDesigner.module.css";
-import tools from "../CanvasEditor/Toolbar/Toolbar.module.css";
-import ToolDropdown from "../CanvasEditor/Toolbar/ToolDropdown/ToolDropdown";
-import UndoRedoDel from "../CanvasEditor/Toolbar/UndoRedoDel/UndoRedoDel";
 import InfoPane from "./InfoPane/InfoPane";
 import styles from "./TabEditor.module.css";
+import CanvasEditor from "../CanvasEditor/CanvasEditor";
 
 const TabEditor = () => {
   const {
@@ -24,63 +20,14 @@ const TabEditor = () => {
 
   const canvasRef = useRef();
   const imgCanvasRef = useRef();
-
-  const [reloadPaths, setReloadPaths] = useState(false);
   const [paths, setPaths] = useState([]);
-  const [currPath, setCurrPath] = useState(null);
-  const [isDrawing, setIsDrawing] = useState(false);
-  const [undoStack, setUndoStack] = useState([]);
-  const [redoStack, setRedoStack] = useState([]);
-  const [lineWidth, setLineWidth] = useState(22);
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const iconSize = 28;
-  const lineLabel = <MdLineWeight size={iconSize} color="white" />;
 
   const handleBackToRemove = () => {
     updateAdjustStage("remove");
     updateSvgData(prevSvgData);
-  };
-
-  // Handle mouse down (start drawing)
-  const handleMouseDown = (e) => {
-    e.preventDefault();
-    setIsDrawing(true);
-
-    const coords = getCoordinates(e, canvasRef, 1);
-    if (!coords) return;
-    var { x, y } = coords;
-    setCurrPath({
-      start: [x, y],
-      end: [x, y],
-      width: lineWidth,
-      type: "line",
-    });
-  };
-
-  // handle mouse move (update line while dragging)
-  const handleMouseMove = (e) => {
-    e.preventDefault();
-    if (!isDrawing) return;
-
-    const coords = getCoordinates(e, canvasRef, 1);
-    if (!coords) return;
-    var { x, y } = coords;
-
-    setCurrPath((prevPath) => ({
-      ...prevPath,
-      end: [x, y],
-    }));
-  };
-
-  // Handle mouse up (finish drawing)
-  const handleMouseUp = () => {
-    setIsDrawing(false);
-    setPaths((prevPaths) => {
-      return [...prevPaths, currPath];
-    });
-    setCurrPath(null);
   };
 
   const submitTabs = async () => {
@@ -125,39 +72,6 @@ const TabEditor = () => {
     }
   };
 
-  // Load the SVG onto the canvas
-  useEffect(() => {
-    const placeholder = () => {};
-    const svgBlob = new Blob([svgData], { type: "image/svg+xml" });
-    const url = URL.createObjectURL(svgBlob);
-
-    if (canvasRef.current) {
-      drawImage(false, url, imgCanvasRef, placeholder, setReloadPaths, "solid");
-    }
-  }, [svgData]);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const context = canvas.getContext("2d");
-    context.clearRect(0, 0, canvas.width, canvas.height);
-
-    if (!paths) return;
-    paths.forEach((path) => {
-      if (path.type === "line") {
-        const startX = path.start[0];
-        const startY = path.start[1];
-        const endX = path.end[0];
-        const endY = path.end[1];
-        drawLine(canvasRef, startX, startY, endX, endY, path.width);
-      }
-    });
-
-    if (currPath) {
-      const { start, end } = currPath;
-      drawLine(canvasRef, start[0], start[1], end[0], end[1], currPath.width);
-    }
-  }, [currPath, paths, reloadPaths]);
-
   return (
     <div className={styles.tab_main}>
       <button
@@ -170,44 +84,13 @@ const TabEditor = () => {
       </button>
       <p>Add tabs for printing</p>
       <div className={styles.tab}>
-        <div className={`${tools.toolbar} ${tools.tools} ${styles.buts}`}>
-          <UndoRedoDel
-            paths={paths}
-            setPaths={setPaths}
-            iconSize={28}
-            setReloadPaths={setReloadPaths}
-            undoStack={undoStack}
-            setUndoStack={setUndoStack}
-            redoStack={redoStack}
-            setRedoStack={setRedoStack}
-          />
-          <ToolDropdown
-            minQuantity={16}
-            maxQuantity={60}
-            labelText={lineLabel}
-            step={4}
-            quantity={lineWidth}
-            setQuantity={setLineWidth}
-            title={"Adjust line width"}
-          />
-        </div>
-        <div className={editor.canvas_container}>
-          <canvas
-            ref={imgCanvasRef}
-            width={500}
-            height={500}
-            className={editor.img_canvas}
-          />
-          <canvas
-            ref={canvasRef}
-            width={500}
-            height={500}
-            className={editor.drawing_canvas}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-          />
-        </div>
+        <CanvasEditor
+          paths={paths}
+          setPaths={setPaths}
+          canvasRef={canvasRef}
+          imgCanvasRef={imgCanvasRef}
+          tabEditor={true}
+        />
         <InfoPane warnText="Indicates un-printable areas, click and draw bridges across yellow items to white areas for printing" />
       </div>
       <button
