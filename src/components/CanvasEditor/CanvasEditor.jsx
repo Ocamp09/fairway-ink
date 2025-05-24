@@ -32,7 +32,7 @@ const CanvasEditor = ({
   const { imageUrl, stage, templateType, editorMode, svgData } = useSession();
 
   const effectiveEditorMode = tabEditor ? "line" : editorMode;
-  const lineColor = tabEditor ? "#FFFFFF" : "#00000";
+  const lineColor = tabEditor ? "#FFFFFF" : "#000000";
 
   useFontLoader();
   useCanvasScaling(canvasRef, setCanvasScale);
@@ -235,10 +235,10 @@ const CanvasEditor = ({
     setIsDragging(false);
 
     if (effectiveEditorMode === "line") {
-      setCurrPath(null);
       setPaths((prevPaths) => {
         return [...prevPaths, currPath];
       });
+      setCurrPath(null);
     }
   };
 
