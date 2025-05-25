@@ -17,24 +17,23 @@ const Home = () => {
         <img src="/home/home.jpg" alt="Golf balls with stencil designs" />
 
         <div className={styles.home_desc}>
-          <h2>Custom golf ball templates</h2>
+          <h2 className={styles.title}>Custom golf ball marking templates</h2>
           <p>Elevate your style with a custom designed logo!</p>
-          <p>
-            Design your own logo in our designer, or select a logo from our
-            daily updating library!
-          </p>
-          <button
-            className={global.submit_button}
-            onClick={handleStartDesigning}
-          >
-            Start designing
-          </button>
-          <button
-            className={global.submit_button}
-            onClick={handleBrowseDesigns}
-          >
-            Browse designs
-          </button>
+          <p>Create your own design, or select a logo from our library!</p>
+          <div className={styles.home_btn}>
+            <button
+              className={global.submit_button}
+              onClick={handleStartDesigning}
+            >
+              Start designing
+            </button>
+            <button
+              className={global.submit_button}
+              onClick={handleBrowseDesigns}
+            >
+              Browse designs
+            </button>
+          </div>
         </div>
       </section>
     </main>
