@@ -4,7 +4,7 @@ import Browse from "./Browse";
 import * as api from "../../api/browse";
 
 // Mock component
-vi.mock("../../components/Browse/BrowseItem", () => ({
+vi.mock("../../components/Browse/BrowseItem/BrowseItem", () => ({
   default: ({ url }) => <div>Mocked Design: {url}</div>,
 }));
 

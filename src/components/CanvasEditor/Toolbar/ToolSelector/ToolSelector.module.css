@@ -1,0 +1,10 @@
+.tool_top {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--tone);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 10px;
+  width: 6rem;
+  gap: 5px;
+}

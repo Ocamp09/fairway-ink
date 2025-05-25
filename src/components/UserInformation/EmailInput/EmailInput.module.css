@@ -1,0 +1,42 @@
+input[type="email"] {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #e5e5e5;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin-bottom: 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  color: #30313d;
+  padding: 0.5rem;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.03), 0px 3px 6px rgba(0, 0, 0, 0.02);
+  text-align: left;
+}
+
+/* Focus Style */
+input[type="email"]:focus {
+  outline: none;
+  border-color: #0070f3; /* Stripe Blue */
+  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
+}
+
+/* Placeholder Style */
+input[type="email"]::placeholder {
+  color: #a5a5a5;
+  font-style: italic;
+}
+
+/* Disabled State */
+input[type="email"]:disabled {
+  background-color: #f7f7f7;
+  border-color: #e5e5e5;
+  cursor: not-allowed;
+}
+
+/* Error Message Style */
+input[type="email"].error {
+  border-color: #f44336; /* Red */
+  background-color: #fff3f3; /* Light red background */
+}
