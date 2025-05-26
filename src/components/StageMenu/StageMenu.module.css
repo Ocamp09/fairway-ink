@@ -4,6 +4,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.5em;
+  width: 90%;
 }
 
 .tab_menu h3 {

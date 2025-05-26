@@ -6,9 +6,11 @@
 }
 
 .tool {
+  height: 500px;
   width: 11rem;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .canvas_container {
@@ -40,7 +42,7 @@
   }
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 800px) {
   .editor {
     flex-direction: column;
     align-items: center;
@@ -48,6 +50,7 @@
   .tool {
     width: 95%;
     justify-content: center;
+    height: auto;
   }
 }
 

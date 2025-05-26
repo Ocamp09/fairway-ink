@@ -29,17 +29,19 @@ describe("Home component", () => {
     expect(
       screen.getByRole("heading", {
         level: 2,
-        name: /custom golf ball templates/i,
+        name: /custom golf ball marking templates/i,
       })
     ).toBeInTheDocument();
 
     expect(
-      screen.getByText(/elevate your style with a custom designed logo!/i)
+      screen.getByText(
+        /Elevate your style with a custom design on your golf ball!/i
+      )
     ).toBeInTheDocument();
 
     expect(
       screen.getByText(
-        /design your own logo in our designer, or select a logo from our daily updating library!/i
+        /Create your own design, or select pre-generated design from our library!/i
       )
     ).toBeInTheDocument();
 

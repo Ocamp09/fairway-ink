@@ -1,3 +1,14 @@
+main {
+  padding-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 {
+  width: 90%;
+}
+
 .intro {
   margin-top: 2rem;
   display: flex;
@@ -17,15 +28,27 @@
 }
 
 .home_desc {
-  width: 35%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.title {
+  width: 90%;
 }
 
 .home_desc p {
   width: 65%;
+}
+
+.home_btn {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1rem;
 }
 
 @media screen and (max-width: 1000px) {
@@ -37,9 +60,15 @@
     width: 100%;
   }
 
-  .home_desc {
-    margin-top: 1rem;
-    width: 95%;
-    padding-bottom: 1rem;
+  .home_btn {
+    flex-direction: row;
+    gap: 1rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .home_btn {
+    flex-direction: column;
+    gap: 0.1rem;
   }
 }

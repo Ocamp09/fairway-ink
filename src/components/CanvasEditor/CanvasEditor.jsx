@@ -264,6 +264,10 @@ const CanvasEditor = ({
   // Load the SVG onto the canvas if tabEditor
   useEffect(() => {
     if (!tabEditor) return;
+    const canvas = imgCanvasRef.current;
+    const context = canvas.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
     const placeholder = () => {};
     const svgBlob = new Blob([svgData], { type: "image/svg+xml" });
     const url = URL.createObjectURL(svgBlob);
@@ -271,7 +275,7 @@ const CanvasEditor = ({
     if (canvasRef.current) {
       drawImage(false, url, imgCanvasRef, placeholder, setReloadPaths, "solid");
     }
-  }, [svgData]);
+  }, [svgData, reloadPaths]);
 
   //will only run when paths or lineWidth changes
   useEffect(() => {
@@ -298,6 +302,7 @@ const CanvasEditor = ({
   );
 
   useEffect(() => {
+    if (tabEditor) return;
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
 
@@ -359,6 +364,7 @@ const CanvasEditor = ({
           canvasRef={canvasRef}
           fontSize={fontSize}
           setFontSize={setFontSize}
+          tabEditor={tabEditor}
         ></Toolbar>
       </div>
       <div className={styles.canvas_container}>
