@@ -11,6 +11,7 @@ const ToolSelector = ({
   isSolidTemplate,
   isTextTemplate,
   isCustomTemplate,
+  tabEditor,
 }) => {
   const { editorMode, updateEditorMode } = useSession();
 
@@ -30,7 +31,7 @@ const ToolSelector = ({
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  if (shouldHideTools) return null;
+  if (shouldHideTools || tabEditor) return null;
 
   return (
     <div className={styles.tool_top} data-testid="tool-top">

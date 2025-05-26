@@ -23,6 +23,7 @@ const Toolbar = ({
   canvasRef,
   fontSize,
   setFontSize,
+  tabEditor,
 }) => {
   const [undoStack, setUndoStack] = useState([]);
   const [redoStack, setRedoStack] = useState([]);
@@ -45,9 +46,10 @@ const Toolbar = ({
         isSolidTemplate={isSolidTemplate}
         isTextTemplate={isTextTemplate}
         isCustomTemplate={isCustomTemplate}
+        tabEditor={tabEditor}
       />
       <div className={styles.toolbar} data-testid="toolbar-main">
-        {!isTextTemplate && (
+        {!isTextTemplate && !tabEditor && (
           <>
             <FileUpload />
             <button
@@ -89,6 +91,7 @@ const Toolbar = ({
         )}
 
         <button
+          hidden={tabEditor}
           title="Download drawings"
           onClick={() => saveCanvas(canvasRef.current, imgCanvasRef.current)}
           data-testid="btn-download"

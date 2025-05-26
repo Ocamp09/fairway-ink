@@ -275,7 +275,7 @@ const CanvasEditor = ({
     if (canvasRef.current) {
       drawImage(false, url, imgCanvasRef, placeholder, setReloadPaths, "solid");
     }
-  }, [svgData]);
+  }, [svgData, reloadPaths]);
 
   //will only run when paths or lineWidth changes
   useEffect(() => {
@@ -364,6 +364,7 @@ const CanvasEditor = ({
           canvasRef={canvasRef}
           fontSize={fontSize}
           setFontSize={setFontSize}
+          tabEditor={tabEditor}
         ></Toolbar>
       </div>
       <div className={styles.canvas_container}>
