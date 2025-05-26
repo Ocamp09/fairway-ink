@@ -15,6 +15,10 @@
   margin-top: 20px;
 }
 
+.dropdown_toggle:hover {
+  background-color: var(--tool-button-hover);
+}
+
 .dropdown label {
   cursor: pointer;
 }
