@@ -264,6 +264,10 @@ const CanvasEditor = ({
   // Load the SVG onto the canvas if tabEditor
   useEffect(() => {
     if (!tabEditor) return;
+    const canvas = imgCanvasRef.current;
+    const context = canvas.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
     const placeholder = () => {};
     const svgBlob = new Blob([svgData], { type: "image/svg+xml" });
     const url = URL.createObjectURL(svgBlob);
@@ -298,6 +302,7 @@ const CanvasEditor = ({
   );
 
   useEffect(() => {
+    if (tabEditor) return;
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
 
