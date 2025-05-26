@@ -99,7 +99,7 @@ const TabEditor = () => {
         }}
       >
         {!loading && "Add tabs"}
-        {loading && "Loading"}
+        {loading && "Generating..."}
       </button>
       {error && <p className={global.error_message}>{error}</p>}
     </div>
