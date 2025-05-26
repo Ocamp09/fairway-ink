@@ -18,8 +18,11 @@ const Home = () => {
 
         <div className={styles.home_desc}>
           <h2 className={styles.title}>Custom golf ball marking templates</h2>
-          <p>Elevate your style with a custom designed logo!</p>
-          <p>Create your own design, or select a logo from our library!</p>
+          <p>Elevate your style with a custom design on your golf ball!</p>
+          <p>
+            Create your own design, or select pre-generated design from our
+            library!
+          </p>
           <div className={styles.home_btn}>
             <button
               className={global.submit_button}
