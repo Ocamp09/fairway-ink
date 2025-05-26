@@ -12,8 +12,12 @@
 
 .back_cart {
   border-radius: 5px;
-  background-color: red;
+  background-color: var(--back);
   justify-content: flex-start;
   padding: 5px 10px 5px 10px;
   margin-left: 0;
+}
+
+.back_cart:hover {
+  background-color: var(--back-hover);
 }
