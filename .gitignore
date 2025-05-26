@@ -10,3 +10,5 @@ venv/
 app.log
 node_modules
 /dist
+/coverage
+*.sarif

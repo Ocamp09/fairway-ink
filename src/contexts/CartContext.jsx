@@ -1,55 +1,57 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
-import { SOLID_PRICE, TEXT_PRICE, CUSTOM_PRICE } from "../constants";
+import { createContext, useContext, useEffect, useState } from "react";
+import { CUSTOM_PRICE, SOLID_PRICE, TEXT_PRICE } from "../constants";
+
 const CartContext = createContext();
+
+const getPriceByType = (templateType, quantity) => {
+  switch (templateType) {
+    case "solid":
+      return SOLID_PRICE * quantity;
+    case "text":
+      return TEXT_PRICE * quantity;
+    default:
+      return CUSTOM_PRICE * quantity;
+  }
+};
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(() => {
-    const storedCart = sessionStorage.getItem("cart");
-    return storedCart ? JSON.parse(storedCart) : [];
+    const stored = sessionStorage.getItem("cart");
+    return stored ? JSON.parse(stored) : [];
   });
-
-  useEffect(() => {
-    const storedCart = sessionStorage.getItem("cart");
-    if (storedCart) {
-      setCartItems(JSON.parse(storedCart));
-    }
-  }, []);
 
   useEffect(() => {
     sessionStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  const addToCart = (key, item, quantity, type) => {
-    const existingItem = cartItems.find((cartItem) => cartItem.stlUrl === item);
-    if (existingItem) {
-      setCartItems(
-        cartItems.map((cartItem) =>
-          cartItem.stlUrl === item.stlUrl
-            ? { ...cartItem, quantity: cartItem.quantity + Number(quantity) }
-            : cartItem
-        )
-      );
-    } else {
-      setCartItems([
-        ...cartItems,
+  const addToCart = (id, stlUrl, quantity, templateType) => {
+    setCartItems((prevItems) => {
+      const index = prevItems.findIndex((item) => item.stlUrl === stlUrl);
+      if (index !== -1) {
+        const updated = [...prevItems];
+        updated[index].quantity += Number(quantity);
+        return updated;
+      }
+      return [
+        ...prevItems,
         {
-          id: key,
-          stlUrl: item,
+          id,
+          stlUrl,
           quantity: Number(quantity),
-          templateType: type,
+          templateType,
         },
-      ]);
-    }
+      ];
+    });
   };
 
-  const removeFromCart = (itemStl) => {
-    setCartItems(cartItems.filter((item) => item.stlUrl !== itemStl));
+  const removeFromCart = (stlUrl) => {
+    setCartItems((items) => items.filter((item) => item.stlUrl !== stlUrl));
   };
 
-  const updateQuantity = (itemStl, quantity) => {
-    setCartItems(
-      cartItems.map((item) =>
-        item.stlUrl === itemStl ? { ...item, quantity } : item
+  const updateQuantity = (stlUrl, quantity) => {
+    setCartItems((items) =>
+      items.map((item) =>
+        item.stlUrl === stlUrl ? { ...item, quantity } : item
       )
     );
   };
@@ -58,35 +60,15 @@ export const CartProvider = ({ children }) => {
     setCartItems([]);
   };
 
-  const getItemCount = () => {
-    return cartItems.length;
-  };
+  const getItemCount = () => cartItems.length;
 
-  const getPrice = (item) => {
-    if (item.templateType === "solid") {
-      return SOLID_PRICE * item.quantity;
-    } else if (item.templateType === "text") {
-      return TEXT_PRICE * item.quantity;
-    } else {
-      return CUSTOM_PRICE * item.quantity;
-    }
-  };
+  const getPrice = (item) => getPriceByType(item.templateType, item.quantity);
 
-  const getTotal = () => {
-    let total = 0.0;
-    for (let i = 0; i < cartItems.length; i++) {
-      const item = cartItems[i];
-      if (item.templateType === "solid") {
-        total += SOLID_PRICE * item.quantity;
-      } else if (item.templateType === "text") {
-        total += TEXT_PRICE * item.quantity;
-      } else {
-        total += CUSTOM_PRICE * item.quantity;
-      }
-    }
-
-    return total;
-  };
+  const getTotal = () =>
+    cartItems.reduce(
+      (total, item) => total + getPriceByType(item.templateType, item.quantity),
+      0
+    );
 
   return (
     <CartContext.Provider
@@ -106,6 +88,4 @@ export const CartProvider = ({ children }) => {
   );
 };
 
-export const useCart = () => {
-  return useContext(CartContext);
-};
+export const useCart = () => useContext(CartContext);

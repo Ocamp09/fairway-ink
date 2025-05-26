@@ -2,102 +2,60 @@ import { createContext, useContext, useState } from "react";
 
 const DesignContext = createContext();
 
+const createSessionState = (key, defaultValue) => {
+  const sessionValue = sessionStorage.getItem(key);
+  const initial =
+    key === "uploadedPaths" && sessionValue
+      ? JSON.parse(sessionValue)
+      : sessionValue ?? defaultValue;
+
+  const [state, setState] = useState(initial);
+
+  const updateState = (value) => {
+    sessionStorage.setItem(
+      key,
+      key === "uploadedPaths" ? JSON.stringify(value) : value
+    );
+    setState(value);
+  };
+
+  return [state, updateState];
+};
+
 export const FileProvider = ({ children }) => {
-  const [stage, setStage] = useState(
-    sessionStorage.getItem("stage") || "design"
+  const [stage, updateStage] = createSessionState("stage", "design");
+  const [adjustStage, updateAdjustStage] = createSessionState(
+    "adjustStage",
+    "scale"
   );
-
-  const [adjustStage, setAdjustStage] = useState(
-    sessionStorage.getItem("adjustStage") || "scale"
+  const [imageUrl, updateImageUrl] = createSessionState("imageUrl", "");
+  const [imageType, updateImageType] = createSessionState("imageType", "");
+  const [uploadedPaths, updateUploadedPaths] = createSessionState(
+    "uploadedPaths",
+    []
   );
-
-  const [imageUrl, setImageUrl] = useState(
-    sessionStorage.getItem("imageUrl") || ""
+  const [svgData, updateSvgData] = createSessionState("svgData", "");
+  const [prevSvgData, updatePrevSvgData] = createSessionState("prevSvg", "");
+  const [stlUrl, updateStl] = createSessionState(
+    "stlUrl",
+    "designer/default.stl"
   );
-
-  const [imageType, setImageType] = useState(
-    sessionStorage.getItem("imageType") || ""
+  const [stlKey, setStlKey] = useState(
+    Number(sessionStorage.getItem("stlKey") || 0)
   );
-
-  const [uploadedPaths, setUploadedPaths] = useState(
-    JSON.parse(sessionStorage.getItem("uploadedPaths")) || []
+  const [templateType, updateTemplateType] = createSessionState(
+    "templateType",
+    "solid"
   );
-
-  const [svgData, setSvgData] = useState(
-    sessionStorage.getItem("svgData") || ""
+  const [editorMode, updateEditorMode] = createSessionState(
+    "editorMode",
+    "draw"
   );
-
-  const [prevSvgData, setPrevSvgData] = useState(
-    sessionStorage.getItem("prevSvg") || ""
-  );
-
-  const [stlUrl, setStlUrl] = useState(
-    sessionStorage.getItem("stlUrl") || "default.stl"
-  );
-
-  const [stlKey, setStlKey] = useState(sessionStorage.getItem("stlKey") || 0);
-
-  const [templateType, setTemplateType] = useState(
-    sessionStorage.getItem("templateType") || "solid"
-  );
-
-  const [editorMode, setEditorMode] = useState(
-    sessionStorage.getItem("editorMode") || "draw"
-  );
-
-  const updateStage = (stage) => {
-    sessionStorage.setItem("stage", stage);
-    setStage(stage);
-  };
-
-  const updateAdjustStage = (adjustStage) => {
-    sessionStorage.setItem("adjustStage", adjustStage);
-    setAdjustStage(adjustStage);
-  };
-
-  const updateImageUrl = (newUrl) => {
-    sessionStorage.setItem("imageUrl", newUrl);
-    setImageUrl(newUrl);
-  };
-
-  const updateImageType = (type) => {
-    sessionStorage.setItem("imageType", type);
-    setImageType(type);
-  };
-
-  const updateUploadedPaths = (paths) => {
-    sessionStorage.setItem("uploadedPaths", JSON.stringify(paths));
-    setUploadedPaths(paths);
-  };
-
-  const updateSvgData = (data) => {
-    sessionStorage.setItem("svgData", data);
-    setSvgData(data);
-  };
-
-  const updatePrevSvgData = (prev) => {
-    sessionStorage.setItem("prevScg", prev);
-    setPrevSvgData(prev);
-  };
-
-  const updateStl = (stlUrl) => {
-    sessionStorage.setItem("stlUrl", stlUrl);
-    setStlUrl(stlUrl);
-  };
 
   const updateStlKey = () => {
-    sessionStorage.setItem("stlKey", Number(stlKey) + 1);
-    setStlKey(Number(stlKey) + 1);
-  };
-
-  const updateTemplateType = (type) => {
-    sessionStorage.setItem("templateType", type);
-    setTemplateType(type);
-  };
-
-  const updateEditorMode = (mode) => {
-    sessionStorage.setItem("editorMode", mode);
-    setEditorMode(mode);
+    const newKey = stlKey + 1;
+    sessionStorage.setItem("stlKey", newKey);
+    setStlKey(newKey);
   };
 
   return (
@@ -132,6 +90,4 @@ export const FileProvider = ({ children }) => {
   );
 };
 
-export const useSession = () => {
-  return useContext(DesignContext);
-};
+export const useSession = () => useContext(DesignContext);

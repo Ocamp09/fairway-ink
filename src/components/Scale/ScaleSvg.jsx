@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import ImageScaler from "./ImageScaler";
+
+import { generateStl } from "../../api/designer";
 import { useSession } from "../../contexts/DesignContext";
-import { generateStl } from "../../api/api";
-import SelectPreview from "./SelectPreview";
-import TabEditor from "./TabEditor";
-import styles from "./ScaleSvg.module.css";
 import global from "../../global.module.css";
+import styles from "./ScaleSvg.module.css";
+import SelectPreview from "./SelectPreview/SelectPreview";
+import TabEditor from "./TabEditor/TabEditor";
+import ScaleSlider from "./ScaleSlider/ScaleSlider";
+import SvgPreview from "./SvgPreview/SvgPreview";
 
 const ScaleSvg = () => {
   const [scale, setScale] = useState(1);
@@ -26,13 +28,6 @@ const ScaleSvg = () => {
     templateType,
   } = useSession();
 
-  let canvasSizePx;
-  if (templateType === "text") {
-    canvasSizePx = 110 * scale * 2.5;
-  } else {
-    canvasSizePx = 110 * scale;
-  }
-
   const handleBackToTab = () => {
     updateAdjustStage("tab");
     updateSvgData(prevSvgData);
@@ -50,7 +45,7 @@ const ScaleSvg = () => {
     }
 
     setIsLoading(true);
-    updateStl("default.stl");
+    updateStl("designer/default.stl");
 
     try {
       const response = await generateStl(svgData, scale, stlKey, templateType);
@@ -97,33 +92,13 @@ const ScaleSvg = () => {
             Back
           </button>
           <p>Scale the image to the desired size</p>
-          <div className={styles.ball_displays}>
-            <div className={styles.golf_template}>
-              <img
-                src={svgUrl}
-                alt="Uploaded"
-                className={styles.upload_img}
-                style={{
-                  width: `${canvasSizePx}px`,
-                }}
-              />
-            </div>
-            <div className={styles.life_size}>
-              <p>Life Size</p>
-              <div className={styles.golf_real_size}>
-                <img
-                  src={svgUrl}
-                  alt="Uploaded"
-                  className={styles.upload_img}
-                  style={{
-                    width: `${(canvasSizePx * 210) / 500}px`,
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-          <ImageScaler scale={scale} setScale={setScale}></ImageScaler>
-          <form onSubmit={handleSubmit}>
+          <SvgPreview
+            svgUrl={svgUrl}
+            scale={scale}
+            templateType={templateType}
+          />
+          <ScaleSlider scale={scale} setScale={setScale}></ScaleSlider>
+          <form onSubmit={handleSubmit} data-testid="scale-form">
             <button
               type="submit"
               className={global.submit_button}

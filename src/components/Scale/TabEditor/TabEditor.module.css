@@ -1,0 +1,37 @@
+.tab_main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tab {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.tab_canvas {
+  margin-top: 15px;
+}
+
+.buts {
+  width: auto;
+}
+
+.buts button {
+  width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+  .tab {
+    flex-direction: column;
+  }
+
+  .buts button {
+    width: auto;
+  }
+}
