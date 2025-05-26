@@ -13,6 +13,6 @@
   padding: 0.5rem 0.75rem 0.5rem 0.75rem;
 }
 
-button:hover {
+.zoom_body button:hover {
   border: 1px solid var(--tool-button);
 }
