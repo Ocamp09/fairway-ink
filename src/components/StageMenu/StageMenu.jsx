@@ -18,13 +18,13 @@ const StageMenu = () => {
   const { stage, updateStage } = useSession();
 
   return (
-    <div className={styles.tab_menu} role="group" aria-label="Stage selector">
+    <div className={styles.stage_menu} role="group" aria-label="Stage selector">
       {stages.map((s) => {
         const { title, Icon } = stageInfo[s];
         return (
           <div
             key={s}
-            className={stage === s ? styles.active : ""}
+            className={stage === s ? styles.active : styles.stage}
             data-testid={`stage-${s}`}
           >
             <h3 onClick={() => updateStage(s)}>

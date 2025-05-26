@@ -1,4 +1,4 @@
-.tab_menu {
+.stage_menu {
   display: flex;
   padding-bottom: 1rem;
   flex-wrap: wrap;
@@ -7,26 +7,31 @@
   width: 90%;
 }
 
-.tab_menu h3 {
+.stage_menu h3 {
   display: flex;
   align-items: center;
   margin-right: 1.5rem;
 }
 
-.tab_menu div {
+.stage_menu div {
   border-bottom: 0.1em solid transparent;
 }
 
-.tab_menu div:hover {
+.stage_menu div:hover {
   color: var(--tool-button);
   border-color: var(--tool-button);
 }
 
-.tab_menu div.active {
+.stage_menu div.active {
   color: var(--tool-button);
   border-bottom: 0.15em solid var(--tool-button);
+  cursor: pointer;
 }
 
-.tab_number {
+.stage:hover {
+  cursor: pointer;
+}
+
+.stage_number {
   margin-right: 0.25rem;
 }
