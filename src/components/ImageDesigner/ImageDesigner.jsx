@@ -8,6 +8,7 @@ import styles from "./ImageDesigner.module.css";
 import ModeExamples from "./ModeExamples/ModeExamples";
 import TypeSelector from "./TypeSelector/TypeSelector";
 import CanvasEditor from "../CanvasEditor/CanvasEditor";
+import Loading from "../Feedback/Loading/Loading";
 
 function ImageDesigner() {
   const canvasRef = useRef(null);
@@ -141,7 +142,7 @@ function ImageDesigner() {
         data-testid="btn-submit"
       >
         {!isLoading && "Proceed to Scale"}
-        {isLoading && "Loading"}
+        {isLoading && "Generating..."}
       </button>
       {error && <p className={global.error_message}>{error}</p>}
     </div>
