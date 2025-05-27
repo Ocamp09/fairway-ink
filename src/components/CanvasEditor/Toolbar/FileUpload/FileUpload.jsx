@@ -4,10 +4,12 @@ import { useSession } from "../../../../contexts/DesignContext";
 
 import global from "../../../../global.module.css";
 import styles from "./FileUpload.module.css";
+import Loading from "../../../Feedback/Loading/Loading";
 
 const FileUpload = () => {
   const fileInputRef = useRef(null);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const { updateImageUrl } = useSession();
 
   const allowedTypes = [
@@ -30,11 +32,21 @@ const FileUpload = () => {
     return true;
   };
 
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
+    setIsLoading(true);
+
     const file = e.target.files[0];
     if (file && validateFile(file)) {
       setError("");
-      updateImageUrl(URL.createObjectURL(file));
+      try {
+        const fileUrl = URL.createObjectURL(file);
+        updateImageUrl(fileUrl);
+        await new Promise((res) => setTimeout(res, 500));
+      } catch (err) {
+        setError("Failed to upload image.");
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -49,7 +61,7 @@ const FileUpload = () => {
     <div className={styles.file_upload_container}>
       <input
         type="file"
-        onChange={handleFileChange}
+        onChange={(e) => handleFileChange(e)}
         accept=".png,.jpg,.jpeg,.svg"
         ref={fileInputRef}
         hidden
@@ -59,9 +71,14 @@ const FileUpload = () => {
         title="Upload image"
         onClick={handleUploadClick}
         data-testid="upload-button"
+        disabled={isLoading}
       >
         <FaImage size={28} />
       </button>
+
+      {isLoading && (
+        <Loading text="Uploading image..." type="spinner" overlay />
+      )}
       {error && <p className={global.error_message}>{error}</p>}
     </div>
   );
