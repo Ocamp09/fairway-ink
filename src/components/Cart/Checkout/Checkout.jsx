@@ -9,14 +9,26 @@ import styles from "./Checkout.module.css";
 import Loading from "../../Feedback/Loading/Loading";
 
 // Replace this with an environment variable in production
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_API_KEY);
-
 const Checkout = ({ setIsCheckout }) => {
   const { getTotal } = useCart();
 
+  const [stripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState("");
   const [intentId, setIntentId] = useState("");
   const [successfulOrder, setSuccessfulOrder] = useState(null);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+        if (!stripe) throw new Error("Stripe failed to load");
+        setStripePromise(stripe);
+      } catch (err) {
+        console.error("Stripe load failed:", err);
+      }
+    };
+    load();
+  }, []);
 
   useEffect(() => {
     const fetchClientSecret = async () => {
@@ -34,7 +46,7 @@ const Checkout = ({ setIsCheckout }) => {
     }
   }, [getTotal]);
 
-  if (!clientSecret) {
+  if (!stripePromise || !clientSecret) {
     return <Loading />;
   }
 
