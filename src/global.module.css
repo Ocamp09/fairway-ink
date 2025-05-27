@@ -29,9 +29,13 @@
   top: 0;
   left: 0;
   border-radius: 5px;
-  background-color: red;
+  background-color: var(--back);
   justify-content: flex-start;
   padding: 5px 10px 5px 10px;
+}
+
+.back_button:hover {
+  background-color: var(--back-hover);
 }
 
 .close_button {

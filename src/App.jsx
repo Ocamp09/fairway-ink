@@ -17,6 +17,11 @@ function App() {
   const [welcome, setWelcome] = useState(false);
   const [isCheckout, setIsCheckout] = useState(false);
 
+  const onCartClose = () => {
+    setCartPopup(false);
+    setIsCheckout(false);
+  };
+
   useEffect(() => {
     const showedWelcome = sessionStorage.getItem("showedWelcome");
 
@@ -36,7 +41,7 @@ function App() {
           <Route path="/design" element={<StencilDesigner />} />
           <Route path="/browse" element={<Browse />} />
         </Routes>
-        <CartPopup isOpen={cartPopup} setIsOpen={setCartPopup}>
+        <CartPopup isOpen={cartPopup} setIsOpen={onCartClose}>
           {isCheckout ? (
             <Checkout setIsCheckout={setIsCheckout} />
           ) : (

@@ -17,6 +17,10 @@
   font-size: 20px;
 }
 
+input {
+  cursor: grab;
+}
+
 @media screen and (max-width: 600px) {
   .scaler {
     width: 40%;

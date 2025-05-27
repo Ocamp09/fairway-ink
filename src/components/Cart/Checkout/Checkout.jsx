@@ -6,9 +6,10 @@ import { getPaymentIntent } from "../../../api/checkout";
 import { useCart } from "../../../contexts/CartContext";
 import CheckoutForm from "../CheckoutForm/CheckoutForm";
 import styles from "./Checkout.module.css";
+import Loading from "../../Feedback/Loading/Loading";
 
 // Replace this with an environment variable in production
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_API_KEY);
 
 const Checkout = ({ setIsCheckout }) => {
   const { getTotal } = useCart();
@@ -34,7 +35,7 @@ const Checkout = ({ setIsCheckout }) => {
   }, [getTotal]);
 
   if (!clientSecret) {
-    return <div data-testid="loading">Loading...</div>;
+    return <Loading />;
   }
 
   return (

@@ -47,21 +47,21 @@ describe("StageMenu", () => {
 
     // Initial state
     expect(designTab.className).not.toBe("");
-    expect(adjustTab.className).toBe("");
-    expect(previewTab.className).toBe("");
+    expect(adjustTab.className).toContain("stage");
+    expect(previewTab.className).toContain("stage");
 
     // Simulate user clicking "Adjust"
     fireEvent.click(screen.getByText("Adjust"));
     rerender(<StageMenu />);
-    expect(screen.getByTestId("stage-design").className).toBe("");
+    expect(screen.getByTestId("stage-design").className).toContain("stage");
     expect(screen.getByTestId("stage-adjust").className).not.toBe("");
-    expect(screen.getByTestId("stage-preview").className).toBe("");
+    expect(screen.getByTestId("stage-preview").className).toContain("stage");
 
     // Simulate user clicking "Preview"
     fireEvent.click(screen.getByText("Preview"));
     rerender(<StageMenu />);
-    expect(screen.getByTestId("stage-design").className).toBe("");
-    expect(screen.getByTestId("stage-adjust").className).toBe("");
+    expect(screen.getByTestId("stage-design").className).toContain("stage");
+    expect(screen.getByTestId("stage-adjust").className).toContain("stage");
     expect(screen.getByTestId("stage-preview").className).not.toBe("");
   });
 

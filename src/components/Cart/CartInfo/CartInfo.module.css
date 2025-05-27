@@ -65,6 +65,10 @@
   color: var(--text);
 }
 
+.quantity_controls button:hover {
+  color: var(--tool-button);
+}
+
 .quantity_controls span {
   margin: 0 10px;
 }
