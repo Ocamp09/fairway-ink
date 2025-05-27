@@ -75,6 +75,5 @@ export const verifySuccessfulCheckout = async (
     return response;
   } catch (error) {
     console.error("Error verifying payment:", error);
-    alert("Error verifying payment");
   }
 };
