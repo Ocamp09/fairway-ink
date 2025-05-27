@@ -13,6 +13,7 @@ import Home from "./pages/Home/Home";
 import StencilDesigner from "./pages/StencilDesigner/StencilDesigner";
 import { apiHealthCheck } from "./api/health";
 import Maintenance from "./pages/Maintenance/Maintenance";
+import Page404 from "./pages/404/404";
 
 function App() {
   const [isDown, setIsDown] = useState(false);
@@ -55,6 +56,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/design" element={<StencilDesigner />} />
           <Route path="/browse" element={<Browse />} />
+          <Route path="*" element={<Page404 />} />
         </Routes>
         <CartPopup isOpen={cartPopup} setIsOpen={onCartClose}>
           {isCheckout ? (
