@@ -11,8 +11,11 @@ import { FileProvider } from "./contexts/DesignContext";
 import Browse from "./pages/Browse/Browse";
 import Home from "./pages/Home/Home";
 import StencilDesigner from "./pages/StencilDesigner/StencilDesigner";
+import { apiHealthCheck } from "./api/health";
+import Maintenance from "./pages/Maintenance/Maintenance";
 
 function App() {
+  const [isDown, setIsDown] = useState(false);
   const [cartPopup, setCartPopup] = useState(false);
   const [welcome, setWelcome] = useState(false);
   const [isCheckout, setIsCheckout] = useState(false);
@@ -23,6 +26,16 @@ function App() {
   };
 
   useEffect(() => {
+    const healthCheck = async () => {
+      try {
+        const down = await apiHealthCheck();
+        setIsDown(down);
+      } catch (err) {
+        setIsDown(true);
+      }
+    };
+    healthCheck();
+
     const showedWelcome = sessionStorage.getItem("showedWelcome");
 
     if (!showedWelcome) {
@@ -30,6 +43,8 @@ function App() {
       sessionStorage.setItem("showedWelcome", "true");
     }
   }, []);
+
+  if (isDown) return <Maintenance />;
 
   return (
     <FileProvider>
