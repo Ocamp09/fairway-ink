@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getDesigns } from "../../api/browse";
 import BrowseItem from "../../components/Browse/BrowseItem/BrowseItem";
 import styles from "./Browse.module.css";
+import global from "../../global.module.css";
 
 const Browse = () => {
   const [designList, setDesignList] = useState([]);
@@ -28,12 +29,16 @@ const Browse = () => {
   };
 
   return (
-    <main>
+    <main className={styles.browse}>
       <h1>Pre-generated designs</h1>
 
       {isLoading && <p>Loading designs...</p>}
 
-      {error && <p role="alert">{error}</p>}
+      {error && (
+        <p role="alert" className={global.error_message}>
+          {error}
+        </p>
+      )}
 
       {!isLoading && designList.length === 0 && !error && (
         <p>No designs found. Check back soon!</p>
