@@ -1,12 +1,15 @@
-main {
+.home main {
   padding-bottom: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-h1 {
+.home h1 {
+  margin-left: auto;
+  margin-right: auto;
   width: 90%;
+  text-align: center;
 }
 
 .intro {
