@@ -7,16 +7,34 @@ import { useCart } from "../../../contexts/CartContext";
 import CheckoutForm from "../CheckoutForm/CheckoutForm";
 import styles from "./Checkout.module.css";
 import Loading from "../../Feedback/Loading/Loading";
+import PopupError from "../../Feedback/PopupError/PopupError";
 
 // Replace this with an environment variable in production
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_API_KEY);
-
 const Checkout = ({ setIsCheckout }) => {
   const { getTotal } = useCart();
+
+  const [stripePromise, setStripePromise] = useState(null);
+  const [stripeError, setStripeError] = useState(null);
 
   const [clientSecret, setClientSecret] = useState("");
   const [intentId, setIntentId] = useState("");
   const [successfulOrder, setSuccessfulOrder] = useState(null);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+        if (!stripe) throw new Error("Stripe failed to load");
+        setStripePromise(stripe);
+      } catch (err) {
+        console.error("Stripe load failed:", err);
+        setStripeError(
+          "We're unable to load payment services. Please try again or come back later."
+        );
+      }
+    };
+    load();
+  }, []);
 
   useEffect(() => {
     const fetchClientSecret = async () => {
@@ -26,6 +44,9 @@ const Checkout = ({ setIsCheckout }) => {
         setIntentId(intent.payment_intent);
       } catch (error) {
         console.error("Error fetching client secret", error);
+        setStripeError(
+          "We're unable to load payment services. Please try again or come back later."
+        );
       }
     };
 
@@ -34,7 +55,11 @@ const Checkout = ({ setIsCheckout }) => {
     }
   }, [getTotal]);
 
-  if (!clientSecret) {
+  if (stripeError) {
+    return <PopupError error={stripeError} />;
+  }
+
+  if (!stripePromise || !clientSecret) {
     return <Loading />;
   }
 

@@ -14,6 +14,10 @@
   color: black;
 }
 
+.size_menu button:hover {
+  border-color: var(--tool-button);
+}
+
 .active {
   border-color: var(--tool-button);
 }

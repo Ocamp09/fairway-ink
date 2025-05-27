@@ -9,6 +9,6 @@ export const getDesigns = async () => {
     return response.data.designs;
   } catch (error) {
     console.error("Error fetching designs:", error);
-    return [];
+    throw error;
   }
 };

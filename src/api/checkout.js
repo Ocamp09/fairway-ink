@@ -29,7 +29,6 @@ export const getPaymentIntent = async () => {
     cart: JSON.parse(sessionStorage.getItem("cart")),
   };
 
-  console.log(cart);
   try {
     const response = await axios.post(
       `${API_URL}/create-payment-intent`,
@@ -76,6 +75,5 @@ export const verifySuccessfulCheckout = async (
     return response;
   } catch (error) {
     console.error("Error verifying payment:", error);
-    alert("Error verifying payment");
   }
 };

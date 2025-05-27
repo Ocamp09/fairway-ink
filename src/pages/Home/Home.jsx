@@ -10,7 +10,7 @@ const Home = () => {
   const handleBrowseDesigns = () => navigate("/browse");
 
   return (
-    <main>
+    <main className={styles.home}>
       <h1>Welcome to Fairway Ink!</h1>
 
       <section className={styles.intro}>

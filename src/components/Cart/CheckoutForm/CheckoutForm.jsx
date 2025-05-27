@@ -27,6 +27,7 @@ const CheckoutForm = ({
   const [addressComplete, setAddressComplete] = useState(false);
   const [cardComplete, setCardComplete] = useState(false);
 
+  const [error, setError] = useState("");
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -36,7 +37,9 @@ const CheckoutForm = ({
     e.preventDefault();
     if (!stripe || !elements) return;
 
+    setError("");
     setIsLoading(true);
+
     const cardElement = elements.getElement(CardElement);
 
     const addressElement = elements.getElement(AddressElement);
@@ -51,7 +54,7 @@ const CheckoutForm = ({
       return;
     }
 
-    const { error } = await stripe.confirmCardPayment(clientSecret, {
+    const { payError } = await stripe.confirmCardPayment(clientSecret, {
       payment_method: {
         card: cardElement,
         billing_details: {
@@ -68,27 +71,33 @@ const CheckoutForm = ({
       },
     });
 
-    if (error) {
+    if (payError) {
       setMessage(error.message);
     }
 
-    let orderResponse = await verifySuccessfulCheckout(
-      intentId,
-      addressData.value.name,
-      email,
-      addressData.value.address
-    );
+    try {
+      let orderResponse = await verifySuccessfulCheckout(
+        intentId,
+        addressData.value.name,
+        email,
+        addressData.value.address
+      );
 
-    if (orderResponse.data.success) {
-      // show success popup
-      const orderInfo = orderResponse.data.order;
-      setOrderInfo(orderInfo);
-      setSuccessfulOrder(true);
-    } else {
-      // show fail popup
-      setSuccessfulOrder(false);
+      if (orderResponse.data.success) {
+        // show success popup
+        const orderInfo = orderResponse.data.order;
+        setOrderInfo(orderInfo);
+        setSuccessfulOrder(true);
+      } else {
+        // show fail popup
+        setSuccessfulOrder(false);
+      }
+      setIsLoading(false);
+    } catch (err) {
+      console.error("Error processing order: ", err);
+      setError("Unable to process order, try again later");
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   if (successfulOrder === true) {
@@ -126,6 +135,7 @@ const CheckoutForm = ({
       >
         {isLoading ? "Processing..." : "Pay now"}
       </button>
+      {error && <p className={global.error_message}>{error}</p>}
     </form>
   );
 };
