@@ -23,7 +23,7 @@ const Checkout = ({ setIsCheckout }) => {
   useEffect(() => {
     const load = async () => {
       try {
-        const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLI_KEY);
+        const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
         if (!stripe) throw new Error("Stripe failed to load");
         setStripePromise(stripe);
       } catch (err) {
