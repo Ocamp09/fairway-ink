@@ -96,7 +96,6 @@ const Header = ({ cartPopup, setCartPopup }) => {
           />
         </div>
       )}
-      <hr />
     </header>
   );
 };

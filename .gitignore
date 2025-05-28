@@ -12,3 +12,4 @@ node_modules
 /dist
 /coverage
 *.sarif
+banner-config.json

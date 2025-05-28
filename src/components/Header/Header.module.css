@@ -3,6 +3,7 @@
   margin-right: auto;
   max-width: 1280px;
   padding-top: 1rem;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.25);
 }
 
 .header_items {
@@ -173,8 +174,4 @@
   #timeline-nav {
     display: block;
   }
-}
-
-hr {
-  margin-block-start: 0;
 }
