@@ -9,7 +9,7 @@ import styles from "./BrowseItem.module.css";
 
 const BrowseItem = ({ url }) => {
   const [isAdded, setIsAdded] = useState(false);
-  const [size, setSize] = useState("medium");
+  const [size, setSize] = useState("md");
   const [displayUrl, setDisplayUrl] = useState(url);
   const { addToCart } = useCart();
 
@@ -21,7 +21,7 @@ const BrowseItem = ({ url }) => {
   };
 
   useEffect(() => {
-    setDisplayUrl((prevUrl) => prevUrl.replace(/(small|medium|large)/, size));
+    setDisplayUrl((prevUrl) => prevUrl.replace(/(xs|sm|md|lg|xl)/, size));
     setIsAdded(false);
   }, [size]);
 

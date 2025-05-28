@@ -1,6 +1,6 @@
 import styles from "./SizeSelector.module.css";
 
-const sizes = ["small", "medium", "large"];
+const sizes = ["xs", "sm", "md", "lg", "xl"];
 
 const SizeSelector = ({ size, setSize }) => {
   return (
