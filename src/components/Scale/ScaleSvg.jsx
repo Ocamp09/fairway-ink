@@ -8,12 +8,14 @@ import SelectPreview from "./SelectPreview/SelectPreview";
 import TabEditor from "./TabEditor/TabEditor";
 import ScaleSlider from "./ScaleSlider/ScaleSlider";
 import SvgPreview from "./SvgPreview/SvgPreview";
+import { APP_ENV } from "../../constants";
 
 const ScaleSvg = () => {
   const [scale, setScale] = useState(1);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [svgUrl, setSvgUrl] = useState("");
+  const [stlName, setStlName] = useState("");
 
   const {
     adjustStage,
@@ -37,8 +39,13 @@ const ScaleSvg = () => {
     updateStage("design");
   };
 
+  const handleStlName = (e) => {
+    setStlName(e.target.value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!svgData) {
       setError("Please draw an image and convert it");
       return;
@@ -48,7 +55,13 @@ const ScaleSvg = () => {
     updateStl("designer/default.stl");
 
     try {
-      const response = await generateStl(svgData, scale, stlKey, templateType);
+      const response = await generateStl(
+        svgData,
+        scale,
+        stlKey,
+        templateType,
+        stlName
+      );
 
       updateStl(response.stlUrl);
       updateStlKey();
@@ -99,6 +112,9 @@ const ScaleSvg = () => {
           />
           <ScaleSlider scale={scale} setScale={setScale}></ScaleSlider>
           <form onSubmit={handleSubmit} data-testid="scale-form">
+            {APP_ENV === "designs" && (
+              <input type="text" onChange={(e) => handleStlName(e)} required />
+            )}
             <button
               type="submit"
               className={global.submit_button}

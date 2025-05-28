@@ -4,7 +4,7 @@ export const TEXT_PRICE = 18.99;
 
 export const TOOL_ICON_SIZE = 28;
 
+export const APP_ENV = import.meta.env.VITE_APP_ENV;
+
 export const API_URL =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:8000"
-    : "https://api.fairway-ink.com";
+  APP_ENV === "prod" ? "https://api.fairway-ink.com" : "http://localhost:8000";

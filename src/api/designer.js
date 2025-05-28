@@ -29,7 +29,13 @@ export const uploadImage = async (file, method) => {
   }
 };
 
-export const generateStl = async (svgData, scale, stlKey, templateType) => {
+export const generateStl = async (
+  svgData,
+  scale,
+  stlKey,
+  templateType,
+  stlName
+) => {
   const session_id = get_ssid();
 
   const formData = new FormData();
@@ -47,6 +53,7 @@ export const generateStl = async (svgData, scale, stlKey, templateType) => {
 
   formData.append("stlKey", stlKey);
   formData.append("ssid", session_id);
+  formData.append("stlName", stlName);
 
   try {
     const response = await axios.post(`${API_URL}/generate`, formData, {
