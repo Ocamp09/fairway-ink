@@ -42,10 +42,10 @@ Fairway Ink is a full-stack e-commerce platform that enables users to create per
 
 ## 🚀 Tech Stack
 
-- **Frontend**: React, Next.js, Vite, TailwindCSS, react-three-fiber
+- **Frontend**: React, Next.js, Vite, CSS, react-three-fiber
 - **Backend**: Golang, gRPC, MySQL, Stripe API, EasyPost API
 - **Scripting & Processing**: Python, svgtrace, Blender (Python API)
-- **Infrastructure**: Docker, AWS EC2, RDS, Amplify, Nginx (TLS)
+- **Infrastructure**: Docker, AWS EC2, RDS, Amplify
 
 ---
 
