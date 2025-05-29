@@ -7,11 +7,12 @@ import STLViewer from "../../3D-View/STLViewer/STLViewer";
 import SizeSelector from "../SizeSelector/SizeSelector";
 import styles from "./BrowseItem.module.css";
 
-const BrowseItem = ({ url }) => {
-  const [isAdded, setIsAdded] = useState(false);
+const BrowseItem = ({ design }) => {
   const [size, setSize] = useState("md");
-  const [displayUrl, setDisplayUrl] = useState(url);
+  const [isAdded, setIsAdded] = useState(false);
   const { addToCart } = useCart();
+
+  const displayUrl = design.urls[size];
 
   const handleAddToCart = (event) => {
     event.preventDefault();
@@ -21,7 +22,6 @@ const BrowseItem = ({ url }) => {
   };
 
   useEffect(() => {
-    setDisplayUrl((prevUrl) => prevUrl.replace(/(xs|sm|md|lg|xl)/, size));
     setIsAdded(false);
   }, [size]);
 

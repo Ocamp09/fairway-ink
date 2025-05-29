@@ -45,8 +45,8 @@ const Browse = () => {
       )}
 
       <section className={styles.browse_grid}>
-        {designList.map((url, index) => (
-          <BrowseItem key={index} url={url} />
+        {designList.map((design, index) => (
+          <BrowseItem key={index} design={design} />
         ))}
       </section>
     </main>
