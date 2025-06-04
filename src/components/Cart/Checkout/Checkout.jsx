@@ -12,6 +12,7 @@ import PopupError from "../../Feedback/PopupError/PopupError";
 // Replace this with an environment variable in production
 const Checkout = ({ setIsCheckout }) => {
   const { getTotal } = useCart();
+  const total = getTotal();
 
   const [stripePromise, setStripePromise] = useState(null);
   const [stripeError, setStripeError] = useState(null);
@@ -50,10 +51,10 @@ const Checkout = ({ setIsCheckout }) => {
       }
     };
 
-    if (getTotal() > 0) {
+    if (total > 0) {
       fetchClientSecret();
     }
-  }, [getTotal]);
+  }, [total]);
 
   if (stripeError) {
     return <PopupError error={stripeError} />;
